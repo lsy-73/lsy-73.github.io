@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on Space Dog&#39;s Blog</title>
+    <link>https://github.com/lsy-73/lsy-73.github.io/categories/git/</link>
+    <description>Recent content in git on Space Dog&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 14 Nov 2021 20:58:22 +0800</lastBuildDate><atom:link href="https://github.com/lsy-73/lsy-73.github.io/categories/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用git创建版本库</title>
+      <link>https://github.com/lsy-73/lsy-73.github.io/p/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/</link>
+      <pubDate>Sun, 14 Nov 2021 20:58:22 +0800</pubDate>
+      
+      <guid>https://github.com/lsy-73/lsy-73.github.io/p/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/</guid>
+      <description>初始化 输入命令：
+mkdir &amp;lt;项目名称&amp;gt; cd &amp;lt;项目名称&amp;gt; #进入目录 git init #初始仓库，新建一个 .git 目录 ls -la #查看所有文件 touch &amp;lt;file1&amp;gt; #创建一个文件 mkdir &amp;lt;dir1&amp;gt; #新建一个目录 现在可以修改文件内容
+git status -sb #文件前面有 ?? 号 git add . #一次性将文件添加到暂存区 git status -sb #现在文件前面 ?? 变成了 A git commit -m &amp;quot;xx&amp;quot; #将你 add 过的内容正式提交到本地仓库，并添加注释 git log #查看历史变动 文件变动 git status -sb git add . git commit -m &amp;quot;xx&amp;quot; 将本地仓库上传到 GitHub 新建一个空仓库，名称与本地目录名一致，复制ssh 不需要勾选任何东西
+git remote add origin git@github.com:xxxx/&amp;lt;仓库名&amp;gt; git push -u origin master 更改文件内容 git add .</description>
+    </item>
+    
+  </channel>
+</rss>

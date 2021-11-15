@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on Space Dog&#39;s Blog</title>
+    <link>https://github.com/lsy-73/lsy-73.github.io/page/</link>
+    <description>Recent content in Pages on Space Dog&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 15 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://github.com/lsy-73/lsy-73.github.io/page/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>分类</title>
+      <link>https://github.com/lsy-73/lsy-73.github.io/bookmark/</link>
+      <pubDate>Mon, 15 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/lsy-73/lsy-73.github.io/bookmark/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>友链</title>
+      <link>https://github.com/lsy-73/lsy-73.github.io/infinity/</link>
+      <pubDate>Mon, 15 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/lsy-73/lsy-73.github.io/infinity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>标签</title>
+      <link>https://github.com/lsy-73/lsy-73.github.io/tag/</link>
+      <pubDate>Mon, 15 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/lsy-73/lsy-73.github.io/tag/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>关于</title>
+      <link>https://github.com/lsy-73/lsy-73.github.io/%E5%85%B3%E4%BA%8E/</link>
+      <pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/lsy-73/lsy-73.github.io/%E5%85%B3%E4%BA%8E/</guid>
+      <description>Hey，我是太空狗 (Space dog)。
+这是我的利用 GitHub Pages &amp;amp; Coding Pages 与 hugo 搭建的个人博客，选择的主题是 Stack。
+我的 GitHub 主页 👉GitHub·lsy-73.</description>
+    </item>
+    
+    <item>
+      <title>归档</title>
+      <link>https://github.com/lsy-73/lsy-73.github.io/archives/</link>
+      <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/lsy-73/lsy-73.github.io/archives/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>搜索</title>
+      <link>https://github.com/lsy-73/lsy-73.github.io/search/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/lsy-73/lsy-73.github.io/search/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
