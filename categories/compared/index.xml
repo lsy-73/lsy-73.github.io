@@ -6,11 +6,11 @@
     <description>Recent content in Compared on Space Dog&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Dec 2021 20:13:15 +0800</lastBuildDate><atom:link href="/categories/compared/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 01 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/compared/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Compared</title>
       <link>/p/compared/</link>
-      <pubDate>Wed, 01 Dec 2021 20:13:15 +0800</pubDate>
+      <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
       
       <guid>/p/compared/</guid>
       <description>本项目基于c#开发 项目名称：简易qq(模仿qq)
@@ -24,7 +24,7 @@
 说明  本项目参考YouTube中up主创作(原视频已下架)
 左边图片为自己的窗体
 右边效果图为原视频项目图片
- 对比 </description>
+ 对比  </description>
     </item>
     
   </channel>
