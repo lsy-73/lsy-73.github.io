@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Space Dog&#39;s Blog</title>
+    <link>https://lsy-73.github.io/post/</link>
+    <description>Recent content in Posts on Space Dog&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 01 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lsy-73.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Compared</title>
+      <link>https://lsy-73.github.io/archives/compared/</link>
+      <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-73.github.io/archives/compared/</guid>
+      <description>本项目基于c#开发 项目名称：简易qq(模仿qq) 软件：Visual Studio 2019 数据库：sqlserver2014 服务器名称：DESKTOP-UOOK</description>
+    </item>
+    
+    <item>
+      <title>使用git创建版本库</title>
+      <link>https://lsy-73.github.io/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/</link>
+      <pubDate>Sun, 14 Nov 2021 20:58:22 +0800</pubDate>
+      
+      <guid>https://lsy-73.github.io/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/</guid>
+      <description>初始化 输入命令： mkdir &amp;lt;项目名称&amp;gt; cd &amp;lt;项目名称&amp;gt; #进入目录 git init #初始仓库，新建一个 .git 目录 ls -la #查看所有文件 touch &amp;lt;file1&amp;gt; #创建一个</description>
+    </item>
+    
+    <item>
+      <title>hugo博客搭建日记</title>
+      <link>https://lsy-73.github.io/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/</link>
+      <pubDate>Thu, 21 Oct 2021 09:39:03 +0800</pubDate>
+      
+      <guid>https://lsy-73.github.io/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/</guid>
+      <description>主人正在编辑内容 请耐心等待</description>
+    </item>
+    
+    <item>
+      <title>Chinese Test</title>
+      <link>https://lsy-73.github.io/archives/test-chinese/</link>
+      <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-73.github.io/archives/test-chinese/</guid>
+      <description>正文测试 而这些并不是完全重要，更加重要的问题是， 带着这些问题，我们来审视一下学生会退会。 既然如何， 对我个人而言，学生会退会不仅仅是一个重大的</description>
+    </item>
+    
+  </channel>
+</rss>

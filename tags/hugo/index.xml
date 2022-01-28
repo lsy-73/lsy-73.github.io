@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hugo on Space Dog&#39;s Blog</title>
+    <link>https://lsy-73.github.io/tags/hugo/</link>
+    <description>Recent content in hugo on Space Dog&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 21 Oct 2021 09:39:03 +0800</lastBuildDate><atom:link href="https://lsy-73.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>hugo博客搭建日记</title>
+      <link>https://lsy-73.github.io/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/</link>
+      <pubDate>Thu, 21 Oct 2021 09:39:03 +0800</pubDate>
+      
+      <guid>https://lsy-73.github.io/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/</guid>
+      <description>主人正在编辑内容 请耐心等待</description>
+    </item>
+    
+  </channel>
+</rss>
