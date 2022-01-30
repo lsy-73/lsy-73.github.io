@@ -2,35 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Space Dog&#39;s Blog</title>
-    <link>https://lsy-73.github.io/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on Space Dog&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 14 Nov 2021 20:58:22 +0800</lastBuildDate><atom:link href="https://lsy-73.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 17 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>海淘</title>
+      <link>/tags/%E6%B5%B7%E6%B7%98/</link>
+      <pubDate>Fri, 17 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E6%B5%B7%E6%B7%98/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>理财</title>
+      <link>/tags/%E7%90%86%E8%B4%A2/</link>
+      <pubDate>Fri, 17 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E7%90%86%E8%B4%A2/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>git</title>
-      <link>https://lsy-73.github.io/tags/git/</link>
+      <link>/tags/git/</link>
       <pubDate>Sun, 14 Nov 2021 20:58:22 +0800</pubDate>
       
-      <guid>https://lsy-73.github.io/tags/git/</guid>
+      <guid>/tags/git/</guid>
       <description></description>
     </item>
     
     <item>
       <title>hugo</title>
-      <link>https://lsy-73.github.io/tags/hugo/</link>
+      <link>/tags/hugo/</link>
       <pubDate>Thu, 21 Oct 2021 09:39:03 +0800</pubDate>
       
-      <guid>https://lsy-73.github.io/tags/hugo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>中文</title>
-      <link>https://lsy-73.github.io/tags/%E4%B8%AD%E6%96%87/</link>
-      <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://lsy-73.github.io/tags/%E4%B8%AD%E6%96%87/</guid>
+      <guid>/tags/hugo/</guid>
       <description></description>
     </item>
     

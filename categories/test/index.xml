@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>技术 on Space Dog&#39;s Blog</title>
-    <link>https://lsy-73.github.io/categories/test/</link>
+    <link>/categories/test/</link>
     <description>Recent content in 技术 on Space Dog&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language><atom:link href="https://lsy-73.github.io/categories/test/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language><atom:link href="/categories/test/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

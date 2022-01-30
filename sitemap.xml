@@ -2,64 +2,70 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://lsy-73.github.io/categories/</loc>
-    <lastmod>2022-01-28T13:04:27+08:00</lastmod>
+    <loc>/post/</loc>
+    <lastmod>2022-01-30T19:58:50+08:00</lastmod>
   </url><url>
-    <loc>https://lsy-73.github.io/archives/compared/</loc>
+    <loc>/</loc>
+    <lastmod>2022-01-30T19:58:50+08:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2022-01-30T19:58:50+08:00</lastmod>
+  </url><url>
+    <loc>/archives/%E4%BD%9C%E4%B8%BA%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%9A%84%E6%88%91%E5%A6%82%E4%BD%95%E7%94%B3%E8%AF%B7%E5%A4%96%E5%B8%81%E4%BF%A1%E7%94%A8%E5%8D%A1%E5%B9%B6%E7%94%A8%E4%BA%8E%E5%A2%83%E5%A4%96%E6%94%AF%E4%BB%98/</loc>
+    <lastmod>2022-01-30T19:58:50+08:00</lastmod>
+  </url><url>
+    <loc>/tags/%E6%B5%B7%E6%B7%98/</loc>
+    <lastmod>2022-01-30T19:58:50+08:00</lastmod>
+  </url><url>
+    <loc>/tags/%E7%90%86%E8%B4%A2/</loc>
+    <lastmod>2022-01-30T19:58:50+08:00</lastmod>
+  </url><url>
+    <loc>/categories/</loc>
+    <lastmod>2022-01-30T19:38:35+08:00</lastmod>
+  </url><url>
+    <loc>/archives/compared/</loc>
     <lastmod>2022-01-28T12:27:44+08:00</lastmod>
   </url><url>
-    <loc>https://lsy-73.github.io/post/</loc>
-    <lastmod>2022-01-28T12:34:19+08:00</lastmod>
-  </url><url>
-    <loc>https://lsy-73.github.io/</loc>
-    <lastmod>2022-01-28T17:36:59+08:00</lastmod>
-  </url><url>
-    <loc>https://lsy-73.github.io/categories/%E6%97%A5%E5%B8%B8/</loc>
+    <loc>/categories/%E6%97%A5%E5%B8%B8/</loc>
     <lastmod>2022-01-28T12:27:44+08:00</lastmod>
   </url><url>
-    <loc>https://lsy-73.github.io/tags/git/</loc>
-    <lastmod>2022-01-28T12:33:24+08:00</lastmod>
+    <loc>/tags/git/</loc>
+    <lastmod>2022-01-30T19:38:35+08:00</lastmod>
   </url><url>
-    <loc>https://lsy-73.github.io/tags/</loc>
-    <lastmod>2022-01-28T12:34:19+08:00</lastmod>
+    <loc>/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/</loc>
+    <lastmod>2022-01-30T19:38:35+08:00</lastmod>
   </url><url>
-    <loc>https://lsy-73.github.io/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/</loc>
-    <lastmod>2022-01-28T12:33:24+08:00</lastmod>
+    <loc>/categories/%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2022-01-30T19:38:35+08:00</lastmod>
   </url><url>
-    <loc>https://lsy-73.github.io/categories/%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2022-01-28T12:34:19+08:00</lastmod>
-  </url><url>
-    <loc>https://lsy-73.github.io/tags/hugo/</loc>
+    <loc>/tags/hugo/</loc>
     <lastmod>2022-01-28T12:32:18+08:00</lastmod>
   </url><url>
-    <loc>https://lsy-73.github.io/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/</loc>
+    <loc>/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/</loc>
     <lastmod>2022-01-28T12:32:18+08:00</lastmod>
   </url><url>
-    <loc>https://lsy-73.github.io/page/</loc>
-    <lastmod>2022-01-28T17:36:59+08:00</lastmod>
+    <loc>/page/</loc>
+    <lastmod>2022-01-30T19:46:06+08:00</lastmod>
   </url><url>
-    <loc>https://lsy-73.github.io/%E5%85%B3%E4%BA%8E/</loc>
+    <loc>/%E5%85%B3%E4%BA%8E/</loc>
     <lastmod>2022-01-26T22:58:51+08:00</lastmod>
   </url><url>
-    <loc>https://lsy-73.github.io/archives/test-chinese/</loc>
-    <lastmod>2022-01-28T12:34:19+08:00</lastmod>
+    <loc>/gpg/</loc>
+    <lastmod>2022-01-30T19:43:16+08:00</lastmod>
   </url><url>
-    <loc>https://lsy-73.github.io/tags/%E4%B8%AD%E6%96%87/</loc>
-    <lastmod>2022-01-28T12:34:19+08:00</lastmod>
-  </url><url>
-    <loc>https://lsy-73.github.io/archives/</loc>
+    <loc>/archives/</loc>
     <lastmod>2022-01-26T22:58:18+08:00</lastmod>
   </url><url>
-    <loc>https://lsy-73.github.io/index.xml/</loc>
+    <loc>/index.xml/</loc>
     <lastmod>2022-01-28T13:31:33+08:00</lastmod>
   </url><url>
-    <loc>https://lsy-73.github.io/links/</loc>
-    <lastmod>2022-01-28T17:36:59+08:00</lastmod>
+    <loc>/links/</loc>
+    <lastmod>2022-01-30T19:46:06+08:00</lastmod>
   </url><url>
-    <loc>https://lsy-73.github.io/categories/test/</loc>
+    <loc>/categories/test/</loc>
     <lastmod>2022-01-28T13:04:27+08:00</lastmod>
   </url><url>
-    <loc>https://lsy-73.github.io/search/</loc>
+    <loc>/search/</loc>
     <lastmod>2022-01-26T22:58:35+08:00</lastmod>
   </url>
 </urlset>

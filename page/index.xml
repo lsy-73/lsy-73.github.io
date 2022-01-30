@@ -2,53 +2,62 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pages on Space Dog&#39;s Blog</title>
-    <link>https://lsy-73.github.io/page/</link>
+    <link>/page/</link>
     <description>Recent content in Pages on Space Dog&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 20 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lsy-73.github.io/page/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="/page/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>关于</title>
-      <link>https://lsy-73.github.io/%E5%85%B3%E4%BA%8E/</link>
+      <link>/%E5%85%B3%E4%BA%8E/</link>
       <pubDate>Wed, 20 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://lsy-73.github.io/%E5%85%B3%E4%BA%8E/</guid>
+      <guid>/%E5%85%B3%E4%BA%8E/</guid>
       <description>Hey，我是太空狗 (Space dog)。 这是我的利用 GitHub Pages &amp;amp; Coding Pages 与 hugo 搭建的个人博客，选择的主题是 Stack。 我的 GitHub 主页 👉GitHub·lsy-73.</description>
     </item>
     
     <item>
-      <title>归档</title>
-      <link>https://lsy-73.github.io/archives/</link>
+      <title>密钥</title>
+      <link>/gpg/</link>
       <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://lsy-73.github.io/archives/</guid>
+      <guid>/gpg/</guid>
+      <description>如果你想与我进行足够安全的通信，那么可以使用 GPG 加密信息，以下是我的 GPG 公钥： -----BEGIN PGP PUBLIC KEY BLOCK----- mQINBF42gfcBEADdJNcrSWYhGK+2DgJXXOwTi8WvHlstLdr9p3UAwoBG1OF1+JQp mS51+ri1wn5gqL7seZZQ1vWw1oLCKh7vUXYHsKHbgqipgQtu8RdJYus+GlM0IQKT zrP3ziQMlOma+YzvlEZjeBRBXZD+zFEjQ2sPhs3uTfGI/B++9KlpkFzPJhNB35HS yomLmJraYHVbflwvGe0qCH4ay4Hd0xIzkJnpvTsQ1tLSSTjfjSq/CqfxIWjppLCl 1Z086ir9I9zubv2SkhBxK0OkMmgRvcl8X443r16TKrdHNqLbyx5NWc6+9jP4RX2L pKh1lqBVV/wgYw+SZn6eeVcRZ8cHp8d2vm/Q01hKeXotLgrCAh5g/KlDVj3joiEM CYwwPtEXTU5/uFKJGbrnIY6VzWCjfEKn/aG7+bb1OYlFpCayChyxNkd3gRqnYm55 MqYV48ku6bM3a7bPi1geIHPJV2XUf2pWsUFCYL/7YEzv4IY4LijJ5o4jKh2WVR5Y iSUiZvAkZVx4HVBVQzgQMJSq5XZpyGC9E9a/NHHtKexqRrzK1Y8nN6UtGdBsyNmr QIY6y2mDbPzzUFfYHTfs0HszaM8wlo2XB3ccxVcwMUfNLFhytr2QnnL7OfgPysfZ 0vDrb7aq7rxUDHaWn8/L3oR1YxcbKMa7JuvfqIJF8pfiW45pbecd8RiDOwARAQAB tBxWaWZseSA8dmlmbHl0aGlua0BnbWFpbC5jb20+iQJMBBMBCgA2FiEEwwu+yQ9i GNlYIDvX5XUe2fHI2m0FAl42gfcCGw8ECwkIBwQVCgkIBRYCAwEAAh4BAheAAAoJ EOV1HtnxyNptXvQP/RaR1VssjDPztMCkaZcLM4IqQ0valf2kuLgpgUjYOa4B1gMB v8pM9ad4S7PWo4S/II96wgzB8dRrb4AZxooBujWdGG6FZp1CrPy5RpH7a/0oqMiM eHGtAUmPDw5Z6nP+CcSsaiVPyCf10FPFU43r4JcLDEM6njuEO3jr0DPatn3XqqXJ k1EELc9p+tIp1RMeOaJr+WBLpq1yfp1tgDl3R9OOphBKclUu7XvwgzBwsqRVShBj SLRj4NgOhIp2g6JGlq78nymBywhDmfKD5aWoBHSvXUYUbc3NufX8ZWkO2Bkf3gt6 qLfa0Tj+GAmCcbkKmfV3H9GA9aLIkBzu9jVw0u7HvQ8NYWZcSL06Emh4Fu8pYj85 TEmS4Mxa4l9zBrYKVctr0caibys01+xHyfZ67INwhkloSQ0aUYsnKjtnazR205vt eWLaIVnvldCO5fSkkdVzJhSwjiSEz1OH9sAq10XUrajnzdv9xvjvgIblsCBo7Y2A 4C8X/+eiXpVVuExhKTpzC1YaisetoSzkXOhseJ396nqi5qpzVU70/Xwaf3oA5MxV XLxu2vsAQQGzbche/SdfDn2RnsY7fcY9ZzU3tme68faQKiOfJp+KVcOY0+sNdZHn Pau+aTwTFu4pKqrRhwVqeDUkvnhwtA1bNqNAXKWsfvavjzqTpNxkHFZk4Y7vuQIN BF42g0MBEADNvDrBNfX+VXipiHlwS7ZY5ffFjniYCfxN6nXWoec3oIhm+8+Xpdf8 k6OviuqOERkcnVXt/Qol0/23v+05Kk1LVDdLtqcbaXvF6b/OZtHJJ7G4UhwO3Sy0 oiMriO62PpdveJ2AnIPMIoY6UYVwePVN+IBFkGcdu2WIXeqlgoX4ICXvJ0NvvF9r F2w/BVStvsAS1YBEpFaZT45r3Z0oV/BRzTnl5tQc05HYDMUj5eOfq76qCOnRk2LU</description>
+    </item>
+    
+    <item>
+      <title>归档</title>
+      <link>/archives/</link>
+      <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/archives/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rss</title>
-      <link>https://lsy-73.github.io/index.xml/</link>
+      <link>/index.xml/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://lsy-73.github.io/index.xml/</guid>
+      <guid>/index.xml/</guid>
       <description></description>
     </item>
     
     <item>
       <title>友链</title>
-      <link>https://lsy-73.github.io/links/</link>
+      <link>/links/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://lsy-73.github.io/links/</guid>
+      <guid>/links/</guid>
       <description>欢迎交换友情链接，本站信息： 网站名称：Space Dog&amp;rsquo;s Blog 网站链接：lsy-73.github.io 网站图像：https://github.com</description>
     </item>
     
     <item>
       <title>搜索</title>
-      <link>https://lsy-73.github.io/search/</link>
+      <link>/search/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://lsy-73.github.io/search/</guid>
+      <guid>/search/</guid>
       <description></description>
     </item>
     
