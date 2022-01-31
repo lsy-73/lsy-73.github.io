@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='主人正在编辑内容 请耐心等待'><title>hugo博客搭建日记</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='使用GPG密钥进行安全通信'><title>GPG的使用与创建</title>
 
-<link rel='canonical' href='/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/'>
+<link rel='canonical' href='/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='hugo博客搭建日记'>
-<meta property='og:description' content='主人正在编辑内容 请耐心等待'>
-<meta property='og:url' content='/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/'>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='GPG的使用与创建'>
+<meta property='og:description' content='使用GPG密钥进行安全通信'>
+<meta property='og:url' content='/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/'>
 <meta property='og:site_name' content='Space Dog&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='hugo' /><meta property='article:published_time' content='2021-10-21T09:39:03&#43;08:00'/><meta property='article:modified_time' content='2022-01-28T12:32:18&#43;08:00'/><meta property='og:image' content='/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/p24.jpg' />
-<meta name="twitter:title" content="hugo博客搭建日记">
-<meta name="twitter:description" content="主人正在编辑内容 请耐心等待"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/p24.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='' /><meta property='article:published_time' content='2022-01-31T13:42:39&#43;08:00'/><meta property='article:modified_time' content='2022-01-31T18:59:35&#43;08:00'/><meta property='og:image' content='/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/1.jpg' />
+<meta name="twitter:title" content="GPG的使用与创建">
+<meta name="twitter:description" content="使用GPG密钥进行安全通信"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/1.jpg' />
     <link rel="shortcut icon" href="/img/favicon.png" />
 <style>
     h1 {letter-spacing: 4px}
@@ -21,7 +21,7 @@
     </head>
     <body class="
     article-page
-<!---->
+<!--has-toc-->
 ">
     <script>
         (function() {
@@ -47,7 +47,7 @@
 </script>
 <div class="container main-container flex 
     
-        on-phone--column extended
+        extended
     
 ">
   <aside class="sidebar left-sidebar sticky">
@@ -314,19 +314,17 @@
 
 <main class="main full-width">
     
-        <p> 最后更新于 2022 年 1 月 28 日</p>
-    
 
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/">
-                <img src="/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/p24_huac97e976f1785bb1b8d211bc3b7d9c93_355660_800x0_resize_q75_box.jpg"
-                        srcset="/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/p24_huac97e976f1785bb1b8d211bc3b7d9c93_355660_800x0_resize_q75_box.jpg 800w, /archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/p24_huac97e976f1785bb1b8d211bc3b7d9c93_355660_1600x0_resize_q75_box.jpg 1600w"
+            <a href="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/">
+                <img src="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/1_hucc2e35af8ac8ea5b87c4b7a5d77083a1_116253_800x0_resize_q75_box.jpg"
+                        srcset="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/1_hucc2e35af8ac8ea5b87c4b7a5d77083a1_116253_800x0_resize_q75_box.jpg 800w, /archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/1_hucc2e35af8ac8ea5b87c4b7a5d77083a1_116253_1600x0_resize_q75_box.jpg 1600w"
                         width="800" 
-                        height="230" 
+                        height="449" 
                         loading="lazy"
-                        alt="Featured image of post hugo博客搭建日记" />
+                        alt="Featured image of post GPG的使用与创建" />
                 
             </a>
         </div>
@@ -336,17 +334,17 @@
     
     <header class="article-category">
         
-            <a href="/categories/%E6%8A%80%E6%9C%AF/" >
-                技术
-            </a>
-        
     </header>
     
 
     <h2 class="article-title">
-        <a href="/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/">hugo博客搭建日记</a>
+        <a href="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/">GPG的使用与创建</a>
     </h2>
 
+    
+    <h3 class="article-subtitle">
+        使用GPG密钥进行安全通信
+    </h3>
     
 
     
@@ -362,7 +360,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2021-10-21</time>
+                <time class="article-time--published">2022-01-31</time>
             </div>
         
 
@@ -373,8 +371,131 @@
 </header>
 
     <section class="article-content">
-    <p>主人正在编辑内容</p>
-<p>请耐心等待</p>
+    <h2 id="gpg介绍">GPG介绍</h2>
+<p>提到 GPG 不得不提一下 PGP(Pretty Good Privacy) ， PGP 最开始是由 Phil Zimmermann 开发，开发的目的是为了躲避监视，如果文件在网络上明文传输，那是多么危险。 PGP 虽然受很多人喜爱，但是是个商业软件，不能自由使用。所以自由基金会决定自己开发一个取名叫 GPG ，这就是 GPG 的由来。 GPG 和 PGP 都遵循 OpenPGP 加解密标准， 现在 PGP 被赛门铁克公司收购了。</p>
+<p>我们平时用各个网站免不了要记住密码，但如果都用一个那风险就很高，如果每个网站都不一样，那也记不住。通常的做法是把这些密码存到一个文件里，但是这个文件本身的安全我们没法保证，所以我们需要对这个文件进行加密。这就要用到我们今天的主角 GPG</p>
+<h2 id="安装">安装</h2>
+<p>安装就非常简单，没什么好说的，执行命令就完成了。我的是通过二进制文件下载的中文版，如果是brew下载应该是英文的，本文以英文版的为教程（中文的我就不多bb了）</p>
+<h2 id="mac">Mac</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">brew install gpg
+</code></pre></div><h2 id="生成密钥">生成密钥</h2>
+<p>现在我们通过 <code>gpg --full-gen-key</code> 来生成密钥。
+<figure style="flex-grow: 75; flex-basis: 180px">
+		<a href="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f1.png" data-size="1170x1554"><img src="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f1.png"
+				srcset="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f1_huc7f8acb9887e247d994ced4dbb456d7e_968433_480x0_resize_box_3.png 480w, /archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f1_huc7f8acb9887e247d994ced4dbb456d7e_968433_1024x0_resize_box_3.png 1024w"
+				width="1170"
+				height="1554"
+				loading="lazy"
+				alt="密钥生成">
+		</a>
+		
+		<figcaption>密钥生成</figcaption>
+		
+	</figure></p>
+<blockquote>
+<p>Your selection? (选择要使用的加密算法),选1就行了</p>
+</blockquote>
+<blockquote>
+<p>RSA keys may be between 1024 and 4096 bits long,(选择加密算法的长度，默认是2048，我选了最长的 4096)</p>
+</blockquote>
+<blockquote>
+<p>Please specify how long the key should be valid.(选择密钥过期时间，如果是自己使用的话，可以选择永不过期，此处我选的0)</p>
+</blockquote>
+<blockquote>
+<p>Real name:(输入用户名，不能少于5个字符，随便写自己喜欢的名字就行了)</p>
+</blockquote>
+<blockquote>
+<p>Email address(输入自己的邮箱)</p>
+</blockquote>
+<blockquote>
+<p>Comment:(这个可以不写，直接回车)</p>
+</blockquote>
+<blockquote>
+<p>Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O(如果确认无误，输入 O)</p>
+</blockquote>
+<p>通过上面的操作，生成了一个名为 <code>lsygpg</code> ，使用 <code>RAS</code> 算法加密，并且永不过期的账户。</p>
+<p>你如果不想选择加密算法和长度信息，可以使用 <code>gpg --gen-key</code> 来快速生成。这样生成的默认算法是 <code>RAS</code> ，有效时间是一年， comment 为空。</p>
+<h1 id="生成撤销密钥">生成撤销密钥</h1>
+<p>生成完密钥之后，为了保险起见，我们需要生成一个撤销证书，以便在日后我们不使用这个密钥的时候可以撤销。</p>
+<p>这个撤销只有你把公钥上传到公钥服务器才有效，如果你不上传到公钥服务器其实没多大作用。即便申请撤销了，它还是会存在，只是不建议使用了。</p>
+<p>撤销的命令如下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">gpg --gen-revoke test1
+</code></pre></div><h1 id="加密">加密</h1>
+<p>有了密钥之后，我们来看看怎么用它来加密一个文件</p>
+<p>通过 gpg -r [uid] -o file -e file 来加密一个文件，其中 -r 指定用哪个用户加密， -o 表示加密后输出的文件， -e 表示要加密的文件。如果不用 -o 默认会在原来的文件后面添加 .gpg 的后缀，用来表示加密文件。</p>
+<p>举个例子：假设我们有一个 test.txt 的文件，内容如下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">我是帅哥
+</code></pre></div><p>我们对其进行加密</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">gpg -r test1 -e test.txt
+
+-- 可以使用 gpg -r test1 -o test.txt.gpg -e test.txt 效果是一样的
+</code></pre></div><p>执行完成后会得到一个名为 test.txt.gpg 的文件，这个文件是一个二进制文件。</p>
+<p>如果我们想要显示 ASCII ，可以通过添加 -a 来显示</p>
+<p><figure style="flex-grow: 193; flex-basis: 464px">
+		<a href="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f3.png" data-size="964x498"><img src="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f3.png"
+				srcset="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f3_huca1fa3d78326d422b4ddb699ff91cf32_380314_480x0_resize_box_3.png 480w, /archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f3_huca1fa3d78326d422b4ddb699ff91cf32_380314_1024x0_resize_box_3.png 1024w"
+				width="964"
+				height="498"
+				loading="lazy"
+				alt="密钥生成">
+		</a>
+		
+		<figcaption>密钥生成</figcaption>
+		
+	</figure></p>
+<h1 id="解密">解密</h1>
+<p>加密完之后，我们来看如何解密</p>
+<p>通过 <code>gpg -o file -d file</code> 来对文件进行解密，其中 <code>-o</code> 表示解密后输出的文件，要放在前面， <code>-d</code> 表示要解密的文件。</p>
+<p>我们就拿之前加密的文件来进行解密</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">gpg -o decrypt.txt -d test.txt.gpg
+cat decrypt.txt
+我是帅哥
+
+gpg -o decrypt.txt -d test.txt.asc
+cat decrypt.txt
+我是帅哥
+</code></pre></div><h3 id="解密的时候会让你输入密码">解密的时候会让你输入密码</h3>
+<p><figure style="flex-grow: 101; flex-basis: 244px">
+		<a href="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f2.png" data-size="1050x1030"><img src="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f2.png"
+				srcset="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f2_hueb48d6a88b0d5107c5a0b9c5d97213cd_397752_480x0_resize_box_3.png 480w, /archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f2_hueb48d6a88b0d5107c5a0b9c5d97213cd_397752_1024x0_resize_box_3.png 1024w"
+				width="1050"
+				height="1030"
+				loading="lazy"
+				alt="密钥生成">
+		</a>
+		
+		<figcaption>密钥生成</figcaption>
+		
+	</figure></p>
+<h1 id="签名">签名</h1>
+<h2 id="二进制签名">二进制签名</h2>
+<p>GPG除了可以用来加密，还可以用来签名，比如在 <code>Github</code> 上可以添加公钥来表示这个代码确实是你提交的。</p>
+<p>使用 <code>gpg --sign test.txt</code> 对 <code>test.txt</code> 进行签名，生成 <code>test.txt.gpg</code> ，里面的内容是二进制。</p>
+<h1 id="ascii-签名">ASCII 签名</h1>
+<p>除了二进制的方式还可以输出 ASCII 的签名，用 <code>gpg --clearsign test.txt</code> 对 <code>test.txt</code> 进行 ASCII 签名</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">gpg --clearsign test.txt
+cat test.txt.asc
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+This is gpg test
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEiPHq0DgY+8QbgkHmOxWoUusKglEFAl41jDIACgkQOxWoUusK
+glFEKhAAqwzhd4lexf1KyMTuCd5jAftPGB6AC1igmUx0gjpnMoZHv7gJkfFr8jTa
+iD958jXVY4fawsBQ+LEEkpJarBdZfY2No5Dw1PSlRlaUzCQgMkOPgLTdqGHuTNB0
+/ENsIiweXv5kUXiSU1Paxedwi7yux5L34WWdi9Mg9KoLhJN84HEdzIKYZjJNyFtB
+WYP/Nqqqs01SBa3writrdVaj/ZaDqMtpzM9DSxfMT4P6NVDR3RGSTkQpnatEEa67
+11i+oQXQcQT6a+O1vZ8GwbfoQ/EmPGT4nURs1HSEbAXj2aInquU5UjIvkvDp3q2x
+j9UbDBcQaQWQdAsuJItIfLeyY1BhejqVIjhPPFMhplp5XrHMMR+JJXOUJleQkkZV
+q35RitRlnRCjm+Z26aACS1vSS4Y23jaNV+MWv23OF570+iQ1lVotYLeLeMbuW4s9
+oWQIqJydaePbL87wR3tTWm7OjlgZNrrSXh9aH366Oz5tjZVrZoJwNDupOj5uAgsf
+T58N0St0OlrPO2csUQw5Kkd7Ls1lKCkh+drPQEPHJJODzNo4WxjtPGwgwhIhLJcw
+o1TQxd3h5YhVInCs0XFzSx3Ty/Ds0Lm0zFa4AyINl0QiHkQy2OoD4rsFO7n6LdOk
+zJKrFEkSwuvTOeIBUOGulwZiZEFrxb9KpaCjhMLZgQfjSYAnyQ8=
+=lmwE
+-----END PGP SIGNATURE-----
+</code></pre></div><p>这种方式会在源文件里加上签名。</p>
 
 </section>
 
@@ -382,8 +503,6 @@
     <footer class="article-footer">
     
     <section class="article-tags">
-        
-            <a href="/tags/hugo/">hugo</a>
         
     </section>
 
@@ -393,7 +512,7 @@
 	
     <section class="article-edit">
         <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1629478225447" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2064" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><defs><style type="text/css"></style></defs><path d="M960 512c0 97.76-28.704 185.216-85.664 263.264-56.96 78.016-130.496 131.84-220.64 161.856-10.304 1.824-18.368 0.448-22.848-4.032a22.4 22.4 0 0 1-7.2-17.504v-122.88c0-37.632-10.304-65.44-30.464-82.912a409.856 409.856 0 0 0 59.616-10.368 222.752 222.752 0 0 0 54.72-22.816c18.848-10.784 34.528-23.36 47.104-38.592 12.544-15.232 22.848-35.904 30.912-61.44 8.096-25.568 12.128-54.688 12.128-87.904 0-47.072-15.232-86.976-46.208-120.16 14.368-35.456 13.024-74.912-4.48-118.848-10.752-3.616-26.432-1.344-47.072 6.272s-38.56 16.16-53.824 25.568l-21.984 13.888c-36.32-10.304-73.536-15.232-112.096-15.232s-75.776 4.928-112.096 15.232a444.48 444.48 0 0 0-24.672-15.68c-10.336-6.272-26.464-13.888-48.896-22.432-21.952-8.96-39.008-11.232-50.24-8.064-17.024 43.936-18.368 83.424-4.032 118.848-30.496 33.632-46.176 73.536-46.176 120.608 0 33.216 4.032 62.336 12.128 87.456 8.032 25.12 18.368 45.76 30.496 61.44 12.544 15.68 28.224 28.704 47.072 39.04 18.848 10.304 37.216 17.92 54.72 22.816a409.6 409.6 0 0 0 59.648 10.368c-15.712 13.856-25.12 34.048-28.704 60.064a99.744 99.744 0 0 1-26.464 8.512 178.208 178.208 0 0 1-33.184 2.688c-13.024 0-25.568-4.032-38.144-12.544-12.544-8.512-23.296-20.64-32.256-36.32a97.472 97.472 0 0 0-28.256-30.496c-11.232-8.064-21.088-12.576-28.704-13.92l-11.648-1.792c-8.096 0-13.92 0.928-17.056 2.688-3.136 1.792-4.032 4.032-2.688 6.72s3.136 5.408 5.376 8.096 4.928 4.928 7.616 7.168l4.032 2.688c8.544 4.032 17.056 11.232 25.568 21.984 8.544 10.752 14.368 20.64 18.4 29.6l5.824 13.44c4.928 14.816 13.44 26.912 25.568 35.872 12.096 8.992 25.088 14.816 39.008 17.504 13.888 2.688 27.36 4.032 40.352 4.032s23.776-0.448 32.288-2.24l13.472-2.24c0 14.784 0 32.288 0.416 52.032 0 19.744 0.48 30.496 0.48 31.392a22.624 22.624 0 0 1-7.648 17.472c-4.928 4.48-12.992 5.824-23.296 4.032-90.144-30.048-163.68-83.84-220.64-161.888C92.256 697.216 64 609.312 64 512c0-81.152 20.192-156.064 60.096-224.672s94.176-122.88 163.232-163.232C355.936 84.192 430.816 64 512 64s156.064 20.192 224.672 60.096 122.88 94.176 163.232 163.232C939.808 355.488 960 430.848 960 512" fill="#000000" p-id="2065"></path></svg>
-        <span><a style="color: inherit;" href="https://github.com/lsy-73/lsy-73.github.io/edit/develop/content/post/test/index.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+        <span><a style="color: inherit;" href="https://github.com/lsy-73/lsy-73.github.io/edit/develop/content/post/GPG/index.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
     </section>
     <section class="article-lastmod">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -405,7 +524,7 @@
 
 
         <span>
-            最后更新于 2022-01-28
+            最后更新于 2022-01-31
         </span>
     </section></footer>
 
@@ -415,35 +534,6 @@
 
     <aside class="related-contents--wrapper">
     
-    
-        <h2 class="section-title">相关文章</h2>
-        <div class="related-contents">
-            <div class="flex article-list--tile">
-                
-                    
-<article class="has-image">
-    <a href="/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/">
-        
-        
-            <div class="article-image">
-                <img src="/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/p1.ec91c5dd5d99c36421a023e1b07687cb_hue562663c14d4442894467021dc935054_243244_250x150_fill_q75_box_smart1.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy" 
-                        data-key="" 
-                        data-hash="md5-7JHF3V2Zw2QhoCPhsHaHyw==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">使用git创建版本库</h2>
-        </div>
-    </a>
-</article>
-                
-            </div>
-        </div>
     
 </aside>
 
@@ -719,6 +809,31 @@
 </section>
 
       
+      
+      <section class="widget archives">
+        <div class="widget--toc">
+          <nav id="TableOfContents">
+  <ol>
+    <li><a href="#gpg介绍">GPG介绍</a></li>
+    <li><a href="#安装">安装</a></li>
+    <li><a href="#mac">Mac</a></li>
+    <li><a href="#生成密钥">生成密钥</a></li>
+  </ol>
+
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#解密的时候会让你输入密码">解密的时候会让你输入密码</a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li><a href="#二进制签名">二进制签名</a></li>
+  </ol>
+</nav>
+        </div>
+      </section>
       
     </aside>
 
