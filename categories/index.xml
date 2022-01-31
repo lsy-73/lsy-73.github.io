@@ -6,7 +6,16 @@
     <description>Recent content in Categories on Space Dog&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 01 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 31 Jan 2022 13:42:39 +0800</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GPG keys</title>
+      <link>/categories/gpg-keys/</link>
+      <pubDate>Mon, 31 Jan 2022 13:42:39 +0800</pubDate>
+      
+      <guid>/categories/gpg-keys/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>日常</title>
       <link>/categories/%E6%97%A5%E5%B8%B8/</link>
