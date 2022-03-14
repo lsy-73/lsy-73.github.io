@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>泛型 on Space Dog&#39;s Blog</title>
+    <link>/tags/%E6%B3%9B%E5%9E%8B/</link>
+    <description>Recent content in 泛型 on Space Dog&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 13 Mar 2022 22:21:21 +0800</lastBuildDate><atom:link href="/tags/%E6%B3%9B%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>泛型</title>
+      <link>/archives/%E6%B3%9B%E5%9E%8B/</link>
+      <pubDate>Sun, 13 Mar 2022 22:21:21 +0800</pubDate>
+      
+      <guid>/archives/%E6%B3%9B%E5%9E%8B/</guid>
+      <description>泛型 1. Java中的泛型是什么 ? 使用泛型的好处是什么? 原则是什么？ Java泛型设计原则：只要在编译时期没有出现警告，那么运行时期就不会出现Cl</description>
+    </item>
+    
+  </channel>
+</rss>
