@@ -9,7 +9,7 @@
 <meta property='og:description' content='泛型的简单面试题'>
 <meta property='og:url' content='/archives/%E6%B3%9B%E5%9E%8B/'>
 <meta property='og:site_name' content='Space Dog&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='泛型' /><meta property='article:published_time' content='2022-03-13T22:21:21&#43;08:00'/><meta property='article:modified_time' content='2022-03-13T23:50:14&#43;08:00'/><meta property='og:image' content='/archives/%E6%B3%9B%E5%9E%8B/1.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='泛型' /><meta property='article:published_time' content='2022-03-14T10:29:23&#43;08:00'/><meta property='article:modified_time' content='2022-03-14T10:57:23&#43;08:00'/><meta property='og:image' content='/archives/%E6%B3%9B%E5%9E%8B/1.png' />
 <meta name="twitter:title" content="泛型">
 <meta name="twitter:description" content="泛型的简单面试题"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='/archives/%E6%B3%9B%E5%9E%8B/1.png' />
@@ -364,7 +364,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2022-03-13</time>
+                <time class="article-time--published">2022-03-14</time>
             </div>
         
 
@@ -375,9 +375,8 @@
 </header>
 
     <section class="article-content">
-    <h2 id="泛型">泛型</h2>
-<br>
-<h2 id="1-java中的泛型是什么--使用泛型的好处是什么-原则是什么">1. Java中的泛型是什么 ? 使用泛型的好处是什么? 原则是什么？</h2>
+    <h2 id="1-java中的泛型是什么--使用泛型的好处是什么-原则是什么">1. Java中的泛型是什么 ? 使用泛型的好处是什么? 原则是什么？</h2>
+<p><strong><code>Java泛型设计原则</code></strong>：只要在编译时期没有出现警告，那么运行时期就不会出现ClassCastException异常。</p>
 <p><strong><code>Java泛型设计原则</code></strong>：只要在编译时期没有出现警告，那么运行时期就不会出现ClassCastException异常。</p>
 <p><strong><code>泛型</code></strong>，即<mark>“参数化类型”</mark>，把类型明确的工作推迟到创建对象或调用方法的时候才去明确的特殊类型,把&lt;数据类型&gt;当作是参数一样传递</p>
 <p><strong><code>好处</code></strong>,在集合中存储对象并在使用前进行类型转换是多么的不方便。泛型防止了那种情况的发生。它提供了编译期的类型安全，确保你只能把正确类型的对象放入集合中，避免了在运行时出现ClassCastException。</p>
@@ -388,14 +387,16 @@
         List list = strlist;
 ​
         List&lt;String&gt; stringList2 = list;
-        List&lt;Integer&gt; intList2 = list;//你也可以把它赋给Integer类型的集合，但是当你把这个集合当成Integer的集合操作的时候，依旧会抛出ClassCastException异常
+        List&lt;Integer&gt; intList2 = list;
+        //你也可以把它赋给Integer类型的集合，但是当你把这个集合当
+        //成Integer的集合操作的时候，依旧会抛出ClassCastException异常
 ​
         for (Integer i:intList2){//java.lang.ClassCastException
             System.out.println(i);
         }
 </code></pre></div><br>
 <h2 id="3-什么是泛型中的限定通配符和非限定通配符-">3. 什么是泛型中的限定通配符和非限定通配符 ?</h2>
-<p>　　限定通配符对类型进行了限制。有两种限定通配符，一种是<code>&lt;? extends T&gt;</code>它通过确保类型必须是T的子类来设定类型的上界，另一种是<code>&lt;? super T&gt;</code>它通过确保类型必须是T的父类来设定类型的下界。泛型类型必须用限定内的类型来进行初始化，否则会导致编译错误。另一方面<?>表示了非限定通配符，因为<?>可以用任意类型来替代。</p>
+<p>限定通配符对类型进行了限制。有两种限定通配符，一种是<code>&lt;? extends T&gt;</code>它通过确保类型必须是T的子类来设定类型的上界，另一种是<code>&lt;? super T&gt;</code>它通过确保类型必须是T的父类来设定类型的下界。泛型类型必须用限定内的类型来进行初始化，否则会导致编译错误。另一方面<?>表示了非限定通配符，因为<?>可以用任意类型来替代。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class Animal {
     public static void main(String[] args) {
         ArrayList&lt;Animal&gt; animals=new ArrayList&lt;&gt;();
@@ -435,7 +436,7 @@ class MiniCat extends Animal{
 
 </code></pre></div><br>
 <h2 id="4可以把list-string传递给一个接受list--object参数的方法吗">4.可以把List&lt; String&gt;传递给一个接受List &lt; Object&gt;参数的方法吗？</h2>
-<p>　　对任何一个不太熟悉泛型的人来说，这个Java泛型题目看起来令人疑惑，因为乍看起来String是一种Object，所以List<String>应当可以用在需要List<Object>的地方，但是事实并非如此。真这样做的话会导致编译错误。如果你再深一步考虑，你会发现Java这样做是有意义的，因为List<Object>可以存储任何类型的对象包括String, Integer等等，而List<String>却只能用来存储Strings。</p>
+<p>　　对任何一个不太熟悉泛型的人来说，这个Java泛型题目看起来令人疑惑，因为乍看起来String是一种Object，所以List&lt; String&gt;应当可以用在需要List&lt; Object&gt;的地方，但是事实并非如此。真这样做的话会导致编译错误。如果你再深一步考虑，你会发现Java这样做是有意义的，因为List&lt; Object&gt;可以存储任何类型的对象包括String, Integer等等，而List&lt; String&gt;却只能用来存储Strings。</p>
 <p><big>例一:</big></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">       //这里与
        List&lt;Object&gt; objectList;
@@ -450,16 +451,20 @@ class MiniCat extends Animal{
         System.out.println(list);
 
         for(int i=0;i&lt;list.size();i++){
-            //若要将list中的元素赋给String变量，需要进行类型转换，不然会报Incompatible types错误，显示list.get(i)返回的是Object
+            //若要将list中的元素赋给String变量，需要进行类型
+            //转换compatible types错误，显示list.get(i)返回的是Object
             String str =  (String) list.get(i);
             System.out.println(str);
         }
 ​   
-        list.add(123);//因为类型是Object，我们可以把Integer类型或者其他数据类型的元素也加入list之中
+        list.add(123);
+        //因为类型是Object，我们可以把Integer类型或者其他数据类型的元素也加入list之中
         System.out.println(list.get(3));
 ​
         for(int i=0;i&lt;list.size();i++){
-            //String str =  (String) list.get(i);//但是在这里会报错java.lang.ClassCastException，我们不能直接将Integer类型的数据转换成String
+            //String str =  (String) list.get(i);
+            //但是在这里会报错java.lang.ClassCastException，
+            //我们不能直接将Integer类型的数据转换成String
             System.out.println(list.get(i).getClass());
         }
 </code></pre></div><p>如代码中所示，当我们定义了一个List，list默认的类型是所有对象的基类Object，那么我们取出数据的时候需要经过一次类型转换才能进行对象的实际类型的相关操作。因为List中的类型是Object，那么我们先添加了String类型的数据，然后再添加Integer或者其他类型的数据也是允许的，因为编译时List中是Object类型的数据，然而运行的时候却是它本身的类型，所以当我们将List中的数据当作String处理时会抛出<code>java.lang.ClassCastException</code></p>
@@ -501,7 +506,7 @@ class MiniCat extends Animal{
 
 
         <span>
-            最后更新于 2022-03-13
+            最后更新于 2022-03-14
         </span>
     </section></footer>
 
@@ -567,34 +572,6 @@ class MiniCat extends Animal{
 
 
     
-        
-    <script src='//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js'></script>
-<div id="waline" class="waline-container"></div>
-<style>
-    .waline-container {
-        background-color: var(--card-background);
-        border-radius: var(--card-border-radius);
-        box-shadow: var(--shadow-l2);
-        padding: var(--card-padding);
-           
-        --waline-theme-color: #34495e;
-        --waline-active-color: #bababa;
-           
-        --waline-badge-color: #34495e;
-          
-        --waline-bgcolor: transparent;
-    }
-    :root{
-   	       --waline-border-color:transparent;
-   	 }        
-</style>
-<script src='//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js'></script>
-<div id="waline" class="waline-container"></div><script>
-    
-    new Waline({"avatar":"monsterid","dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://cdn.jsdelivr.net/gh/sowhereso/waline-blobcatemojis@1.2/blobs"],"lang":"zh-CN","locale":{"admin":"博主"},"placeholder":"欢迎评论留言","requiredMeta":["name","email"],"serverURL":"https://waline-pc25lo4ye-yw2667899.vercel.app/"});
-</script>
-
-    
 
     <footer class="site-footer">
   <section class="copyright">
@@ -626,14 +603,12 @@ class MiniCat extends Animal{
       
    
       
-   
-      
   
   <section class="copyright">
     &copy; 
     
-    2022 Space Dog's Blog·<i class="fas fa-bell"></i> <a id="days">50</a>Days<br>共编辑了6.8k字
-    ·共 6篇文章</br><span><p>
+    2022 Space Dog's Blog·<i class="fas fa-bell"></i> <a id="days">50</a>Days<br>共编辑了6.6k字
+    ·共 5篇文章</br><span><p>
 </section>
 
 
@@ -770,7 +745,7 @@ class MiniCat extends Animal{
                     <a href="/archives/#2021">
                         
                             <span class="year">2021</span>
-                            <span class="count">4</span>
+                            <span class="count">3</span>
                         
                     </a> 
                 </div>
@@ -797,8 +772,6 @@ class MiniCat extends Animal{
             <div class="category-list-item"><a href="/categories/gpg-keys/" class="category-list-link">gpg-keys<span class="category-list-count">1</a>
             </span></div>
             <div class="category-list-item"><a href="/categories/%E6%8A%80%E6%9C%AF/" class="category-list-link">技术<span class="category-list-count">3</a>
-            </span></div>
-            <div class="category-list-item"><a href="/categories/%E6%97%A5%E5%B8%B8/" class="category-list-link">日常<span class="category-list-count">1</a>
             </span></div>
         </div>
     </div>
@@ -854,7 +827,6 @@ class MiniCat extends Animal{
         <div class="widget--toc">
           <nav id="TableOfContents">
   <ol>
-    <li><a href="#泛型">泛型</a></li>
     <li><a href="#1-java中的泛型是什么--使用泛型的好处是什么-原则是什么">1. Java中的泛型是什么 ? 使用泛型的好处是什么? 原则是什么？</a></li>
     <li><a href="#2-java的泛型是如何工作的--什么是类型擦除-">2. Java的泛型是如何工作的 ? 什么是类型擦除 ?</a></li>
     <li><a href="#3-什么是泛型中的限定通配符和非限定通配符-">3. 什么是泛型中的限定通配符和非限定通配符 ?</a></li>
