@@ -6,7 +6,57 @@
         <description>Recent content on Space Dog&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-CN</language>
-        <lastBuildDate>Mon, 14 Mar 2022 10:29:23 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Apr 2022 14:20:13 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>快慢指针</title>
+        <link>/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/</link>
+        <pubDate>Thu, 07 Apr 2022 14:20:13 +0800</pubDate>
+        
+        <guid>/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/</guid>
+        <description>&lt;img src="/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/1.jpg" alt="Featured image of post 快慢指针" /&gt;&lt;h2 id=&#34;关于快慢指针&#34;&gt;关于快慢指针&lt;/h2&gt;
+&lt;h3 id=&#34;1怎么证明快慢指针在环中是可以相遇的&#34;&gt;1.怎么证明快慢指针在环中是可以相遇的？&lt;/h3&gt;
+&lt;p&gt;证明这个问题？可能你会说，只要快慢两个指针都进入环中，两者有速度差，快指针就一定能够追上慢指针。可是这儿“追上”有可能是两种情况（注意，这儿讨论的是一般情况，快指针步长k &amp;gt;= 2），一是恰好追上（也就是相遇了），二是追上并超过了慢指针。当然，这两种情况都不妨碍我们判断是否有环存在。下面我们就证明一下无论快指针步长k为多少，快慢指针在环中都能恰好相遇。&lt;/p&gt;
+&lt;p&gt;证明开始：&lt;/p&gt;
+&lt;h3 id=&#34;方法一&#34;&gt;方法一：&lt;/h3&gt;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 163; flex-basis: 391px&#34;&gt;
+		&lt;a href=&#34;/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/3.png&#34; data-size=&#34;1530x938&#34;&gt;&lt;img src=&#34;/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/3.png&#34;
+				srcset=&#34;/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/3_hua3e5114dc0e0e39079b42bf8fbc55e4d_191455_480x0_resize_box_3.png 480w, /archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/3_hua3e5114dc0e0e39079b42bf8fbc55e4d_191455_1024x0_resize_box_3.png 1024w&#34;
+				width=&#34;1530&#34;
+				height=&#34;938&#34;
+				loading=&#34;lazy&#34;
+				alt=&#34;链表图&#34;&gt;
+		&lt;/a&gt;
+		
+		&lt;figcaption&gt;链表图&lt;/figcaption&gt;
+		
+	&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;首先，换个角度想问题。用一个步长为1的指针模拟遍历这个单向链表的过程。如上图所示，设单向链表的起始结点为X0（0是下标），环的起始结点为Xs。自然，遍历到最后就是一遍遍的重复这个环。如果，我们把遍历的项都不断记录到一个数组中的话(下标按次序递增)，最后就是一定长度的序列串的重复。例如，&lt;/p&gt;
+&lt;p&gt;X0, X1, &amp;hellip; , Xs, Xs+1, &amp;hellip;, Xs+cl-1&lt;/p&gt;
+&lt;p&gt;​ Xs+cl, Xs+cl+1, &amp;hellip;, Xs+2*cl-1&lt;/p&gt;
+&lt;p&gt;​ &amp;hellip;&lt;/p&gt;
+&lt;p&gt;cl (circle length)表示环的长度。&lt;/p&gt;
+&lt;p&gt;假设 j 是 cl 的整数倍，并且是 cl 整数倍中满足 j &amp;gt; s 最小的那个数。对于任意的 k (k &amp;gt;= 2)，我们考虑下标分别为 j 和 jk 的两个位置 Xj 和 Xjk。可见，Xj 就是慢指针走了 j 步之后的位置，而 j &amp;gt; s 则保证了此时慢指针已经进入环中。同理，此时的快指针在位置 Xjk，必然也在环中。&lt;/p&gt;
+&lt;p&gt;因为 j 是 cl 的整数倍，我们可以把 Xjk 看成是一个指针从位置 Xj 开始，走了 (k - 1) 次的 j 步。而每走 j 步，在单向链表的环中，其实又回到了 Xj 位置，因为 j 是 cl 的整数倍。所以我们有，Xj = Xjk 。这样，我们就证明了快慢指针肯定会恰好相遇的问题。&lt;/p&gt;
+&lt;p&gt;为什么快指针步长要为 2 ？3，4，5可以吗
+有了上面证明的基础，就不难发现 k 越小，所需的遍历次数就越少，因为给定一个带环的单向链表，j 的取值是确定的。所以，取 k ＝ 2。当然，除了 1 ，别的其他数都可以。&lt;/p&gt;
+&lt;p&gt;正规一点儿的分析，如下：&lt;/p&gt;
+&lt;p&gt;因为 j 是 cl 的整数倍，并且是 cl 整数倍中满足 j &amp;gt; s 最小的那个数。如果 s &amp;lt;= cl，那么 j = cl；如果 s &amp;gt; cl，那么 j &amp;lt; 2*s ，所以 j 的时间复杂度为 O(s + cl)。假设单向链表中结点的个数为 n，因为 s 和 cl 都是小于 n 的，所以 j = O(n) 。这是慢指针的时间复杂度，那么快指针的就是 O(nk) 。所以取 k = 2 ，可以最小化算法的运行时间。&lt;/p&gt;
+&lt;h3 id=&#34;方法二简单版&#34;&gt;方法二(简单版)：&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;证明能相遇
+	假定环前节点有 x 个，环上节点有 y 个，快慢指针在环上分别走了 m，n 圈后相遇，
+	在环上相遇的位置为 z，用 i 表示慢指针在相遇的时候走了多少步。能有如下两表达式：
+	x + my + z = 2*i + 1
+	x + ny + z = 1*i
+	两式相减
+	(m - n)y = (2-1)i + 1
+	说明 i+1 的值为环节点长度的倍数，即可相遇
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2为什么快指针步长要为-2-345可以吗&#34;&gt;2.为什么快指针步长要为 2 ？3，4，5可以吗&lt;/h3&gt;
+&lt;p&gt;有了上面证明的基础，就不难发现 k 越小，所需的遍历次数就越少，因为给定一个带环的单向链表，j 的取值是确定的。所以，取 k ＝ 2。当然，除了 1 ，别的其他数都可以。&lt;/p&gt;
+&lt;p&gt;正规一点儿的分析，如下：&lt;/p&gt;
+&lt;p&gt;因为 j 是 cl 的整数倍，并且是 cl 整数倍中满足 j &amp;gt; s 最小的那个数。如果 s &amp;lt;= cl，那么 j = cl；如果 s &amp;gt; cl，那么 j &amp;lt; 2*s ，所以 j 的时间复杂度为 O(s + cl)。假设单向链表中结点的个数为 n，因为 s 和 cl 都是小于 n 的，所以 j = O(n) 。这是慢指针的时间复杂度，那么快指针的就是 O(nk) 。所以取 k = 2 ，可以最小化算法的运行时间。&lt;/p&gt;
+&lt;p&gt;总结：取其他数可以，但每取大一倍数就得多走一圈，所以取2才是最优解。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>泛型</title>
         <link>/archives/%E6%B3%9B%E5%9E%8B/</link>
         <pubDate>Mon, 14 Mar 2022 10:29:23 +0800</pubDate>

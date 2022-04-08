@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='git 简单配置'><title>使用git创建版本库</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='关于快慢指针的问题'><title>快慢指针</title>
 
-<link rel='canonical' href='/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/'>
+<link rel='canonical' href='/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='使用git创建版本库'>
-<meta property='og:description' content='git 简单配置'>
-<meta property='og:url' content='/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/'>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='快慢指针'>
+<meta property='og:description' content='关于快慢指针的问题'>
+<meta property='og:url' content='/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/'>
 <meta property='og:site_name' content='Space Dog&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='git' /><meta property='article:published_time' content='2021-11-14T20:58:22&#43;08:00'/><meta property='article:modified_time' content='2022-03-13T23:58:23&#43;08:00'/><meta property='og:image' content='/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/p1.jpg' />
-<meta name="twitter:title" content="使用git创建版本库">
-<meta name="twitter:description" content="git 简单配置"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/p1.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='指针' /><meta property='article:published_time' content='2022-04-07T14:20:13&#43;08:00'/><meta property='article:modified_time' content='2022-04-07T15:15:51&#43;08:00'/><meta property='og:image' content='/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/1.jpg' />
+<meta name="twitter:title" content="快慢指针">
+<meta name="twitter:description" content="关于快慢指针的问题"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/1.jpg' />
     <link rel="shortcut icon" href="/img/favicon.png" />
 <style>
     h1 {letter-spacing: 4px}
@@ -295,19 +295,17 @@
 
 <main class="main full-width">
     
-        <p> 最后更新于 2022 年 3 月 13 日</p>
-    
 
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/">
-                <img src="/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/p1_hue562663c14d4442894467021dc935054_243244_800x0_resize_q75_box.jpg"
-                        srcset="/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/p1_hue562663c14d4442894467021dc935054_243244_800x0_resize_q75_box.jpg 800w, /archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/p1_hue562663c14d4442894467021dc935054_243244_1600x0_resize_q75_box.jpg 1600w"
+            <a href="/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/">
+                <img src="/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/1_hu41d61907f311ce5b0ea210fd61a4a533_75291_800x0_resize_q75_box.jpg"
+                        srcset="/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/1_hu41d61907f311ce5b0ea210fd61a4a533_75291_800x0_resize_q75_box.jpg 800w, /archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/1_hu41d61907f311ce5b0ea210fd61a4a533_75291_1600x0_resize_q75_box.jpg 1600w"
                         width="800" 
-                        height="450" 
+                        height="449" 
                         loading="lazy"
-                        alt="Featured image of post 使用git创建版本库" />
+                        alt="Featured image of post 快慢指针" />
                 
             </a>
         </div>
@@ -325,12 +323,12 @@
     
 
     <h2 class="article-title">
-        <a href="/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/">使用git创建版本库</a>
+        <a href="/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/">快慢指针</a>
     </h2>
 
     
     <h3 class="article-subtitle">
-        git 简单配置
+        关于快慢指针的问题
     </h3>
     
 
@@ -347,7 +345,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2021-11-14</time>
+                <time class="article-time--published">2022-04-07</time>
             </div>
         
 
@@ -358,34 +356,49 @@
 </header>
 
     <section class="article-content">
-    <h2 id="初始化">初始化</h2>
-<p>输入命令：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">mkdir &lt;项目名称&gt;
-cd &lt;项目名称&gt;   #进入目录
-git init       #初始仓库，新建一个 .git 目录
-ls -la         #查看所有文件
-touch &lt;file1&gt;  #创建一个文件
-mkdir &lt;dir1&gt;   #新建一个目录
-</code></pre></div><p>现在可以修改文件内容</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git status -sb      #文件前面有 ?? 号
-git add .           #一次性将文件添加到暂存区
-git status -sb      #现在文件前面 ?? 变成了 A
-git commit -m &#34;xx&#34;  #将你 add 过的内容正式提交到本地仓库，并添加注释
-git log             #查看历史变动
-</code></pre></div><h3 id="文件变动">文件变动</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git status -sb
-git add .
-git commit -m &#34;xx&#34;
-</code></pre></div><h2 id="将本地仓库上传到-github">将本地仓库上传到 GitHub</h2>
-<h3 id="新建一个空仓库名称与本地目录名一致复制ssh">新建一个空仓库，名称与本地目录名一致，复制ssh</h3>
-<p>不需要勾选任何东西</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git remote add origin git@github.com:xxxx/&lt;仓库名&gt;
-git push -u origin master
-</code></pre></div><h2 id="更改文件内容">更改文件内容</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git add .
-git commit -m &#34;xx&#34;
-git push
-</code></pre></div>
+    <h2 id="关于快慢指针">关于快慢指针</h2>
+<h3 id="1怎么证明快慢指针在环中是可以相遇的">1.怎么证明快慢指针在环中是可以相遇的？</h3>
+<p>证明这个问题？可能你会说，只要快慢两个指针都进入环中，两者有速度差，快指针就一定能够追上慢指针。可是这儿“追上”有可能是两种情况（注意，这儿讨论的是一般情况，快指针步长k &gt;= 2），一是恰好追上（也就是相遇了），二是追上并超过了慢指针。当然，这两种情况都不妨碍我们判断是否有环存在。下面我们就证明一下无论快指针步长k为多少，快慢指针在环中都能恰好相遇。</p>
+<p>证明开始：</p>
+<h3 id="方法一">方法一：</h3>
+<p><figure style="flex-grow: 163; flex-basis: 391px">
+		<a href="/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/3.png" data-size="1530x938"><img src="/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/3.png"
+				srcset="/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/3_hua3e5114dc0e0e39079b42bf8fbc55e4d_191455_480x0_resize_box_3.png 480w, /archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/3_hua3e5114dc0e0e39079b42bf8fbc55e4d_191455_1024x0_resize_box_3.png 1024w"
+				width="1530"
+				height="938"
+				loading="lazy"
+				alt="链表图">
+		</a>
+		
+		<figcaption>链表图</figcaption>
+		
+	</figure></p>
+<p>首先，换个角度想问题。用一个步长为1的指针模拟遍历这个单向链表的过程。如上图所示，设单向链表的起始结点为X0（0是下标），环的起始结点为Xs。自然，遍历到最后就是一遍遍的重复这个环。如果，我们把遍历的项都不断记录到一个数组中的话(下标按次序递增)，最后就是一定长度的序列串的重复。例如，</p>
+<p>X0, X1, &hellip; , Xs, Xs+1, &hellip;, Xs+cl-1</p>
+<p>​ Xs+cl, Xs+cl+1, &hellip;, Xs+2*cl-1</p>
+<p>​ &hellip;</p>
+<p>cl (circle length)表示环的长度。</p>
+<p>假设 j 是 cl 的整数倍，并且是 cl 整数倍中满足 j &gt; s 最小的那个数。对于任意的 k (k &gt;= 2)，我们考虑下标分别为 j 和 jk 的两个位置 Xj 和 Xjk。可见，Xj 就是慢指针走了 j 步之后的位置，而 j &gt; s 则保证了此时慢指针已经进入环中。同理，此时的快指针在位置 Xjk，必然也在环中。</p>
+<p>因为 j 是 cl 的整数倍，我们可以把 Xjk 看成是一个指针从位置 Xj 开始，走了 (k - 1) 次的 j 步。而每走 j 步，在单向链表的环中，其实又回到了 Xj 位置，因为 j 是 cl 的整数倍。所以我们有，Xj = Xjk 。这样，我们就证明了快慢指针肯定会恰好相遇的问题。</p>
+<p>为什么快指针步长要为 2 ？3，4，5可以吗
+有了上面证明的基础，就不难发现 k 越小，所需的遍历次数就越少，因为给定一个带环的单向链表，j 的取值是确定的。所以，取 k ＝ 2。当然，除了 1 ，别的其他数都可以。</p>
+<p>正规一点儿的分析，如下：</p>
+<p>因为 j 是 cl 的整数倍，并且是 cl 整数倍中满足 j &gt; s 最小的那个数。如果 s &lt;= cl，那么 j = cl；如果 s &gt; cl，那么 j &lt; 2*s ，所以 j 的时间复杂度为 O(s + cl)。假设单向链表中结点的个数为 n，因为 s 和 cl 都是小于 n 的，所以 j = O(n) 。这是慢指针的时间复杂度，那么快指针的就是 O(nk) 。所以取 k = 2 ，可以最小化算法的运行时间。</p>
+<h3 id="方法二简单版">方法二(简单版)：</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">证明能相遇
+	假定环前节点有 x 个，环上节点有 y 个，快慢指针在环上分别走了 m，n 圈后相遇，
+	在环上相遇的位置为 z，用 i 表示慢指针在相遇的时候走了多少步。能有如下两表达式：
+	x + my + z = 2*i + 1
+	x + ny + z = 1*i
+	两式相减
+	(m - n)y = (2-1)i + 1
+	说明 i+1 的值为环节点长度的倍数，即可相遇
+</code></pre></div><h3 id="2为什么快指针步长要为-2-345可以吗">2.为什么快指针步长要为 2 ？3，4，5可以吗</h3>
+<p>有了上面证明的基础，就不难发现 k 越小，所需的遍历次数就越少，因为给定一个带环的单向链表，j 的取值是确定的。所以，取 k ＝ 2。当然，除了 1 ，别的其他数都可以。</p>
+<p>正规一点儿的分析，如下：</p>
+<p>因为 j 是 cl 的整数倍，并且是 cl 整数倍中满足 j &gt; s 最小的那个数。如果 s &lt;= cl，那么 j = cl；如果 s &gt; cl，那么 j &lt; 2*s ，所以 j 的时间复杂度为 O(s + cl)。假设单向链表中结点的个数为 n，因为 s 和 cl 都是小于 n 的，所以 j = O(n) 。这是慢指针的时间复杂度，那么快指针的就是 O(nk) 。所以取 k = 2 ，可以最小化算法的运行时间。</p>
+<p>总结：取其他数可以，但每取大一倍数就得多走一圈，所以取2才是最优解。</p>
+
 </section>
 
 
@@ -393,7 +406,7 @@ git push
     
     <section class="article-tags">
         
-            <a href="/tags/git/">git</a>
+            <a href="/tags/%E6%8C%87%E9%92%88/">指针</a>
         
     </section>
 
@@ -403,7 +416,7 @@ git push
 	
     <section class="article-edit">
         <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1629478225447" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2064" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><defs><style type="text/css"></style></defs><path d="M960 512c0 97.76-28.704 185.216-85.664 263.264-56.96 78.016-130.496 131.84-220.64 161.856-10.304 1.824-18.368 0.448-22.848-4.032a22.4 22.4 0 0 1-7.2-17.504v-122.88c0-37.632-10.304-65.44-30.464-82.912a409.856 409.856 0 0 0 59.616-10.368 222.752 222.752 0 0 0 54.72-22.816c18.848-10.784 34.528-23.36 47.104-38.592 12.544-15.232 22.848-35.904 30.912-61.44 8.096-25.568 12.128-54.688 12.128-87.904 0-47.072-15.232-86.976-46.208-120.16 14.368-35.456 13.024-74.912-4.48-118.848-10.752-3.616-26.432-1.344-47.072 6.272s-38.56 16.16-53.824 25.568l-21.984 13.888c-36.32-10.304-73.536-15.232-112.096-15.232s-75.776 4.928-112.096 15.232a444.48 444.48 0 0 0-24.672-15.68c-10.336-6.272-26.464-13.888-48.896-22.432-21.952-8.96-39.008-11.232-50.24-8.064-17.024 43.936-18.368 83.424-4.032 118.848-30.496 33.632-46.176 73.536-46.176 120.608 0 33.216 4.032 62.336 12.128 87.456 8.032 25.12 18.368 45.76 30.496 61.44 12.544 15.68 28.224 28.704 47.072 39.04 18.848 10.304 37.216 17.92 54.72 22.816a409.6 409.6 0 0 0 59.648 10.368c-15.712 13.856-25.12 34.048-28.704 60.064a99.744 99.744 0 0 1-26.464 8.512 178.208 178.208 0 0 1-33.184 2.688c-13.024 0-25.568-4.032-38.144-12.544-12.544-8.512-23.296-20.64-32.256-36.32a97.472 97.472 0 0 0-28.256-30.496c-11.232-8.064-21.088-12.576-28.704-13.92l-11.648-1.792c-8.096 0-13.92 0.928-17.056 2.688-3.136 1.792-4.032 4.032-2.688 6.72s3.136 5.408 5.376 8.096 4.928 4.928 7.616 7.168l4.032 2.688c8.544 4.032 17.056 11.232 25.568 21.984 8.544 10.752 14.368 20.64 18.4 29.6l5.824 13.44c4.928 14.816 13.44 26.912 25.568 35.872 12.096 8.992 25.088 14.816 39.008 17.504 13.888 2.688 27.36 4.032 40.352 4.032s23.776-0.448 32.288-2.24l13.472-2.24c0 14.784 0 32.288 0.416 52.032 0 19.744 0.48 30.496 0.48 31.392a22.624 22.624 0 0 1-7.648 17.472c-4.928 4.48-12.992 5.824-23.296 4.032-90.144-30.048-163.68-83.84-220.64-161.888C92.256 697.216 64 609.312 64 512c0-81.152 20.192-156.064 60.096-224.672s94.176-122.88 163.232-163.232C355.936 84.192 430.816 64 512 64s156.064 20.192 224.672 60.096 122.88 94.176 163.232 163.232C939.808 355.488 960 430.848 960 512" fill="#000000" p-id="2065"></path></svg>
-        <span><a style="color: inherit;" href="https://github.com/lsy-73/lsy-73.github.io/edit/develop/content/post/create/index.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+        <span><a style="color: inherit;" href="https://github.com/lsy-73/lsy-73.github.io/edit/develop/content/post/pointer/index.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
     </section>
     <section class="article-lastmod">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -415,7 +428,7 @@ git push
 
 
         <span>
-            最后更新于 2022-03-13
+            最后更新于 2022-04-07
         </span>
     </section></footer>
 
@@ -429,28 +442,6 @@ git push
         <h2 class="section-title">相关文章</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
-                
-                    
-<article class="has-image">
-    <a href="/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/">
-        
-        
-            <div class="article-image">
-                <img src="/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/1.35a45f0e335096bf82ae88fb8a396174_hu41d61907f311ce5b0ea210fd61a4a533_75291_250x150_fill_q75_box_smart1.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy" 
-                        data-key="" 
-                        data-hash="md5-NaRfDjNQlr&#43;Croj7ijlhdA==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">快慢指针</h2>
-        </div>
-    </a>
-</article>
                 
                     
 <article class="has-image">
@@ -470,6 +461,28 @@ git push
 
         <div class="article-details">
             <h2 class="article-title">泛型</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/">
+        
+        
+            <div class="article-image">
+                <img src="/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/p1.ec91c5dd5d99c36421a023e1b07687cb_hue562663c14d4442894467021dc935054_243244_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="" 
+                        data-hash="md5-7JHF3V2Zw2QhoCPhsHaHyw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">使用git创建版本库</h2>
         </div>
     </a>
 </article>
@@ -501,34 +514,6 @@ git push
     
 </aside>
 
-
-    
-        
-    <script src='//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js'></script>
-<div id="waline" class="waline-container"></div>
-<style>
-    .waline-container {
-        background-color: var(--card-background);
-        border-radius: var(--card-border-radius);
-        box-shadow: var(--shadow-l2);
-        padding: var(--card-padding);
-           
-        --waline-theme-color: #34495e;
-        --waline-active-color: #bababa;
-           
-        --waline-badge-color: #34495e;
-          
-        --waline-bgcolor: transparent;
-    }
-    :root{
-   	       --waline-border-color:transparent;
-   	 }        
-</style>
-<script src='//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js'></script>
-<div id="waline" class="waline-container"></div><script>
-    
-    new Waline({"avatar":"monsterid","dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://cdn.jsdelivr.net/gh/sowhereso/waline-blobcatemojis@1.2/blobs"],"lang":"zh-CN","locale":{"admin":"博主"},"placeholder":"欢迎评论留言","requiredMeta":["name","email"],"serverURL":"https://waline-pc25lo4ye-yw2667899.vercel.app/"});
-</script>
 
     
 
@@ -790,17 +775,14 @@ git push
         <div class="widget--toc">
           <nav id="TableOfContents">
   <ol>
-    <li><a href="#初始化">初始化</a>
+    <li><a href="#关于快慢指针">关于快慢指针</a>
       <ol>
-        <li><a href="#文件变动">文件变动</a></li>
+        <li><a href="#1怎么证明快慢指针在环中是可以相遇的">1.怎么证明快慢指针在环中是可以相遇的？</a></li>
+        <li><a href="#方法一">方法一：</a></li>
+        <li><a href="#方法二简单版">方法二(简单版)：</a></li>
+        <li><a href="#2为什么快指针步长要为-2-345可以吗">2.为什么快指针步长要为 2 ？3，4，5可以吗</a></li>
       </ol>
     </li>
-    <li><a href="#将本地仓库上传到-github">将本地仓库上传到 GitHub</a>
-      <ol>
-        <li><a href="#新建一个空仓库名称与本地目录名一致复制ssh">新建一个空仓库，名称与本地目录名一致，复制ssh</a></li>
-      </ol>
-    </li>
-    <li><a href="#更改文件内容">更改文件内容</a></li>
   </ol>
 </nav>
         </div>
