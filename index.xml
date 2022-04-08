@@ -6,14 +6,130 @@
         <description>Recent content on Space Dog&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-CN</language>
-        <lastBuildDate>Thu, 07 Apr 2022 14:20:13 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 Apr 2022 13:51:19 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>时间与空间复杂度</title>
+        <link>/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/</link>
+        <pubDate>Fri, 08 Apr 2022 13:51:19 +0800</pubDate>
+        
+        <guid>/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/</guid>
+        <description>&lt;img src="/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/2.jpg" alt="Featured image of post 时间与空间复杂度" /&gt;&lt;p&gt;时间复杂度和空间复杂度是衡量算法优劣的标准，效率可以用算法的时间复杂度来描述，而所占用的存储空间可以用算法的空间复杂度来描述。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;时间复杂度：用于评估执行程序所消耗的时间，可以估算出程序对处理器的使用程度。&lt;/li&gt;
+&lt;li&gt;空间复杂度：用于评估执行程序所占用的内存空间，可以估算出程序对计算机内存的使用程度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;常见的时间复杂度有：O(1)常数型；O(log n)对数型，O(n)线性型，O(nlog n)线性对数型，O(n2)平方型，O(n3)立方型，O(nk)k次方型，O(2n)指数型。&lt;/p&gt;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 144; flex-basis: 347px&#34;&gt;
+		&lt;a href=&#34;/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.jpeg&#34; data-size=&#34;946x654&#34;&gt;&lt;img src=&#34;/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.jpeg&#34;
+				srcset=&#34;/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1_hu896a899d0234344bf30a77368539cfd0_68903_480x0_resize_q75_box.jpeg 480w, /archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1_hu896a899d0234344bf30a77368539cfd0_68903_1024x0_resize_q75_box.jpeg 1024w&#34;
+				width=&#34;946&#34;
+				height=&#34;654&#34;
+				loading=&#34;lazy&#34;
+				&gt;
+		&lt;/a&gt;
+		
+	&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;值得留意的是，算法复杂度只是描述算法的增长趋势，并不能说一个算法一定比另外一个算法高效。这要添加上问题规模n的范围，在一定问题规范范围之前某一算法比另外一算法高效，而过了一个阈值之后，情况可能就相反了，通过上图我们可以明显看到这一点。这也就是为什么我们在实践的过程中得出的结论可能上面算法的排序相反的原因。&lt;/p&gt;
+&lt;h2 id=&#34;如何推导时间复杂度&#34;&gt;如何推导时间复杂度&lt;/h2&gt;
+&lt;p&gt;求解算法复杂度一般分以下几个步骤：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;找出算法中的基本语句：算法中执行次数最多的语句就是基本语句，通常是最内层循环的循环体。&lt;/li&gt;
+&lt;li&gt;计算基本语句的执行次数的数量级：只需计算基本语句执行次数的数量级，即只要保证函数中的最高次幂正确即可，可以忽略所有低次幂和最高次幂的系数。这样能够简化算法分析，使注意力集中在最重要的一点上：增长率。&lt;/li&gt;
+&lt;li&gt;用大Ο表示算法的时间性能：将基本语句执行次数的数量级放入大Ο记号中。
+其中用大O表示法通常有三种规则：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;用常数1取代运行时间中的所有加法常数；&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;只保留时间函数中的最高阶项；&lt;/li&gt;
+&lt;li&gt;如果最高阶项存在，则省去最高阶项前面的系数；&lt;/li&gt;
+&lt;li&gt;下面通过具体的实例来说明以上的推断步骤和规则。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;时间复杂度实例&#34;&gt;时间复杂度实例&lt;/h3&gt;
+&lt;h4 id=&#34;常数阶o1&#34;&gt;常数阶O(1)&lt;/h4&gt;
+&lt;p&gt;无论代码执行了多少行，只要是没有循环等复杂结构，那这个代码的时间复杂度就都是O(1)，如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;int i = 1;
+int j = 2;
+int k = 1 + 2;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上述代码执行时，单个语句的频度均为1，不会随着问题规模n的变化而变化。因此，算法时间复杂度为常数阶，记作T(n)=O(1)。这里我们需要注意的是，即便上述代码有成千上万行，只要执行算法的时间不会随着问题规模n的增长而增长，那么执行时间只不过是一个比较大的常数而已。此类算法的时间复杂度均为O(1)。&lt;/p&gt;
+&lt;h4 id=&#34;对数阶olog-n&#34;&gt;对数阶O(log n)&lt;/h4&gt;
+&lt;p&gt;先来看对应的示例代码:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;int i = 1; // ①
+while (i &amp;lt;= n) {
+   i = i * 2; // ②
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在上述代码中，语句①的频度为1，可以忽略不计。&lt;/p&gt;
+&lt;p&gt;语句②我们可以看到它是以2的倍数来逼近n，每次都乘以2。如果用公式表示就是122*2…*2 &amp;lt;=n，也就是说2的x次方小于等于n时会执行循环体，记作2^x &amp;lt;= n，于是得出x&amp;lt;=logn。也就是说上述循环在执行logn次之后，便结束了，因此上述代码的时间复杂度为O(log n)。&lt;/p&gt;
+&lt;p&gt;其实上面代码的时间复杂度公式如果精确的来讲应该是：T(n) = 1 + O(log n)，但我们上面已经讲到对应的原则，“只保留时间函数中的最高阶项”，因此记作O(log n)。&lt;/p&gt;
+&lt;h4 id=&#34;线性阶on&#34;&gt;线性阶O(n)&lt;/h4&gt;
+&lt;p&gt;示例代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;int j = 0; // ①
+for (int i = 0; i &amp;lt; n; i++) { // ②
+   j = i; // ③
+   j++; // ④
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上述代码中，语句①的频度为1，②的频度为n，③的频度为n-1，④的频度为n-1，因此整个算法可以用公式T(n)=1+n+(n-1)+(n-1)来表示。进而可以推到T(n)=1+n+(n-1)+(n-1)=3n-1，即O(n)=3n-1，去掉低次幂和系数即O(n)=n，因此T(n)=O(n)。&lt;/p&gt;
+&lt;p&gt;在上述代码中for循环中的代码会执行n遍，因此它消耗的时间是随着n的变化而成线性变化的，因此这类算法都可以用O(n)来表示时间复杂度。&lt;/p&gt;
+&lt;h4 id=&#34;线性对数阶onlogn&#34;&gt;线性对数阶O(nlogN)&lt;/h4&gt;
+&lt;p&gt;示例代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;for (int m = 1; m &amp;lt; n; m++) {
+   int i = 1; // ①
+   while (i &amp;lt;= n) {
+      i = i * 2; // ②
+   }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;线性对数阶要对照对数阶 O(log n)来进行理解。上述代码中for循环内部的代码便是上面讲到对数阶，只不过在对数阶的外面套了一个n次的循环，当然，它的时间复杂度就是n*O(log n)了，于是记作O(nlog n)。&lt;/p&gt;
+&lt;h4 id=&#34;平方阶on&#34;&gt;平方阶O(n²)&lt;/h4&gt;
+&lt;p&gt;示例代码:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;int k = 0;
+for (int i = 0; i &amp;lt; n; i++) {
+   for (int j = 0; j &amp;lt; n; j++) {
+      k++;
+   }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;平方阶可对照线性阶来进行理解，我们知道线性阶是一层for循环，记作O(n)，此时等于又嵌套了一层for循环，那么便是n * O(n)，也就是O(n * n)，即O(n^2)。&lt;/p&gt;
+&lt;p&gt;如果将外层循环中的n改为m，即：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;int k = 0;
+for (int i = 0; i &amp;lt; m; i++) {
+   for (int j = 0; j &amp;lt; n; j++) {
+      k++;
+   }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;那么，对应的时间复杂度便为：O(m * n)。&lt;/p&gt;
+&lt;p&gt;同理，立方阶O(n³)、K次方阶O(n^k)，只不过是嵌套了3层循环、k层循环而已。&lt;/p&gt;
+&lt;h2 id=&#34;空间复杂度&#34;&gt;空间复杂度&lt;/h2&gt;
+&lt;p&gt;最后，我们再了解一下空间复杂度。空间复杂度主要指执行算法所需内存的大小，用于对程序运行过程中所需要的临时存储空间的度量，这里的空间复杂度同样是预估的。&lt;/p&gt;
+&lt;p&gt;程序执行除了需要存储空间、指令、常数、变量和输入数据外，还包括对数据进行操作的工作单元和存储计算所需信息的辅助空间。存储空间通常包括：指令空间（即代码空间）、数据空间（常量、简单变量）等所占的固定部分和动态分配、递归栈所需的可变空间。其中可变空间与算法有关。&lt;/p&gt;
+&lt;p&gt;一个算法所需的存储空间用f(n)表示。S(n)=O(f(n))其中n为问题的规模，S(n)表示空间复杂度。&lt;/p&gt;
+&lt;h3 id=&#34;空间复杂度实例&#34;&gt;空间复杂度实例&lt;/h3&gt;
+&lt;h4 id=&#34;空间复杂度-o1&#34;&gt;空间复杂度 O(1)&lt;/h4&gt;
+&lt;p&gt;空间复杂度为O(1)的情况的示例代码与时间复杂度为O(1)的实例代码一致：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;int i = 1;
+int j = 2;
+int k = 1 + 2;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上述代码中临时空间并不会随着n的变化而变化，因此空间复杂度为O(1)。总结一下就是：如果算法执行所需要的临时空间不随着某个变量n的大小而变化，此算法空间复杂度为一个常量，可表示为 O(1)，即 S(n) = O(1)。&lt;/p&gt;
+&lt;h4 id=&#34;空间复杂度-on&#34;&gt;空间复杂度 O(n)&lt;/h4&gt;
+&lt;p&gt;示例代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;int j = 0;
+int[] m = new int[n];
+for (int i = 1; i &amp;lt;= n; ++i) {
+   j = i;
+   j++;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上述代码中，只有创建int数组分配空间时与n的大小有关，而for循环内没有再分配新的空间，因此，对应的空间复杂度为S(n) = O(n)。&lt;/p&gt;
+&lt;p&gt;总结：&lt;/p&gt;
+&lt;p&gt;本篇文章给大家讲了可以通过时间复杂度和空间复杂度来衡量算法的优劣，同时用具体的实例来讲解如何计算不同方法的时间复杂度和空间复杂度。&lt;/p&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/zolalad/article/details/11848739&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/zolalad/article/details/11848739&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>快慢指针</title>
         <link>/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/</link>
         <pubDate>Thu, 07 Apr 2022 14:20:13 +0800</pubDate>
         
         <guid>/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/</guid>
         <description>&lt;img src="/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/1.jpg" alt="Featured image of post 快慢指针" /&gt;&lt;h2 id=&#34;关于快慢指针&#34;&gt;关于快慢指针&lt;/h2&gt;
-&lt;h3 id=&#34;1怎么证明快慢指针在环中是可以相遇的&#34;&gt;1.怎么证明快慢指针在环中是可以相遇的？&lt;/h3&gt;
+&lt;h3 id=&#34;怎么证明快慢指针在环中是可以相遇的&#34;&gt;怎么证明快慢指针在环中是可以相遇的？&lt;/h3&gt;
 &lt;p&gt;证明这个问题？可能你会说，只要快慢两个指针都进入环中，两者有速度差，快指针就一定能够追上慢指针。可是这儿“追上”有可能是两种情况（注意，这儿讨论的是一般情况，快指针步长k &amp;gt;= 2），一是恰好追上（也就是相遇了），二是追上并超过了慢指针。当然，这两种情况都不妨碍我们判断是否有环存在。下面我们就证明一下无论快指针步长k为多少，快慢指针在环中都能恰好相遇。&lt;/p&gt;
 &lt;p&gt;证明开始：&lt;/p&gt;
 &lt;h3 id=&#34;方法一&#34;&gt;方法一：&lt;/h3&gt;
@@ -49,11 +165,14 @@
 	两式相减
 	(m - n)y = (2-1)i + 1
 	说明 i+1 的值为环节点长度的倍数，即可相遇
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2为什么快指针步长要为-2-345可以吗&#34;&gt;2.为什么快指针步长要为 2 ？3，4，5可以吗&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;为什么快指针步长要为-2-345可以吗&#34;&gt;为什么快指针步长要为 2 ？3，4，5可以吗&lt;/h3&gt;
 &lt;p&gt;有了上面证明的基础，就不难发现 k 越小，所需的遍历次数就越少，因为给定一个带环的单向链表，j 的取值是确定的。所以，取 k ＝ 2。当然，除了 1 ，别的其他数都可以。&lt;/p&gt;
 &lt;p&gt;正规一点儿的分析，如下：&lt;/p&gt;
 &lt;p&gt;因为 j 是 cl 的整数倍，并且是 cl 整数倍中满足 j &amp;gt; s 最小的那个数。如果 s &amp;lt;= cl，那么 j = cl；如果 s &amp;gt; cl，那么 j &amp;lt; 2*s ，所以 j 的时间复杂度为 O(s + cl)。假设单向链表中结点的个数为 n，因为 s 和 cl 都是小于 n 的，所以 j = O(n) 。这是慢指针的时间复杂度，那么快指针的就是 O(nk) 。所以取 k = 2 ，可以最小化算法的运行时间。&lt;/p&gt;
 &lt;p&gt;总结：取其他数可以，但每取大一倍数就得多走一圈，所以取2才是最优解。&lt;/p&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/xgjonathan/article/details/18034825?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-3.not_use_machine_learn_pai&amp;amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-3.not_use_machine_learn_pai&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/xgjonathan/article/details/18034825?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-3.not_use_machine_learn_pai&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-3.not_use_machine_learn_pai&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -158,8 +277,8 @@ class MiniCat extends Animal{
 &lt;br&gt;
 &lt;h2 id=&#34;5-array中可以用泛型吗&#34;&gt;5. Array中可以用泛型吗?&lt;/h2&gt;
 &lt;p&gt;　　这可能是Java泛型面试题中最简单的一个了，当然前提是你要知道Array事实上并不支持泛型，这也是为什么Joshua Bloch在Effective Java一书中建议使用List来代替Array，因为&lt;strong&gt;List可以提供编译期的类型安全保证，而Array却不能。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;本文参考：
-&lt;a class=&#34;link&#34; href=&#34;https://www.jb51.net/article/214509.htm&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;p&gt;本文参考：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jb51.net/article/214509.htm&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://www.jb51.net/article/214509.htm&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/1033693&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://cloud.tencent.com/developer/article/1033693&lt;/a&gt;&lt;/p&gt;
@@ -396,16 +515,6 @@ git push -u origin master
 git commit -m &amp;#34;xx&amp;#34;
 git push
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-        </item>
-        <item>
-        <title>hugo博客搭建日记</title>
-        <link>/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/</link>
-        <pubDate>Thu, 21 Oct 2021 09:39:03 +0800</pubDate>
-        
-        <guid>/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/</guid>
-        <description>&lt;img src="/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/p24.jpg" alt="Featured image of post hugo博客搭建日记" /&gt;&lt;p&gt;主人正在编辑内容&lt;/p&gt;
-&lt;p&gt;请耐心等待&lt;/p&gt;
-</description>
         </item>
         
     </channel>

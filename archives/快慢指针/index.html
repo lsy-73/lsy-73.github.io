@@ -9,7 +9,7 @@
 <meta property='og:description' content='关于快慢指针的问题'>
 <meta property='og:url' content='/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/'>
 <meta property='og:site_name' content='Space Dog&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='指针' /><meta property='article:published_time' content='2022-04-07T14:20:13&#43;08:00'/><meta property='article:modified_time' content='2022-04-07T15:15:51&#43;08:00'/><meta property='og:image' content='/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/1.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='指针' /><meta property='article:published_time' content='2022-04-07T14:20:13&#43;08:00'/><meta property='article:modified_time' content='2022-04-08T14:44:11&#43;08:00'/><meta property='og:image' content='/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/1.jpg' />
 <meta name="twitter:title" content="快慢指针">
 <meta name="twitter:description" content="关于快慢指针的问题"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/1.jpg' />
@@ -295,6 +295,8 @@
 
 <main class="main full-width">
     
+        <p> 最后更新于 2022 年 4 月 8 日</p>
+    
 
     <article class="has-image main-article">
     <header class="article-header">
@@ -357,7 +359,7 @@
 
     <section class="article-content">
     <h2 id="关于快慢指针">关于快慢指针</h2>
-<h3 id="1怎么证明快慢指针在环中是可以相遇的">1.怎么证明快慢指针在环中是可以相遇的？</h3>
+<h3 id="怎么证明快慢指针在环中是可以相遇的">怎么证明快慢指针在环中是可以相遇的？</h3>
 <p>证明这个问题？可能你会说，只要快慢两个指针都进入环中，两者有速度差，快指针就一定能够追上慢指针。可是这儿“追上”有可能是两种情况（注意，这儿讨论的是一般情况，快指针步长k &gt;= 2），一是恰好追上（也就是相遇了），二是追上并超过了慢指针。当然，这两种情况都不妨碍我们判断是否有环存在。下面我们就证明一下无论快指针步长k为多少，快慢指针在环中都能恰好相遇。</p>
 <p>证明开始：</p>
 <h3 id="方法一">方法一：</h3>
@@ -393,11 +395,14 @@
 	两式相减
 	(m - n)y = (2-1)i + 1
 	说明 i+1 的值为环节点长度的倍数，即可相遇
-</code></pre></div><h3 id="2为什么快指针步长要为-2-345可以吗">2.为什么快指针步长要为 2 ？3，4，5可以吗</h3>
+</code></pre></div><h3 id="为什么快指针步长要为-2-345可以吗">为什么快指针步长要为 2 ？3，4，5可以吗</h3>
 <p>有了上面证明的基础，就不难发现 k 越小，所需的遍历次数就越少，因为给定一个带环的单向链表，j 的取值是确定的。所以，取 k ＝ 2。当然，除了 1 ，别的其他数都可以。</p>
 <p>正规一点儿的分析，如下：</p>
 <p>因为 j 是 cl 的整数倍，并且是 cl 整数倍中满足 j &gt; s 最小的那个数。如果 s &lt;= cl，那么 j = cl；如果 s &gt; cl，那么 j &lt; 2*s ，所以 j 的时间复杂度为 O(s + cl)。假设单向链表中结点的个数为 n，因为 s 和 cl 都是小于 n 的，所以 j = O(n) 。这是慢指针的时间复杂度，那么快指针的就是 O(nk) 。所以取 k = 2 ，可以最小化算法的运行时间。</p>
 <p>总结：取其他数可以，但每取大一倍数就得多走一圈，所以取2才是最优解。</p>
+<p>参考：</p>
+<p><a class="link" href="https://blog.csdn.net/xgjonathan/article/details/18034825?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-3.not_use_machine_learn_pai&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-3.not_use_machine_learn_pai"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/xgjonathan/article/details/18034825?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-3.not_use_machine_learn_pai&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-3.not_use_machine_learn_pai</a></p>
 
 </section>
 
@@ -428,7 +433,7 @@
 
 
         <span>
-            最后更新于 2022-04-07
+            最后更新于 2022-04-08
         </span>
     </section></footer>
 
@@ -442,6 +447,28 @@
         <h2 class="section-title">相关文章</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">
+        
+        
+            <div class="article-image">
+                <img src="/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/2.f8790c30d00d662cb0d9282b6d43c10c_hufa17463cd2f8fec8fc68f7767c4d536f_109577_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="" 
+                        data-hash="md5-&#43;HkMMNANZiyw2SgrbUPBDA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">时间与空间复杂度</h2>
+        </div>
+    </a>
+</article>
                 
                     
 <article class="has-image">
@@ -483,28 +510,6 @@
 
         <div class="article-details">
             <h2 class="article-title">使用git创建版本库</h2>
-        </div>
-    </a>
-</article>
-                
-                    
-<article class="has-image">
-    <a href="/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/">
-        
-        
-            <div class="article-image">
-                <img src="/archives/hugo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%97%A5%E8%AE%B0/p24.53c35d5646a6e80a463f51b5a0836b98_huac97e976f1785bb1b8d211bc3b7d9c93_355660_250x150_fill_q75_box_smart1.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy" 
-                        data-key="" 
-                        data-hash="md5-U8NdVkam6ApGP1G1oINrmA==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">hugo博客搭建日记</h2>
         </div>
     </a>
 </article>
@@ -551,7 +556,7 @@
   <section class="copyright">
     &copy; 
     
-    2022 Space Dog's Blog·<i class="fas fa-bell"></i> <a id="days">50</a>Days<br>共编辑了7.9k字
+    2022 Space Dog's Blog·<i class="fas fa-bell"></i> <a id="days">50</a>Days<br>共编辑了10.3k字
     ·共 6篇文章</br><span><p>
 </section>
 
@@ -681,7 +686,7 @@
                     <a href="/archives/#2022">
                         
                             <span class="year">2022</span>
-                            <span class="count">3</span>
+                            <span class="count">4</span>
                         
                     </a> 
                 </div>
@@ -689,7 +694,7 @@
                     <a href="/archives/#2021">
                         
                             <span class="year">2021</span>
-                            <span class="count">3</span>
+                            <span class="count">2</span>
                         
                     </a> 
                 </div>
@@ -746,8 +751,8 @@
                 GPG
             </a>
         
-            <a href="/tags/hugo/" class="font_size_1">
-                hugo
+            <a href="/tags/%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="font_size_1">
+                复杂度
             </a>
         
             <a href="/tags/%E6%8C%87%E9%92%88/" class="font_size_1">
@@ -777,10 +782,10 @@
   <ol>
     <li><a href="#关于快慢指针">关于快慢指针</a>
       <ol>
-        <li><a href="#1怎么证明快慢指针在环中是可以相遇的">1.怎么证明快慢指针在环中是可以相遇的？</a></li>
+        <li><a href="#怎么证明快慢指针在环中是可以相遇的">怎么证明快慢指针在环中是可以相遇的？</a></li>
         <li><a href="#方法一">方法一：</a></li>
         <li><a href="#方法二简单版">方法二(简单版)：</a></li>
-        <li><a href="#2为什么快指针步长要为-2-345可以吗">2.为什么快指针步长要为 2 ？3，4，5可以吗</a></li>
+        <li><a href="#为什么快指针步长要为-2-345可以吗">为什么快指针步长要为 2 ？3，4，5可以吗</a></li>
       </ol>
     </li>
   </ol>

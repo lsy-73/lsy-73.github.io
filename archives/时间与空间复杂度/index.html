@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Blog built using the hugo framework'><title>关于</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='时间复杂度与空间复杂度的计算'><title>时间与空间复杂度</title>
 
-<link rel='canonical' href='/%E5%85%B3%E4%BA%8E/'>
+<link rel='canonical' href='/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='关于'>
-<meta property='og:description' content='Blog built using the hugo framework'>
-<meta property='og:url' content='/%E5%85%B3%E4%BA%8E/'>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='时间与空间复杂度'>
+<meta property='og:description' content='时间复杂度与空间复杂度的计算'>
+<meta property='og:url' content='/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/'>
 <meta property='og:site_name' content='Space Dog&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Page' /><meta property='article:published_time' content='2021-10-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-01-26T22:58:51&#43;08:00'/>
-<meta name="twitter:title" content="关于">
-<meta name="twitter:description" content="Blog built using the hugo framework">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='复杂度' /><meta property='article:published_time' content='2022-04-08T13:51:19&#43;08:00'/><meta property='article:modified_time' content='2022-04-08T14:41:57&#43;08:00'/><meta property='og:image' content='/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/2.jpg' />
+<meta name="twitter:title" content="时间与空间复杂度">
+<meta name="twitter:description" content="时间复杂度与空间复杂度的计算"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/2.jpg' />
     <link rel="shortcut icon" href="/img/favicon.png" />
 <style>
     h1 {letter-spacing: 4px}
@@ -20,7 +21,7 @@
     </head>
     <body class="
     article-page
-<!---->
+<!--has-toc-->
 ">
     <script>
         (function() {
@@ -46,7 +47,7 @@
 </script>
 <div class="container main-container flex 
     
-        on-phone--column extended
+        extended
     
 ">
   <aside class="sidebar left-sidebar sticky">
@@ -178,7 +179,7 @@
         
         
 
-        <li  class='current' >
+        <li >
             <a href='/%E5%85%B3%E4%BA%8E/' >
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -294,22 +295,40 @@
 
 <main class="main full-width">
     
-        <p> 最后更新于 2022 年 1 月 26 日</p>
-    
 
-    <article class="main-article">
+    <article class="has-image main-article">
     <header class="article-header">
+        <div class="article-image">
+            <a href="/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">
+                <img src="/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/2_hufa17463cd2f8fec8fc68f7767c4d536f_109577_800x0_resize_q75_box.jpg"
+                        srcset="/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/2_hufa17463cd2f8fec8fc68f7767c4d536f_109577_800x0_resize_q75_box.jpg 800w, /archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/2_hufa17463cd2f8fec8fc68f7767c4d536f_109577_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post 时间与空间复杂度" />
+                
+            </a>
+        </div>
+    
 
     <div class="article-details">
     
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF/" >
+                技术
+            </a>
+        
+    </header>
+    
 
     <h2 class="article-title">
-        <a href="/%E5%85%B3%E4%BA%8E/">关于</a>
+        <a href="/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">时间与空间复杂度</a>
     </h2>
 
     
     <h3 class="article-subtitle">
-        Blog built using the hugo framework
+        时间复杂度与空间复杂度的计算
     </h3>
     
 
@@ -326,7 +345,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2021-10-20</time>
+                <time class="article-time--published">2022-04-08</time>
             </div>
         
 
@@ -337,23 +356,133 @@
 </header>
 
     <section class="article-content">
-    <p>Hey，我是太空狗 (Space dog)。</p>
-<p>这是我的利用 GitHub Pages &amp; Coding Pages 与 hugo 搭建的个人博客，选择的主题是 Stack。</p>
-<p>我的 GitHub 主页 👉<a class="link" href="https://github.com/lsy-73"  target="_blank" rel="noopener"
-    >GitHub·lsy-73</a>.</p>
+    <p>时间复杂度和空间复杂度是衡量算法优劣的标准，效率可以用算法的时间复杂度来描述，而所占用的存储空间可以用算法的空间复杂度来描述。</p>
+<ul>
+<li>时间复杂度：用于评估执行程序所消耗的时间，可以估算出程序对处理器的使用程度。</li>
+<li>空间复杂度：用于评估执行程序所占用的内存空间，可以估算出程序对计算机内存的使用程度。</li>
+</ul>
+<p>常见的时间复杂度有：O(1)常数型；O(log n)对数型，O(n)线性型，O(nlog n)线性对数型，O(n2)平方型，O(n3)立方型，O(nk)k次方型，O(2n)指数型。</p>
+<p><figure style="flex-grow: 144; flex-basis: 347px">
+		<a href="/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.jpeg" data-size="946x654"><img src="/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1.jpeg"
+				srcset="/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1_hu896a899d0234344bf30a77368539cfd0_68903_480x0_resize_q75_box.jpeg 480w, /archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/1_hu896a899d0234344bf30a77368539cfd0_68903_1024x0_resize_q75_box.jpeg 1024w"
+				width="946"
+				height="654"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<p>值得留意的是，算法复杂度只是描述算法的增长趋势，并不能说一个算法一定比另外一个算法高效。这要添加上问题规模n的范围，在一定问题规范范围之前某一算法比另外一算法高效，而过了一个阈值之后，情况可能就相反了，通过上图我们可以明显看到这一点。这也就是为什么我们在实践的过程中得出的结论可能上面算法的排序相反的原因。</p>
+<h2 id="如何推导时间复杂度">如何推导时间复杂度</h2>
+<p>求解算法复杂度一般分以下几个步骤：</p>
+<ul>
+<li>找出算法中的基本语句：算法中执行次数最多的语句就是基本语句，通常是最内层循环的循环体。</li>
+<li>计算基本语句的执行次数的数量级：只需计算基本语句执行次数的数量级，即只要保证函数中的最高次幂正确即可，可以忽略所有低次幂和最高次幂的系数。这样能够简化算法分析，使注意力集中在最重要的一点上：增长率。</li>
+<li>用大Ο表示算法的时间性能：将基本语句执行次数的数量级放入大Ο记号中。
+其中用大O表示法通常有三种规则：</li>
+</ul>
+<p>用常数1取代运行时间中的所有加法常数；</p>
+<ul>
+<li>只保留时间函数中的最高阶项；</li>
+<li>如果最高阶项存在，则省去最高阶项前面的系数；</li>
+<li>下面通过具体的实例来说明以上的推断步骤和规则。</li>
+</ul>
+<h3 id="时间复杂度实例">时间复杂度实例</h3>
+<h4 id="常数阶o1">常数阶O(1)</h4>
+<p>无论代码执行了多少行，只要是没有循环等复杂结构，那这个代码的时间复杂度就都是O(1)，如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">int i = 1;
+int j = 2;
+int k = 1 + 2;
+</code></pre></div><p>上述代码执行时，单个语句的频度均为1，不会随着问题规模n的变化而变化。因此，算法时间复杂度为常数阶，记作T(n)=O(1)。这里我们需要注意的是，即便上述代码有成千上万行，只要执行算法的时间不会随着问题规模n的增长而增长，那么执行时间只不过是一个比较大的常数而已。此类算法的时间复杂度均为O(1)。</p>
+<h4 id="对数阶olog-n">对数阶O(log n)</h4>
+<p>先来看对应的示例代码:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">int i = 1; // ①
+while (i &lt;= n) {
+   i = i * 2; // ②
+}
+</code></pre></div><p>在上述代码中，语句①的频度为1，可以忽略不计。</p>
+<p>语句②我们可以看到它是以2的倍数来逼近n，每次都乘以2。如果用公式表示就是122*2…*2 &lt;=n，也就是说2的x次方小于等于n时会执行循环体，记作2^x &lt;= n，于是得出x&lt;=logn。也就是说上述循环在执行logn次之后，便结束了，因此上述代码的时间复杂度为O(log n)。</p>
+<p>其实上面代码的时间复杂度公式如果精确的来讲应该是：T(n) = 1 + O(log n)，但我们上面已经讲到对应的原则，“只保留时间函数中的最高阶项”，因此记作O(log n)。</p>
+<h4 id="线性阶on">线性阶O(n)</h4>
+<p>示例代码：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">int j = 0; // ①
+for (int i = 0; i &lt; n; i++) { // ②
+   j = i; // ③
+   j++; // ④
+}
+</code></pre></div><p>上述代码中，语句①的频度为1，②的频度为n，③的频度为n-1，④的频度为n-1，因此整个算法可以用公式T(n)=1+n+(n-1)+(n-1)来表示。进而可以推到T(n)=1+n+(n-1)+(n-1)=3n-1，即O(n)=3n-1，去掉低次幂和系数即O(n)=n，因此T(n)=O(n)。</p>
+<p>在上述代码中for循环中的代码会执行n遍，因此它消耗的时间是随着n的变化而成线性变化的，因此这类算法都可以用O(n)来表示时间复杂度。</p>
+<h4 id="线性对数阶onlogn">线性对数阶O(nlogN)</h4>
+<p>示例代码：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">for (int m = 1; m &lt; n; m++) {
+   int i = 1; // ①
+   while (i &lt;= n) {
+      i = i * 2; // ②
+   }
+}
+</code></pre></div><p>线性对数阶要对照对数阶 O(log n)来进行理解。上述代码中for循环内部的代码便是上面讲到对数阶，只不过在对数阶的外面套了一个n次的循环，当然，它的时间复杂度就是n*O(log n)了，于是记作O(nlog n)。</p>
+<h4 id="平方阶on">平方阶O(n²)</h4>
+<p>示例代码:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">int k = 0;
+for (int i = 0; i &lt; n; i++) {
+   for (int j = 0; j &lt; n; j++) {
+      k++;
+   }
+}
+</code></pre></div><p>平方阶可对照线性阶来进行理解，我们知道线性阶是一层for循环，记作O(n)，此时等于又嵌套了一层for循环，那么便是n * O(n)，也就是O(n * n)，即O(n^2)。</p>
+<p>如果将外层循环中的n改为m，即：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">int k = 0;
+for (int i = 0; i &lt; m; i++) {
+   for (int j = 0; j &lt; n; j++) {
+      k++;
+   }
+}
+</code></pre></div><p>那么，对应的时间复杂度便为：O(m * n)。</p>
+<p>同理，立方阶O(n³)、K次方阶O(n^k)，只不过是嵌套了3层循环、k层循环而已。</p>
+<h2 id="空间复杂度">空间复杂度</h2>
+<p>最后，我们再了解一下空间复杂度。空间复杂度主要指执行算法所需内存的大小，用于对程序运行过程中所需要的临时存储空间的度量，这里的空间复杂度同样是预估的。</p>
+<p>程序执行除了需要存储空间、指令、常数、变量和输入数据外，还包括对数据进行操作的工作单元和存储计算所需信息的辅助空间。存储空间通常包括：指令空间（即代码空间）、数据空间（常量、简单变量）等所占的固定部分和动态分配、递归栈所需的可变空间。其中可变空间与算法有关。</p>
+<p>一个算法所需的存储空间用f(n)表示。S(n)=O(f(n))其中n为问题的规模，S(n)表示空间复杂度。</p>
+<h3 id="空间复杂度实例">空间复杂度实例</h3>
+<h4 id="空间复杂度-o1">空间复杂度 O(1)</h4>
+<p>空间复杂度为O(1)的情况的示例代码与时间复杂度为O(1)的实例代码一致：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">int i = 1;
+int j = 2;
+int k = 1 + 2;
+</code></pre></div><p>上述代码中临时空间并不会随着n的变化而变化，因此空间复杂度为O(1)。总结一下就是：如果算法执行所需要的临时空间不随着某个变量n的大小而变化，此算法空间复杂度为一个常量，可表示为 O(1)，即 S(n) = O(1)。</p>
+<h4 id="空间复杂度-on">空间复杂度 O(n)</h4>
+<p>示例代码：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">int j = 0;
+int[] m = new int[n];
+for (int i = 1; i &lt;= n; ++i) {
+   j = i;
+   j++;
+}
+</code></pre></div><p>上述代码中，只有创建int数组分配空间时与n的大小有关，而for循环内没有再分配新的空间，因此，对应的空间复杂度为S(n) = O(n)。</p>
+<p>总结：</p>
+<p>本篇文章给大家讲了可以通过时间复杂度和空间复杂度来衡量算法的优劣，同时用具体的实例来讲解如何计算不同方法的时间复杂度和空间复杂度。</p>
+<p>参考：</p>
+<p><a class="link" href="https://blog.csdn.net/zolalad/article/details/11848739"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/zolalad/article/details/11848739</a></p>
 
 </section>
 
 
     <footer class="article-footer">
     
+    <section class="article-tags">
+        
+            <a href="/tags/%E5%A4%8D%E6%9D%82%E5%BA%A6/">复杂度</a>
+        
+    </section>
+
 
     
 	
 	
     <section class="article-edit">
         <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1629478225447" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2064" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><defs><style type="text/css"></style></defs><path d="M960 512c0 97.76-28.704 185.216-85.664 263.264-56.96 78.016-130.496 131.84-220.64 161.856-10.304 1.824-18.368 0.448-22.848-4.032a22.4 22.4 0 0 1-7.2-17.504v-122.88c0-37.632-10.304-65.44-30.464-82.912a409.856 409.856 0 0 0 59.616-10.368 222.752 222.752 0 0 0 54.72-22.816c18.848-10.784 34.528-23.36 47.104-38.592 12.544-15.232 22.848-35.904 30.912-61.44 8.096-25.568 12.128-54.688 12.128-87.904 0-47.072-15.232-86.976-46.208-120.16 14.368-35.456 13.024-74.912-4.48-118.848-10.752-3.616-26.432-1.344-47.072 6.272s-38.56 16.16-53.824 25.568l-21.984 13.888c-36.32-10.304-73.536-15.232-112.096-15.232s-75.776 4.928-112.096 15.232a444.48 444.48 0 0 0-24.672-15.68c-10.336-6.272-26.464-13.888-48.896-22.432-21.952-8.96-39.008-11.232-50.24-8.064-17.024 43.936-18.368 83.424-4.032 118.848-30.496 33.632-46.176 73.536-46.176 120.608 0 33.216 4.032 62.336 12.128 87.456 8.032 25.12 18.368 45.76 30.496 61.44 12.544 15.68 28.224 28.704 47.072 39.04 18.848 10.304 37.216 17.92 54.72 22.816a409.6 409.6 0 0 0 59.648 10.368c-15.712 13.856-25.12 34.048-28.704 60.064a99.744 99.744 0 0 1-26.464 8.512 178.208 178.208 0 0 1-33.184 2.688c-13.024 0-25.568-4.032-38.144-12.544-12.544-8.512-23.296-20.64-32.256-36.32a97.472 97.472 0 0 0-28.256-30.496c-11.232-8.064-21.088-12.576-28.704-13.92l-11.648-1.792c-8.096 0-13.92 0.928-17.056 2.688-3.136 1.792-4.032 4.032-2.688 6.72s3.136 5.408 5.376 8.096 4.928 4.928 7.616 7.168l4.032 2.688c8.544 4.032 17.056 11.232 25.568 21.984 8.544 10.752 14.368 20.64 18.4 29.6l5.824 13.44c4.928 14.816 13.44 26.912 25.568 35.872 12.096 8.992 25.088 14.816 39.008 17.504 13.888 2.688 27.36 4.032 40.352 4.032s23.776-0.448 32.288-2.24l13.472-2.24c0 14.784 0 32.288 0.416 52.032 0 19.744 0.48 30.496 0.48 31.392a22.624 22.624 0 0 1-7.648 17.472c-4.928 4.48-12.992 5.824-23.296 4.032-90.144-30.048-163.68-83.84-220.64-161.888C92.256 697.216 64 609.312 64 512c0-81.152 20.192-156.064 60.096-224.672s94.176-122.88 163.232-163.232C355.936 84.192 430.816 64 512 64s156.064 20.192 224.672 60.096 122.88 94.176 163.232 163.232C939.808 355.488 960 430.848 960 512" fill="#000000" p-id="2065"></path></svg>
-        <span><a style="color: inherit;" href="https://github.com/lsy-73/lsy-73.github.io/edit/develop/content/page/about.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+        <span><a style="color: inherit;" href="https://github.com/lsy-73/lsy-73.github.io/edit/develop/content/post/time_complexity/index.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
     </section>
     <section class="article-lastmod">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -365,7 +494,7 @@
 
 
         <span>
-            最后更新于 2022-01-26
+            最后更新于 2022-04-08
         </span>
     </section></footer>
 
@@ -376,36 +505,81 @@
     <aside class="related-contents--wrapper">
     
     
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/">
+        
+        
+            <div class="article-image">
+                <img src="/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/1.35a45f0e335096bf82ae88fb8a396174_hu41d61907f311ce5b0ea210fd61a4a533_75291_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="" 
+                        data-hash="md5-NaRfDjNQlr&#43;Croj7ijlhdA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">快慢指针</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/archives/%E6%B3%9B%E5%9E%8B/">
+        
+        
+            <div class="article-image">
+                <img src="/archives/%E6%B3%9B%E5%9E%8B/1.fba56aa261a7752c8b03d98b62671726_hu4e960fdb6340cae1ad375241e2cdb7c4_2583790_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="" 
+                        data-hash="md5-&#43;6VqomGndSyLA9mLYmcXJg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">泛型</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/">
+        
+        
+            <div class="article-image">
+                <img src="/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/p1.ec91c5dd5d99c36421a023e1b07687cb_hue562663c14d4442894467021dc935054_243244_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="" 
+                        data-hash="md5-7JHF3V2Zw2QhoCPhsHaHyw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">使用git创建版本库</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
 </aside>
 
-
-    
-        
-    <script src='//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js'></script>
-<div id="waline" class="waline-container"></div>
-<style>
-    .waline-container {
-        background-color: var(--card-background);
-        border-radius: var(--card-border-radius);
-        box-shadow: var(--shadow-l2);
-        padding: var(--card-padding);
-           
-        --waline-theme-color: #34495e;
-        --waline-active-color: #bababa;
-           
-        --waline-badge-color: #34495e;
-          
-        --waline-bgcolor: transparent;
-    }
-    :root{
-   	       --waline-border-color:transparent;
-   	 }        
-</style>
-<script src='//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js'></script>
-<div id="waline" class="waline-container"></div><script>
-    
-    new Waline({"avatar":"monsterid","dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://cdn.jsdelivr.net/gh/sowhereso/waline-blobcatemojis@1.2/blobs"],"lang":"zh-CN","locale":{"admin":"博主"},"placeholder":"欢迎评论留言","requiredMeta":["name","email"],"serverURL":"https://waline-pc25lo4ye-yw2667899.vercel.app/"});
-</script>
 
     
 
@@ -662,6 +836,38 @@
 </section>
 
       
+      
+      <section class="widget archives">
+        <div class="widget--toc">
+          <nav id="TableOfContents">
+  <ol>
+    <li><a href="#如何推导时间复杂度">如何推导时间复杂度</a>
+      <ol>
+        <li><a href="#时间复杂度实例">时间复杂度实例</a>
+          <ol>
+            <li><a href="#常数阶o1">常数阶O(1)</a></li>
+            <li><a href="#对数阶olog-n">对数阶O(log n)</a></li>
+            <li><a href="#线性阶on">线性阶O(n)</a></li>
+            <li><a href="#线性对数阶onlogn">线性对数阶O(nlogN)</a></li>
+            <li><a href="#平方阶on">平方阶O(n²)</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#空间复杂度">空间复杂度</a>
+      <ol>
+        <li><a href="#空间复杂度实例">空间复杂度实例</a>
+          <ol>
+            <li><a href="#空间复杂度-o1">空间复杂度 O(1)</a></li>
+            <li><a href="#空间复杂度-on">空间复杂度 O(n)</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+      </section>
       
     </aside>
 
