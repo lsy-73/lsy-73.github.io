@@ -6,7 +6,71 @@
         <description>Recent content on Space Dog&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-CN</language>
-        <lastBuildDate>Fri, 08 Apr 2022 13:51:19 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 22 Apr 2022 16:57:19 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>JVM Native</title>
+        <link>/archives/jvm-native/</link>
+        <pubDate>Fri, 22 Apr 2022 16:57:19 +0800</pubDate>
+        
+        <guid>/archives/jvm-native/</guid>
+        <description>&lt;img src="/archives/jvm-native/1.jpg" alt="Featured image of post JVM Native" /&gt;&lt;h2 id=&#34;什么是本地方法native&#34;&gt;什么是本地方法Native？&lt;/h2&gt;
+&lt;p&gt;    简单地讲，一个Native Method就是一个Java调用非Java代码的接口。一个Native Method是这样一个Java方法：该方法的实现由非Java语言实现，比如C。这个特征并非Java所特有，很多其它的编程语言都有这一机制，比如在C++中，你可以extern“C”告知C++编译器去调用一个C的函数。&lt;/p&gt;
+&lt;p&gt;    “A native method is a Java method whose implementation is provided by non-java code.”&lt;/p&gt;
+&lt;p&gt;    在定义一个native method时，并不提供实现体（有些像定义一个Java interface），因为其实现体是由非java语言在外面实现的。&lt;/p&gt;
+&lt;p&gt;    本地接口的作用是融合不同的编程语言为Java所用，它的初衷是融合C/C++程序。&lt;/p&gt;
+&lt;p&gt;&lt;big&gt;举例&lt;/big&gt;&lt;/p&gt;
+&lt;p&gt;如果要启动一个线程&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;new Thread.start();
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在start（）方法源码中&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;    public synchronized void start() {
+       
+        if (threadStatus != 0)//状态校验  0：NEW 新建状态
+            throw new IllegalThreadStateException();
+
+       
+        group.add(this);//添加进线程组
+
+        boolean started = false;
+        try {
+            start0();//调用native方法执行线程run方法
+            started = true;
+        } finally {
+            try {
+                if (!started) {
+                    group.threadStartFailed(this);//启动失败，从线程组中移除当前前程。
+                }
+            } catch (Throwable ignore) {
+                /* do nothing. If start0 threw a Throwable then
+                  it will be passed up the call stack */
+            }
+        }
+    }
+
+    private native void start0();
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;进入start方法后，检查如果状态不为0，后将它添加到group组中，然后调用了一个start0（）方法，但是&lt;em&gt;private native void start0();&lt;/em&gt; 这个方法放在一个class会很奇怪吧。因为这是线程级别的东西，java处理不了然后去调用c++底层&lt;/p&gt;
+&lt;p&gt;&lt;big&gt;下面这张图：&lt;/big&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 101; flex-basis: 242px&#34;&gt;
+		&lt;a href=&#34;/archives/jvm-native/2.png&#34; data-size=&#34;904x894&#34;&gt;&lt;img src=&#34;/archives/jvm-native/2.png&#34;
+				srcset=&#34;/archives/jvm-native/2_hu8842732ed017dfcb694aa25ce3f815c0_715057_480x0_resize_box_3.png 480w, /archives/jvm-native/2_hu8842732ed017dfcb694aa25ce3f815c0_715057_1024x0_resize_box_3.png 1024w&#34;
+				width=&#34;904&#34;
+				height=&#34;894&#34;
+				loading=&#34;lazy&#34;
+				&gt;
+		&lt;/a&gt;
+		
+	&lt;/figure&gt;
+java虚拟机在操作系统之上，那操作系统的东西java是调用不了的，所以只能使用接口去调用本地方法，那调用本地方法库就需要使用到native&lt;/p&gt;
+&lt;h2 id=&#34;为什么要使用native-method&#34;&gt;为什么要使用Native Method？&lt;/h2&gt;
+&lt;p&gt;  Java使用起来非常方便，然而有些层次的任务用Java实现起来不容易，或者我们对程序的效率很在意时，问题就来了。&lt;/p&gt;
+&lt;p&gt;1.与java环境外交互：&lt;/p&gt;
+&lt;p&gt;    有时java应用需要与java外面的环境交互，这是本地方法存在的主要原因。&lt;/p&gt;
+&lt;p&gt;    你可以想想java需要与一些底层系统，如操作系统或某些硬件交换信息时的情况。本地方法正是这样一种交流机制：它为我们提供了一个非常简洁的接口，而且我们无需去了解java应用之外的繁琐的细节。&lt;/p&gt;
+&lt;p&gt;2.与操作系统交互：&lt;/p&gt;
+&lt;p&gt;    JVM支持着Java语言本身和运行时库，它是java程序赖以生存的平台，它由一个解释器（解释字节码）和一些连接到本地代码的库组成。然而不管怎样，它毕竟不是一个完整的系统，它经常依赖于一些底层系统的支持。这些底层系统常常是强大的操作系统。通过使用本地方法，我们得以用java实现了jre的与底层系统的交互，甚至JVM的一些部分就是C写的。还有，如果我们要使用一些java语言本身没有提供封装的操作系统的特性时，我们也需要使用本地方法。&lt;/p&gt;
+&lt;p&gt;3.Sun&amp;rsquo;s Java&lt;/p&gt;
+&lt;p&gt;    Sun的解释器是用C实现的，这使得它能像一些普通的C一样与外部交互。jre大部分是用java实现的，它也通过一些本地方法与外界交互。例如：类java.lang.Thread的setPriority()方法是用java实现的，但是它实现调用的是该类里的本地方法setPriority0()。这个本地方法是用C实现的，并被植入JVM内部，在windows 95的平台上，这个本地方法最终将调用win32 SetPriority() API。这是一个本地方法的具体实现由JVM直接提供，更多的情况是本地方法由外部的动态链接库（external dynamic link library）提供，然后被JVM调用。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>时间与空间复杂度</title>
         <link>/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/</link>
         <pubDate>Fri, 08 Apr 2022 13:51:19 +0800</pubDate>
@@ -487,7 +551,7 @@ zJKrFEkSwuvTOeIBUOGulwZiZEFrxb9KpaCjhMLZgQfjSYAnyQ8=
         <pubDate>Sun, 14 Nov 2021 20:58:22 +0800</pubDate>
         
         <guid>/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/</guid>
-        <description>&lt;img src="/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/p1.jpg" alt="Featured image of post 使用git创建版本库" /&gt;&lt;h2 id=&#34;初始化&#34;&gt;初始化&lt;/h2&gt;
+        <description>&lt;img src="/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/p2.jpg" alt="Featured image of post 使用git创建版本库" /&gt;&lt;h2 id=&#34;初始化&#34;&gt;初始化&lt;/h2&gt;
 &lt;p&gt;输入命令：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;mkdir &amp;lt;项目名称&amp;gt;
 cd &amp;lt;项目名称&amp;gt;   #进入目录

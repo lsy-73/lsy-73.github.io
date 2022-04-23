@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>学习 on Space Dog&#39;s Blog</title>
+    <link>/categories/%E5%AD%A6%E4%B9%A0/</link>
+    <description>Recent content in 学习 on Space Dog&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 22 Apr 2022 16:57:19 +0800</lastBuildDate><atom:link href="/categories/%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JVM Native</title>
+      <link>/archives/jvm-native/</link>
+      <pubDate>Fri, 22 Apr 2022 16:57:19 +0800</pubDate>
+      
+      <guid>/archives/jvm-native/</guid>
+      <description>什么是本地方法Native？ 简单地讲，一个Native Method就是一个Java调用非Java代码的接口。一个Native Method是这</description>
+    </item>
+    
+    <item>
+      <title>时间与空间复杂度</title>
+      <link>/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/</link>
+      <pubDate>Fri, 08 Apr 2022 13:51:19 +0800</pubDate>
+      
+      <guid>/archives/%E6%97%B6%E9%97%B4%E4%B8%8E%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/</guid>
+      <description>时间复杂度和空间复杂度是衡量算法优劣的标准，效率可以用算法的时间复杂度来描述，而所占用的存储空间可以用算法的空间复杂度来描述。 时间复杂度：用</description>
+    </item>
+    
+    <item>
+      <title>快慢指针</title>
+      <link>/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/</link>
+      <pubDate>Thu, 07 Apr 2022 14:20:13 +0800</pubDate>
+      
+      <guid>/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/</guid>
+      <description>关于快慢指针 怎么证明快慢指针在环中是可以相遇的？ 证明这个问题？可能你会说，只要快慢两个指针都进入环中，两者有速度差，快指针就一定能够追上慢指</description>
+    </item>
+    
+    <item>
+      <title>泛型</title>
+      <link>/archives/%E6%B3%9B%E5%9E%8B/</link>
+      <pubDate>Mon, 14 Mar 2022 10:29:23 +0800</pubDate>
+      
+      <guid>/archives/%E6%B3%9B%E5%9E%8B/</guid>
+      <description>1. Java中的泛型是什么 ? 使用泛型的好处是什么? 原则是什么？ Java泛型设计原则：只要在编译时期没有出现警告，那么运行时期就不会出现Clas</description>
+    </item>
+    
+    <item>
+      <title>GPG的使用与创建</title>
+      <link>/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/</link>
+      <pubDate>Mon, 31 Jan 2022 13:42:39 +0800</pubDate>
+      
+      <guid>/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/</guid>
+      <description>GPG介绍 提到 GPG 不得不提一下 PGP(Pretty Good Privacy) ， PGP 最开始是由 Phil Zimmermann 开发，开发的目的是为了躲避监视，如果文件在网络上明文传输，那是多么危险。 PGP 虽然受很多人喜</description>
+    </item>
+    
+    <item>
+      <title>使用git创建版本库</title>
+      <link>/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/</link>
+      <pubDate>Sun, 14 Nov 2021 20:58:22 +0800</pubDate>
+      
+      <guid>/archives/%E4%BD%BF%E7%94%A8git%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93/</guid>
+      <description>初始化 输入命令： mkdir &amp;lt;项目名称&amp;gt; cd &amp;lt;项目名称&amp;gt; #进入目录 git init #初始仓库，新建一个 .git 目录 ls -la #查看所有文件 touch &amp;lt;file1&amp;gt; #创建一个</description>
+    </item>
+    
+  </channel>
+</rss>
