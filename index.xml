@@ -6,7 +6,24 @@
         <description>Recent content on Space Dog&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-CN</language>
-        <lastBuildDate>Fri, 22 Apr 2022 16:57:19 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 24 Apr 2022 20:10:48 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Jprofiler的使用</title>
+        <link>/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+        <pubDate>Sun, 24 Apr 2022 20:10:48 +0800</pubDate>
+        
+        <guid>/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+        <description>&lt;img src="/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/1.jpg" alt="Featured image of post Jprofiler的使用" /&gt;&lt;h2 id=&#34;编辑中&#34;&gt;编辑中&lt;/h2&gt;
+</description>
+        </item>
+        <item>
+        <title>双亲委派机制</title>
+        <link>/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/</link>
+        <pubDate>Sun, 24 Apr 2022 20:09:28 +0800</pubDate>
+        
+        <guid>/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/</guid>
+        <description>&lt;img src="/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/1.jpg" alt="Featured image of post 双亲委派机制" /&gt;</description>
+        </item>
+        <item>
         <title>JVM Native</title>
         <link>/archives/jvm-native/</link>
         <pubDate>Fri, 22 Apr 2022 16:57:19 +0800</pubDate>
@@ -14,6 +31,7 @@
         <guid>/archives/jvm-native/</guid>
         <description>&lt;img src="/archives/jvm-native/1.jpg" alt="Featured image of post JVM Native" /&gt;&lt;h2 id=&#34;什么是本地方法native&#34;&gt;什么是本地方法Native？&lt;/h2&gt;
 &lt;p&gt;    简单地讲，一个Native Method就是一个Java调用非Java代码的接口。一个Native Method是这样一个Java方法：该方法的实现由非Java语言实现，比如C。这个特征并非Java所特有，很多其它的编程语言都有这一机制，比如在C++中，你可以extern“C”告知C++编译器去调用一个C的函数。&lt;/p&gt;
+&lt;p&gt;凡是带了Native关键字的，说明java的作用范围达不到了，会去调用底层c语言的库！&lt;/p&gt;
 &lt;p&gt;    “A native method is a Java method whose implementation is provided by non-java code.”&lt;/p&gt;
 &lt;p&gt;    在定义一个native method时，并不提供实现体（有些像定义一个Java interface），因为其实现体是由非java语言在外面实现的。&lt;/p&gt;
 &lt;p&gt;    本地接口的作用是融合不同的编程语言为Java所用，它的初衷是融合C/C++程序。&lt;/p&gt;
@@ -68,6 +86,30 @@ java虚拟机在操作系统之上，那操作系统的东西java是调用不了
 &lt;p&gt;    JVM支持着Java语言本身和运行时库，它是java程序赖以生存的平台，它由一个解释器（解释字节码）和一些连接到本地代码的库组成。然而不管怎样，它毕竟不是一个完整的系统，它经常依赖于一些底层系统的支持。这些底层系统常常是强大的操作系统。通过使用本地方法，我们得以用java实现了jre的与底层系统的交互，甚至JVM的一些部分就是C写的。还有，如果我们要使用一些java语言本身没有提供封装的操作系统的特性时，我们也需要使用本地方法。&lt;/p&gt;
 &lt;p&gt;3.Sun&amp;rsquo;s Java&lt;/p&gt;
 &lt;p&gt;    Sun的解释器是用C实现的，这使得它能像一些普通的C一样与外部交互。jre大部分是用java实现的，它也通过一些本地方法与外界交互。例如：类java.lang.Thread的setPriority()方法是用java实现的，但是它实现调用的是该类里的本地方法setPriority0()。这个本地方法是用C实现的，并被植入JVM内部，在windows 95的平台上，这个本地方法最终将调用win32 SetPriority() API。这是一个本地方法的具体实现由JVM直接提供，更多的情况是本地方法由外部的动态链接库（external dynamic link library）提供，然后被JVM调用。&lt;/p&gt;
+&lt;h2 id=&#34;native调用流程&#34;&gt;Native调用流程&lt;/h2&gt;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 140; flex-basis: 337px&#34;&gt;
+		&lt;a href=&#34;/archives/jvm-native/3.png&#34; data-size=&#34;1500x1068&#34;&gt;&lt;img src=&#34;/archives/jvm-native/3.png&#34;
+				srcset=&#34;/archives/jvm-native/3_hu4ec9d4539aa2005581724630656b0401_227027_480x0_resize_box_3.png 480w, /archives/jvm-native/3_hu4ec9d4539aa2005581724630656b0401_227027_1024x0_resize_box_3.png 1024w&#34;
+				width=&#34;1500&#34;
+				height=&#34;1068&#34;
+				loading=&#34;lazy&#34;
+				&gt;
+		&lt;/a&gt;
+		
+	&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;本地方法接口（Java Native Interface）简称：JNI&lt;/p&gt;
+&lt;p&gt;第一步：凡是带了Native关键字的，说明java的作用范围达不到了，会去调用底层c语言的库！&lt;/p&gt;
+&lt;p&gt;第二步：进入本地方法栈区&lt;/p&gt;
+&lt;p&gt;第三步：调用本地方法接口JNI&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;JNI的作用:扩展java的使用，融合不同的语言为java所用 例如java调用python，c++等，都可以使用JNI&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;big&gt;那JNI为什么会诞生？&lt;/big&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;因为java刚刚诞生的时候c和C++很流行，想要立足那必须要有可以调用c和c++程序&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;big&gt;一般在哪使用到Native？&lt;/big&gt;
+一般在做硬件方面的东西或者java程序驱动打印机，管理系统，robot（）机器人类&lt;/p&gt;
 </description>
         </item>
         <item>

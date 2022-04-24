@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='关于Native方法'><title>JVM Native</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='关于双亲委派机制一些的问题'><title>双亲委派机制</title>
 
-<link rel='canonical' href='/archives/jvm-native/'>
+<link rel='canonical' href='/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='JVM Native'>
-<meta property='og:description' content='关于Native方法'>
-<meta property='og:url' content='/archives/jvm-native/'>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='双亲委派机制'>
+<meta property='og:description' content='关于双亲委派机制一些的问题'>
+<meta property='og:url' content='/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/'>
 <meta property='og:site_name' content='Space Dog&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JVM' /><meta property='article:published_time' content='2022-04-22T16:57:19&#43;08:00'/><meta property='article:modified_time' content='2022-04-24T08:22:28&#43;08:00'/><meta property='og:image' content='/archives/jvm-native/1.jpg' />
-<meta name="twitter:title" content="JVM Native">
-<meta name="twitter:description" content="关于Native方法"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='/archives/jvm-native/1.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JVM' /><meta property='article:published_time' content='2022-04-24T20:09:28&#43;08:00'/><meta property='article:modified_time' content='2022-04-24T20:56:38&#43;08:00'/><meta property='og:image' content='/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/1.jpg' />
+<meta name="twitter:title" content="双亲委派机制">
+<meta name="twitter:description" content="关于双亲委派机制一些的问题"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/1.jpg' />
     <link rel="shortcut icon" href="/img/favicon.png" />
 <style>
     h1 {letter-spacing: 4px}
@@ -21,7 +21,7 @@
     </head>
     <body class="
     article-page
-<!--has-toc-->
+<!---->
 ">
     <script>
         (function() {
@@ -47,7 +47,7 @@
 </script>
 <div class="container main-container flex 
     
-        extended
+        on-phone--column extended
     
 ">
   <aside class="sidebar left-sidebar sticky">
@@ -295,19 +295,17 @@
 
 <main class="main full-width">
     
-        <p> 最后更新于 2022 年 4 月 24 日</p>
-    
 
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/archives/jvm-native/">
-                <img src="/archives/jvm-native/1_hu3d03a01dcc18bc5be0e67db3d8d209a6_2551496_800x0_resize_q75_box.jpg"
-                        srcset="/archives/jvm-native/1_hu3d03a01dcc18bc5be0e67db3d8d209a6_2551496_800x0_resize_q75_box.jpg 800w, /archives/jvm-native/1_hu3d03a01dcc18bc5be0e67db3d8d209a6_2551496_1600x0_resize_q75_box.jpg 1600w"
+            <a href="/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/">
+                <img src="/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/1_hu124c772b1b7dfb7979e375944d922698_71386_800x0_resize_q75_box.jpg"
+                        srcset="/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/1_hu124c772b1b7dfb7979e375944d922698_71386_800x0_resize_q75_box.jpg 800w, /archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/1_hu124c772b1b7dfb7979e375944d922698_71386_1600x0_resize_q75_box.jpg 1600w"
                         width="800" 
-                        height="450" 
+                        height="519" 
                         loading="lazy"
-                        alt="Featured image of post JVM Native" />
+                        alt="Featured image of post 双亲委派机制" />
                 
             </a>
         </div>
@@ -325,12 +323,12 @@
     
 
     <h2 class="article-title">
-        <a href="/archives/jvm-native/">JVM Native</a>
+        <a href="/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/">双亲委派机制</a>
     </h2>
 
     
     <h3 class="article-subtitle">
-        关于Native方法
+        关于双亲委派机制一些的问题
     </h3>
     
 
@@ -347,7 +345,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2022-04-22</time>
+                <time class="article-time--published">2022-04-24</time>
             </div>
         
 
@@ -358,88 +356,7 @@
 </header>
 
     <section class="article-content">
-    <h2 id="什么是本地方法native">什么是本地方法Native？</h2>
-<p>    简单地讲，一个Native Method就是一个Java调用非Java代码的接口。一个Native Method是这样一个Java方法：该方法的实现由非Java语言实现，比如C。这个特征并非Java所特有，很多其它的编程语言都有这一机制，比如在C++中，你可以extern“C”告知C++编译器去调用一个C的函数。</p>
-<p>凡是带了Native关键字的，说明java的作用范围达不到了，会去调用底层c语言的库！</p>
-<p>    “A native method is a Java method whose implementation is provided by non-java code.”</p>
-<p>    在定义一个native method时，并不提供实现体（有些像定义一个Java interface），因为其实现体是由非java语言在外面实现的。</p>
-<p>    本地接口的作用是融合不同的编程语言为Java所用，它的初衷是融合C/C++程序。</p>
-<p><big>举例</big></p>
-<p>如果要启动一个线程</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">new Thread.start();
-</code></pre></div><p>在start（）方法源码中</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    public synchronized void start() {
-       
-        if (threadStatus != 0)//状态校验  0：NEW 新建状态
-            throw new IllegalThreadStateException();
-
-       
-        group.add(this);//添加进线程组
-
-        boolean started = false;
-        try {
-            start0();//调用native方法执行线程run方法
-            started = true;
-        } finally {
-            try {
-                if (!started) {
-                    group.threadStartFailed(this);//启动失败，从线程组中移除当前前程。
-                }
-            } catch (Throwable ignore) {
-                /* do nothing. If start0 threw a Throwable then
-                  it will be passed up the call stack */
-            }
-        }
-    }
-
-    private native void start0();
-</code></pre></div><p>进入start方法后，检查如果状态不为0，后将它添加到group组中，然后调用了一个start0（）方法，但是<em>private native void start0();</em> 这个方法放在一个class会很奇怪吧。因为这是线程级别的东西，java处理不了然后去调用c++底层</p>
-<p><big>下面这张图：</big></p>
-<p><figure style="flex-grow: 101; flex-basis: 242px">
-		<a href="/archives/jvm-native/2.png" data-size="904x894"><img src="/archives/jvm-native/2.png"
-				srcset="/archives/jvm-native/2_hu8842732ed017dfcb694aa25ce3f815c0_715057_480x0_resize_box_3.png 480w, /archives/jvm-native/2_hu8842732ed017dfcb694aa25ce3f815c0_715057_1024x0_resize_box_3.png 1024w"
-				width="904"
-				height="894"
-				loading="lazy"
-				>
-		</a>
-		
-	</figure>
-java虚拟机在操作系统之上，那操作系统的东西java是调用不了的，所以只能使用接口去调用本地方法，那调用本地方法库就需要使用到native</p>
-<h2 id="为什么要使用native-method">为什么要使用Native Method？</h2>
-<p>  Java使用起来非常方便，然而有些层次的任务用Java实现起来不容易，或者我们对程序的效率很在意时，问题就来了。</p>
-<p>1.与java环境外交互：</p>
-<p>    有时java应用需要与java外面的环境交互，这是本地方法存在的主要原因。</p>
-<p>    你可以想想java需要与一些底层系统，如操作系统或某些硬件交换信息时的情况。本地方法正是这样一种交流机制：它为我们提供了一个非常简洁的接口，而且我们无需去了解java应用之外的繁琐的细节。</p>
-<p>2.与操作系统交互：</p>
-<p>    JVM支持着Java语言本身和运行时库，它是java程序赖以生存的平台，它由一个解释器（解释字节码）和一些连接到本地代码的库组成。然而不管怎样，它毕竟不是一个完整的系统，它经常依赖于一些底层系统的支持。这些底层系统常常是强大的操作系统。通过使用本地方法，我们得以用java实现了jre的与底层系统的交互，甚至JVM的一些部分就是C写的。还有，如果我们要使用一些java语言本身没有提供封装的操作系统的特性时，我们也需要使用本地方法。</p>
-<p>3.Sun&rsquo;s Java</p>
-<p>    Sun的解释器是用C实现的，这使得它能像一些普通的C一样与外部交互。jre大部分是用java实现的，它也通过一些本地方法与外界交互。例如：类java.lang.Thread的setPriority()方法是用java实现的，但是它实现调用的是该类里的本地方法setPriority0()。这个本地方法是用C实现的，并被植入JVM内部，在windows 95的平台上，这个本地方法最终将调用win32 SetPriority() API。这是一个本地方法的具体实现由JVM直接提供，更多的情况是本地方法由外部的动态链接库（external dynamic link library）提供，然后被JVM调用。</p>
-<h2 id="native调用流程">Native调用流程</h2>
-<p><figure style="flex-grow: 140; flex-basis: 337px">
-		<a href="/archives/jvm-native/3.png" data-size="1500x1068"><img src="/archives/jvm-native/3.png"
-				srcset="/archives/jvm-native/3_hu4ec9d4539aa2005581724630656b0401_227027_480x0_resize_box_3.png 480w, /archives/jvm-native/3_hu4ec9d4539aa2005581724630656b0401_227027_1024x0_resize_box_3.png 1024w"
-				width="1500"
-				height="1068"
-				loading="lazy"
-				>
-		</a>
-		
-	</figure></p>
-<p>本地方法接口（Java Native Interface）简称：JNI</p>
-<p>第一步：凡是带了Native关键字的，说明java的作用范围达不到了，会去调用底层c语言的库！</p>
-<p>第二步：进入本地方法栈区</p>
-<p>第三步：调用本地方法接口JNI</p>
-<blockquote>
-<p>JNI的作用:扩展java的使用，融合不同的语言为java所用 例如java调用python，c++等，都可以使用JNI</p>
-</blockquote>
-<p><big>那JNI为什么会诞生？</big></p>
-<blockquote>
-<p>因为java刚刚诞生的时候c和C++很流行，想要立足那必须要有可以调用c和c++程序</p>
-</blockquote>
-<p><big>一般在哪使用到Native？</big>
-一般在做硬件方面的东西或者java程序驱动打印机，管理系统，robot（）机器人类</p>
-
+    
 </section>
 
 
@@ -457,7 +374,7 @@ java虚拟机在操作系统之上，那操作系统的东西java是调用不了
 	
     <section class="article-edit">
         <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1629478225447" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2064" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><defs><style type="text/css"></style></defs><path d="M960 512c0 97.76-28.704 185.216-85.664 263.264-56.96 78.016-130.496 131.84-220.64 161.856-10.304 1.824-18.368 0.448-22.848-4.032a22.4 22.4 0 0 1-7.2-17.504v-122.88c0-37.632-10.304-65.44-30.464-82.912a409.856 409.856 0 0 0 59.616-10.368 222.752 222.752 0 0 0 54.72-22.816c18.848-10.784 34.528-23.36 47.104-38.592 12.544-15.232 22.848-35.904 30.912-61.44 8.096-25.568 12.128-54.688 12.128-87.904 0-47.072-15.232-86.976-46.208-120.16 14.368-35.456 13.024-74.912-4.48-118.848-10.752-3.616-26.432-1.344-47.072 6.272s-38.56 16.16-53.824 25.568l-21.984 13.888c-36.32-10.304-73.536-15.232-112.096-15.232s-75.776 4.928-112.096 15.232a444.48 444.48 0 0 0-24.672-15.68c-10.336-6.272-26.464-13.888-48.896-22.432-21.952-8.96-39.008-11.232-50.24-8.064-17.024 43.936-18.368 83.424-4.032 118.848-30.496 33.632-46.176 73.536-46.176 120.608 0 33.216 4.032 62.336 12.128 87.456 8.032 25.12 18.368 45.76 30.496 61.44 12.544 15.68 28.224 28.704 47.072 39.04 18.848 10.304 37.216 17.92 54.72 22.816a409.6 409.6 0 0 0 59.648 10.368c-15.712 13.856-25.12 34.048-28.704 60.064a99.744 99.744 0 0 1-26.464 8.512 178.208 178.208 0 0 1-33.184 2.688c-13.024 0-25.568-4.032-38.144-12.544-12.544-8.512-23.296-20.64-32.256-36.32a97.472 97.472 0 0 0-28.256-30.496c-11.232-8.064-21.088-12.576-28.704-13.92l-11.648-1.792c-8.096 0-13.92 0.928-17.056 2.688-3.136 1.792-4.032 4.032-2.688 6.72s3.136 5.408 5.376 8.096 4.928 4.928 7.616 7.168l4.032 2.688c8.544 4.032 17.056 11.232 25.568 21.984 8.544 10.752 14.368 20.64 18.4 29.6l5.824 13.44c4.928 14.816 13.44 26.912 25.568 35.872 12.096 8.992 25.088 14.816 39.008 17.504 13.888 2.688 27.36 4.032 40.352 4.032s23.776-0.448 32.288-2.24l13.472-2.24c0 14.784 0 32.288 0.416 52.032 0 19.744 0.48 30.496 0.48 31.392a22.624 22.624 0 0 1-7.648 17.472c-4.928 4.48-12.992 5.824-23.296 4.032-90.144-30.048-163.68-83.84-220.64-161.888C92.256 697.216 64 609.312 64 512c0-81.152 20.192-156.064 60.096-224.672s94.176-122.88 163.232-163.232C355.936 84.192 430.816 64 512 64s156.064 20.192 224.672 60.096 122.88 94.176 163.232 163.232C939.808 355.488 960 430.848 960 512" fill="#000000" p-id="2065"></path></svg>
-        <span><a style="color: inherit;" href="https://github.com/lsy-73/lsy-73.github.io/edit/develop/content/post/JVM-Native/index.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+        <span><a style="color: inherit;" href="https://github.com/lsy-73/lsy-73.github.io/edit/develop/content/post/JVM_Parental_delegation_mechanism/index.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
     </section>
     <section class="article-lastmod">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -508,22 +425,22 @@ java虚拟机在操作系统之上，那操作系统的东西java是调用不了
                 
                     
 <article class="has-image">
-    <a href="/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/">
+    <a href="/archives/jvm-native/">
         
         
             <div class="article-image">
-                <img src="/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/1.03a04249a688dfc6f370518c91b69b9f_hu124c772b1b7dfb7979e375944d922698_71386_250x150_fill_q75_box_smart1.jpg" 
+                <img src="/archives/jvm-native/1.b3a32ea046585ef4a0028ae1b73be762_hu3d03a01dcc18bc5be0e67db3d8d209a6_2551496_250x150_fill_q75_box_smart1.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy" 
                         data-key="" 
-                        data-hash="md5-A6BCSaaI38bzcFGMkbabnw==">
+                        data-hash="md5-s6MuoEZYXvSgAorhtzvnYg==">
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">双亲委派机制</h2>
+            <h2 class="article-title">JVM Native</h2>
         </div>
     </a>
 </article>
@@ -865,18 +782,6 @@ java虚拟机在操作系统之上，那操作系统的东西java是调用不了
 </section>
 
       
-      
-      <section class="widget archives">
-        <div class="widget--toc">
-          <nav id="TableOfContents">
-  <ol>
-    <li><a href="#什么是本地方法native">什么是本地方法Native？</a></li>
-    <li><a href="#为什么要使用native-method">为什么要使用Native Method？</a></li>
-    <li><a href="#native调用流程">Native调用流程</a></li>
-  </ol>
-</nav>
-        </div>
-      </section>
       
     </aside>
 
