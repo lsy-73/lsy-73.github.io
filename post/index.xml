@@ -22,7 +22,7 @@
       <pubDate>Sun, 24 Apr 2022 20:09:28 +0800</pubDate>
       
       <guid>/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/</guid>
-      <description></description>
+      <description>java类加载器 首先，我们知道，虚拟机在加载类的过程中需要使用类加载器进行加载，而在Java中，类加载器有很多，那么当JVM想要加载一个.c</description>
     </item>
     
     <item>

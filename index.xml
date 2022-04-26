@@ -21,7 +21,111 @@
         <pubDate>Sun, 24 Apr 2022 20:09:28 +0800</pubDate>
         
         <guid>/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/</guid>
-        <description>&lt;img src="/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/1.jpg" alt="Featured image of post 双亲委派机制" /&gt;</description>
+        <description>&lt;img src="/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/1.jpg" alt="Featured image of post 双亲委派机制" /&gt;&lt;h2 id=&#34;java类加载器&#34;&gt;java类加载器&lt;/h2&gt;
+&lt;p&gt;首先，我们知道，虚拟机在加载类的过程中需要使用类加载器进行加载，而在Java中，类加载器有很多，那么当JVM想要加载一个.class文件的时候，到底应该由哪个类加载器加载呢？&lt;/p&gt;
+&lt;p&gt;首先，我们需要知道的是，Java语言系统中支持以下4种类加载器：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Bootstrap ClassLoader (启动类加载器)&lt;/strong&gt;&lt;br&gt;
+默认加载的是jdk\lib目录下jar中诸多类；&lt;br&gt;
+这个路径可以使用 -Xbootclasspath参数指定。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Extension ClassLoader (扩展类加载器)&lt;/strong&gt;&lt;br&gt;
+默认加载jdk\lib\ext\目录下jar中诸多类；&lt;br&gt;
+这个路径可以使用 java.ext.dirs系统变量来更改。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Application ClassLoader (应用程序类加载器)&lt;/strong&gt;&lt;br&gt;
+负责加载开发人员所编写的诸多类。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;User ClassLoader (自定义类加载器)&lt;/strong&gt;&lt;br&gt;
+当存在上述类加载器解决不了的特殊情况，或存在特殊要求时，可以自行实现类加载逻辑。&lt;/p&gt;
+&lt;p&gt;关系如图所示：
+&lt;figure style=&#34;flex-grow: 112; flex-basis: 270px&#34;&gt;
+		&lt;a href=&#34;/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/2.jpg&#34; data-size=&#34;1668x1482&#34;&gt;&lt;img src=&#34;/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/2.jpg&#34;
+				srcset=&#34;/archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/2_hua771216fef53d05553be2c32eed538b5_1151008_480x0_resize_q75_box.jpg 480w, /archives/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/2_hua771216fef53d05553be2c32eed538b5_1151008_1024x0_resize_q75_box.jpg 1024w&#34;
+				width=&#34;1668&#34;
+				height=&#34;1482&#34;
+				loading=&#34;lazy&#34;
+				alt=&#34;类加载器关系图&#34;&gt;
+		&lt;/a&gt;
+		
+		&lt;figcaption&gt;类加载器关系图&lt;/figcaption&gt;
+		
+	&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&#34;什么是双亲委派&#34;&gt;什么是双亲委派&lt;/h2&gt;
+&lt;p&gt;其是在JDK1.2期间被引入的，而后陆续被推荐给开发者，到目前已经成为了最常用的类加载器实现方式了。
+双亲委派整个过程分为以下几步：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;假设用户刚刚摸鱼写的Test类想进行加载，这个时候首先会发送给应用程序类加载器AppCloassLoader；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;然后AppClassLoader并不会直接去加载Test类，而是会委派于父类加载器完成此操作，也就是ExtClassLoader；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ExtClassLoader同样也不会直接去加载Test类，而是会继续委派于父类加载器完成，也就是BootstrapClassLoader；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;BootstrapClassLoader这个时候已经到顶层了，没有父类加载器了，所以BootstrapClassLoader会在jdk/lib目录下去搜索是否存在，因为这里是用户自己写的Test类，是不会存在于jdk下的，所以这个时候会给子类加载器一个反馈。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ExtClassLoader收到父类加载器发送的反馈，知道了父类加载器并没有找到对应的类，爸爸靠不住，就只能自己来加载了，结果显而易见，自己也不行，没办法，只能给更下面的子类加载器了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;AppClassLoader收到父类加载器的反馈，顿时明白，原来爸爸虽然是爸爸，但是他终究不能管儿子的私事，所以这时候，AppClassLoader就自己尝试去加载。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;总结：就是一个类从应用类加载器（Application ClassLoader）进入，会不断的向上找类加载器直到找到类加载器的顶层-&amp;gt;启动类加载器（BootstrapClassLoader）,然后查看有没有对应的类，如果没有就交给子类去加载。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;为什么需要双亲委派机制&#34;&gt;为什么需要双亲委派机制&lt;/h2&gt;
+&lt;p&gt;使用双亲委派模型，有一个很大的好处，就是&lt;strong&gt;避免原始类被覆盖的问题&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;比如，用户编写了一个Object类，放入程序中加载。&lt;/p&gt;
+&lt;p&gt;当没有双亲委派机制时，就会出现重复的Object类，会给开发人员造成很大的困扰，本来就只需要基于JDK开发就好了，现在还得把JDK中的类全记住，避免编写重复的类。&lt;/p&gt;
+&lt;p&gt;当存在双亲委派机制时呢，整个事情就不一样了，每次加载类时，都会遵循双亲委派机制，去问父类是否可以加载，如果可以呢，那就不需要再次加载了，这样事情就变得简单了。（老子走的路，小子不能走 ）&lt;/p&gt;
+&lt;p&gt;另外，通过双亲委派的方式，还&lt;strong&gt;保证了安全性&lt;/strong&gt;。因为Bootstrap ClassLoader在加载的时候，只会加载JAVA_HOME中的jar包里面的类，如java.lang.Integer，那么这个类是不会被随意替换的，除非有人跑到你的机器上， 破坏你的JDK。&lt;/p&gt;
+&lt;p&gt;那么，就可以避免有人自定义一个有破坏功能的java.lang.Integer被加载。这样可以有效的防止核心Java API被篡改。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;总结：1.避免类的重复加载&lt;/p&gt;
+&lt;p&gt;2.防止核心类被篡改&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;如何主动破坏双亲委派机制&#34;&gt;如何主动破坏双亲委派机制？&lt;/h2&gt;
+&lt;p&gt;首先看一下loadclass的源码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;protected Class&amp;lt;?&amp;gt; loadClass(String name, boolean resolve)
+        throws ClassNotFoundException
+    {
+        synchronized (getClassLoadingLock(name)) {
+            //首先检查类是否已经被加载过了
+            Class&amp;lt;?&amp;gt; c = findLoadedClass(name);
+            //若父加载器为空则默认使用启动类加载器作为父加载器
+            if (c == null) {
+                long t0 = System.nanoTime();
+                try {
+                    if (parent != null) {
+                        c = parent.loadClass(name, false);
+                    } else {
+                        c = findBootstrapClassOrNull(name);
+                    }
+                } catch (ClassNotFoundException e) {
+                    // 如果父类加载失败，抛出ClassNotFoundException异常后，再调用自己的findClass()方法进行加载。
+                }
+                if (c == null) {
+                    // If still not found, then invoke findClass in order
+                    // to find the class.
+                    long t1 = System.nanoTime();
+                    c = findClass(name);
+
+                    // this is the defining class loader; record the stats
+                    sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);
+                    sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);
+                    sun.misc.PerfCounter.getFindClasses().increment();
+                }
+            }
+            if (resolve) {
+                resolveClass(c);
+            }
+            return c;
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;看过源码我们知道了双亲委派模型的实现，那么想要破坏双亲委派机制就很简单了。&lt;/p&gt;
+&lt;p&gt;因为他的双亲委派过程都是在loadClass方法中实现的，那么想要破坏这种机制，那么就自定义一个类加载器，重写其中的loadClass方法，使其不进行双亲委派即可。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;总结：重写loadclass方法&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
         </item>
         <item>
         <title>JVM Native</title>
