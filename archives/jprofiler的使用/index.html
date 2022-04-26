@@ -9,7 +9,7 @@
 <meta property='og:description' content='关于内存分析工具Jprofiler的使用'>
 <meta property='og:url' content='/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/'>
 <meta property='og:site_name' content='Space Dog&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JVM' /><meta property='article:published_time' content='2022-04-24T20:10:48&#43;08:00'/><meta property='article:modified_time' content='2022-04-24T20:56:36&#43;08:00'/><meta property='og:image' content='/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/1.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JVM' /><meta property='article:published_time' content='2022-04-24T20:10:48&#43;08:00'/><meta property='article:modified_time' content='2022-04-26T22:07:20&#43;08:00'/><meta property='og:image' content='/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/1.jpg' />
 <meta name="twitter:title" content="Jprofiler的使用">
 <meta name="twitter:description" content="关于内存分析工具Jprofiler的使用"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/1.jpg' />
@@ -21,7 +21,7 @@
     </head>
     <body class="
     article-page
-<!---->
+<!--has-toc-->
 ">
     <script>
         (function() {
@@ -47,7 +47,7 @@
 </script>
 <div class="container main-container flex 
     
-        on-phone--column extended
+        extended
     
 ">
   <aside class="sidebar left-sidebar sticky">
@@ -295,6 +295,8 @@
 
 <main class="main full-width">
     
+        <p> 最后更新于 2022 年 4 月 26 日</p>
+    
 
     <article class="has-image main-article">
     <header class="article-header">
@@ -356,8 +358,110 @@
 </header>
 
     <section class="article-content">
-    <h2 id="编辑中">编辑中</h2>
+    <p><strong>首先我们写一个报oom错误的代码</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class demo01 {
+    public static void main(String[] args) {
+        byte[] array=new byte[1*1024*1024];//1m  1兆
+        ArrayList&lt;demo01&gt; list=new ArrayList&lt;demo01&gt;();
+        int count=0;//计数
 
+
+        try{
+            while(true){
+                list.add(new demo01());//无限的向list中添加数据，new新的对象。注意：次方法会导致oom
+                count=count++;
+            }
+        }catch(Error e){
+            System.out.println(&#34;count:&#34;+count);
+            e.printStackTrace();
+        }
+        //Throwable
+            //error
+            //Exception
+    }
+
+}
+</code></pre></div><h2 id="设置堆内存大小">设置堆内存大小</h2>
+<p>如果不设置堆内存，堆的默认内存应该是1GB，会占用很多资源，为了让
+<figure style="flex-grow: 111; flex-basis: 268px">
+		<a href="/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/2.jpg" data-size="1582x1414"><img src="/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/2.jpg"
+				srcset="/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/2_hu97565987d4f9a59b8ba1a32c80f33ff5_409950_480x0_resize_q75_box.jpg 480w, /archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/2_hu97565987d4f9a59b8ba1a32c80f33ff5_409950_1024x0_resize_q75_box.jpg 1024w"
+				width="1582"
+				height="1414"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure>
+解释一下-XX:<strong>+HeapDumpOnOutOfMemoryError</strong></p>
+<blockquote>
+<p>heap表示堆，on表示条件<br>
+让堆进行Dump，条件是OutOfMemoryError。意思就是说只要报出OOM这个异常，就会被Dump<br>
+如果要dump其他异常只需要将OutOfMemoryError这个异常改成你想要的dump的异常就可以了</p>
+</blockquote>
+<h2 id="jprofiler查看内存使用情况">Jprofiler查看内存使用情况</h2>
+<p>上一步我们设置完堆内存大小后，在运行一下程序，如下：会创建一个文件<strong>Dumping heap to java_pid47550.hprof &hellip;</strong>。
+<figure style="flex-grow: 417; flex-basis: 1001px">
+		<a href="/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/3.jpg" data-size="1594x382"><img src="/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/3.jpg"
+				srcset="/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/3_hu1dbedff6360006637f0094fddfa80380_157312_480x0_resize_q75_box.jpg 480w, /archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/3_hu1dbedff6360006637f0094fddfa80380_157312_1024x0_resize_q75_box.jpg 1024w"
+				width="1594"
+				height="382"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<p>此时我们找到这个文件：</p>
+<blockquote>
+<p>依次点击：对着demo01类右击&gt;open in&gt;finder&gt;在文件根目录下就可以找到Dumping heap to java_pid47550.hprof这个文件,然后双击打开（前提是下载了jprofiler这个软件）</p>
+</blockquote>
+<p><figure style="flex-grow: 132; flex-basis: 316px">
+		<a href="/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/4.jpg" data-size="2472x1872"><img src="/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/4.jpg"
+				srcset="/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/4_hu29aa6e96036bcc7e80e5bd100c9be533_3324954_480x0_resize_q75_box.jpg 480w, /archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/4_hu29aa6e96036bcc7e80e5bd100c9be533_3324954_1024x0_resize_q75_box.jpg 1024w"
+				width="2472"
+				height="1872"
+				loading="lazy"
+				alt="Jprofiler">
+		</a>
+		
+		<figcaption>Jprofiler</figcaption>
+		
+	</figure>
+如上图我们可以在最大对象这里看出是那个部分出错，如果具体要看是哪一行有问题，我们需要点击堆遍历器下的线程转储，这样就可以看出问题所在了</p>
+<h2 id="jvm常见调优">JVM常见调优</h2>
+<blockquote>
+<p>堆设置</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">-Xms:初始堆大小
+-Xmx:最大堆大小
+-XX:NewSize=n:设置年轻代大小
+-XX:NewRatio=n:设置年轻代和年老代的比值。如:为3，表示年轻代与年老代比值为1：3，年轻代占整个年轻代年老代和的1/4
+-XX:SurvivorRatio=n:年轻代中Eden区与两个Survivor区的比值。注意Survivor区有两个。如：3，表示Eden：Survivor=3：2，一个Survivor区占整个年轻代的1/5
+-XX:MaxPermSize=n:设置持久代大小
+</code></pre></div><blockquote>
+<p>收集器设置</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">-XX:+UseSerialGC:设置串行收集器
+-XX:+UseParallelGC:设置并行收集器
+-XX:+UseParalledlOldGC:设置并行年老代收集器
+-XX:+UseConcMarkSweepGC:设置并发收集器
+</code></pre></div><blockquote>
+<p>垃圾回收统计信息</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">-XX:+PrintGC
+-XX:+PrintGCDetails
+-XX:+PrintGCTimeStamps
+-Xloggc:filename
+</code></pre></div><blockquote>
+<p>并行收集器设置</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">-XX:ParallelGCThreads=n:设置并行收集器收集时使用的CPU数。并行收集线程数。
+-XX:MaxGCPauseMillis=n:设置并行收集最大暂停时间
+-XX:GCTimeRatio=n:设置垃圾回收时间占程序运行时间的百分比。公式为1/(1+n)
+
+-XX:+CMSIncrementalMode:设置为增量模式。适用于单CPU情况。
+-XX:ParallelGCThreads=n:设置并发收集器年轻代收集方式为并行收集时，使用的CPU数。并行收集线程数。
+</code></pre></div>
 </section>
 
 
@@ -387,7 +491,7 @@
 
 
         <span>
-            最后更新于 2022-04-24
+            最后更新于 2022-04-26
         </span>
     </section></footer>
 
@@ -560,7 +664,7 @@
   <section class="copyright">
     &copy; 
     
-    2022 Space Dog's Blog·<i class="fas fa-bell"></i> <a id="days">50</a>Days<br>共编辑了13.9k字
+    2022 Space Dog's Blog·<i class="fas fa-bell"></i> <a id="days">50</a>Days<br>共编辑了15.1k字
     ·共 9篇文章</br><span><p>
 </section>
 
@@ -783,6 +887,18 @@
 </section>
 
       
+      
+      <section class="widget archives">
+        <div class="widget--toc">
+          <nav id="TableOfContents">
+  <ol>
+    <li><a href="#设置堆内存大小">设置堆内存大小</a></li>
+    <li><a href="#jprofiler查看内存使用情况">Jprofiler查看内存使用情况</a></li>
+    <li><a href="#jvm常见调优">JVM常见调优</a></li>
+  </ol>
+</nav>
+        </div>
+      </section>
       
     </aside>
 

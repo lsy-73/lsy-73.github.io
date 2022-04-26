@@ -13,7 +13,7 @@
       <pubDate>Sun, 24 Apr 2022 20:10:48 +0800</pubDate>
       
       <guid>/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
-      <description>编辑中</description>
+      <description>首先我们写一个报oom错误的代码 public class demo01 { public static void main(String[] args) { byte[] array=new byte[1*1024*1024];//1m 1兆 ArrayList&amp;lt;demo01&amp;gt; list=new ArrayList&amp;lt;demo01&amp;gt;(); int count=0;//计数 try{ while(true){ list.add(new demo01());//无限的向list</description>
     </item>
     
     <item>

@@ -12,8 +12,110 @@
         <pubDate>Sun, 24 Apr 2022 20:10:48 +0800</pubDate>
         
         <guid>/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
-        <description>&lt;img src="/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/1.jpg" alt="Featured image of post Jprofiler的使用" /&gt;&lt;h2 id=&#34;编辑中&#34;&gt;编辑中&lt;/h2&gt;
-</description>
+        <description>&lt;img src="/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/1.jpg" alt="Featured image of post Jprofiler的使用" /&gt;&lt;p&gt;&lt;strong&gt;首先我们写一个报oom错误的代码&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;public class demo01 {
+    public static void main(String[] args) {
+        byte[] array=new byte[1*1024*1024];//1m  1兆
+        ArrayList&amp;lt;demo01&amp;gt; list=new ArrayList&amp;lt;demo01&amp;gt;();
+        int count=0;//计数
+
+
+        try{
+            while(true){
+                list.add(new demo01());//无限的向list中添加数据，new新的对象。注意：次方法会导致oom
+                count=count++;
+            }
+        }catch(Error e){
+            System.out.println(&amp;#34;count:&amp;#34;+count);
+            e.printStackTrace();
+        }
+        //Throwable
+            //error
+            //Exception
+    }
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;设置堆内存大小&#34;&gt;设置堆内存大小&lt;/h2&gt;
+&lt;p&gt;如果不设置堆内存，堆的默认内存应该是1GB，会占用很多资源，为了让
+&lt;figure style=&#34;flex-grow: 111; flex-basis: 268px&#34;&gt;
+		&lt;a href=&#34;/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/2.jpg&#34; data-size=&#34;1582x1414&#34;&gt;&lt;img src=&#34;/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/2.jpg&#34;
+				srcset=&#34;/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/2_hu97565987d4f9a59b8ba1a32c80f33ff5_409950_480x0_resize_q75_box.jpg 480w, /archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/2_hu97565987d4f9a59b8ba1a32c80f33ff5_409950_1024x0_resize_q75_box.jpg 1024w&#34;
+				width=&#34;1582&#34;
+				height=&#34;1414&#34;
+				loading=&#34;lazy&#34;
+				&gt;
+		&lt;/a&gt;
+		
+	&lt;/figure&gt;
+解释一下-XX:&lt;strong&gt;+HeapDumpOnOutOfMemoryError&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;heap表示堆，on表示条件&lt;br&gt;
+让堆进行Dump，条件是OutOfMemoryError。意思就是说只要报出OOM这个异常，就会被Dump&lt;br&gt;
+如果要dump其他异常只需要将OutOfMemoryError这个异常改成你想要的dump的异常就可以了&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;jprofiler查看内存使用情况&#34;&gt;Jprofiler查看内存使用情况&lt;/h2&gt;
+&lt;p&gt;上一步我们设置完堆内存大小后，在运行一下程序，如下：会创建一个文件&lt;strong&gt;Dumping heap to java_pid47550.hprof &amp;hellip;&lt;/strong&gt;。
+&lt;figure style=&#34;flex-grow: 417; flex-basis: 1001px&#34;&gt;
+		&lt;a href=&#34;/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/3.jpg&#34; data-size=&#34;1594x382&#34;&gt;&lt;img src=&#34;/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/3.jpg&#34;
+				srcset=&#34;/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/3_hu1dbedff6360006637f0094fddfa80380_157312_480x0_resize_q75_box.jpg 480w, /archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/3_hu1dbedff6360006637f0094fddfa80380_157312_1024x0_resize_q75_box.jpg 1024w&#34;
+				width=&#34;1594&#34;
+				height=&#34;382&#34;
+				loading=&#34;lazy&#34;
+				&gt;
+		&lt;/a&gt;
+		
+	&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;此时我们找到这个文件：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;依次点击：对着demo01类右击&amp;gt;open in&amp;gt;finder&amp;gt;在文件根目录下就可以找到Dumping heap to java_pid47550.hprof这个文件,然后双击打开（前提是下载了jprofiler这个软件）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 132; flex-basis: 316px&#34;&gt;
+		&lt;a href=&#34;/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/4.jpg&#34; data-size=&#34;2472x1872&#34;&gt;&lt;img src=&#34;/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/4.jpg&#34;
+				srcset=&#34;/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/4_hu29aa6e96036bcc7e80e5bd100c9be533_3324954_480x0_resize_q75_box.jpg 480w, /archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/4_hu29aa6e96036bcc7e80e5bd100c9be533_3324954_1024x0_resize_q75_box.jpg 1024w&#34;
+				width=&#34;2472&#34;
+				height=&#34;1872&#34;
+				loading=&#34;lazy&#34;
+				alt=&#34;Jprofiler&#34;&gt;
+		&lt;/a&gt;
+		
+		&lt;figcaption&gt;Jprofiler&lt;/figcaption&gt;
+		
+	&lt;/figure&gt;
+如上图我们可以在最大对象这里看出是那个部分出错，如果具体要看是哪一行有问题，我们需要点击堆遍历器下的线程转储，这样就可以看出问题所在了&lt;/p&gt;
+&lt;h2 id=&#34;jvm常见调优&#34;&gt;JVM常见调优&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;堆设置&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;-Xms:初始堆大小
+-Xmx:最大堆大小
+-XX:NewSize=n:设置年轻代大小
+-XX:NewRatio=n:设置年轻代和年老代的比值。如:为3，表示年轻代与年老代比值为1：3，年轻代占整个年轻代年老代和的1/4
+-XX:SurvivorRatio=n:年轻代中Eden区与两个Survivor区的比值。注意Survivor区有两个。如：3，表示Eden：Survivor=3：2，一个Survivor区占整个年轻代的1/5
+-XX:MaxPermSize=n:设置持久代大小
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;收集器设置&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;-XX:+UseSerialGC:设置串行收集器
+-XX:+UseParallelGC:设置并行收集器
+-XX:+UseParalledlOldGC:设置并行年老代收集器
+-XX:+UseConcMarkSweepGC:设置并发收集器
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;垃圾回收统计信息&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;-XX:+PrintGC
+-XX:+PrintGCDetails
+-XX:+PrintGCTimeStamps
+-Xloggc:filename
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;并行收集器设置&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;-XX:ParallelGCThreads=n:设置并行收集器收集时使用的CPU数。并行收集线程数。
+-XX:MaxGCPauseMillis=n:设置并行收集最大暂停时间
+-XX:GCTimeRatio=n:设置垃圾回收时间占程序运行时间的百分比。公式为1/(1+n)
+
+-XX:+CMSIncrementalMode:设置为增量模式。适用于单CPU情况。
+-XX:ParallelGCThreads=n:设置并发收集器年轻代收集方式为并行收集时，使用的CPU数。并行收集线程数。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
         </item>
         <item>
         <title>双亲委派机制</title>
