@@ -6,7 +6,321 @@
         <description>Recent content on Space Dog&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-CN</language>
-        <lastBuildDate>Sun, 24 Apr 2022 20:10:48 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 29 Apr 2022 12:50:22 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>生产者消费者问题</title>
+        <link>/archives/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98/</link>
+        <pubDate>Fri, 29 Apr 2022 12:50:22 +0800</pubDate>
+        
+        <guid>/archives/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98/</guid>
+        <description>&lt;img src="/archives/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98/1.jpg" alt="Featured image of post 生产者消费者问题" /&gt;&lt;h2 id=&#34;synchronized版生产者消费者问题旧版&#34;&gt;Synchronized版生产者消费者问题（旧版）&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;/*
+* 线程之间的通信问题：生产者消费者问题  等待唤醒  通知唤醒
+* 线程交替执行 A B C D操作同一个变量  num=0
+* A num+1
+* B num-1
+* C num+1
+* D num-1
+ */
+
+public class A {
+    public static void main(String[] args) {
+        Data data=new Data();
+        new Thread(()-&amp;gt;{
+            for (int i = 0; i &amp;lt; 10; i++) {
+                try {
+                    data.increment();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        },&amp;#34;A&amp;#34;).start();
+
+        new Thread(()-&amp;gt;{
+            for (int i = 0; i &amp;lt; 10; i++) {
+                try {
+                    data.decrement();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        },&amp;#34;B&amp;#34;).start();
+
+        new Thread(()-&amp;gt;{
+            for (int i = 0; i &amp;lt; 10; i++) {
+                try {
+                    data.increment();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        },&amp;#34;C&amp;#34;).start();
+
+        new Thread(()-&amp;gt;{
+            for (int i = 0; i &amp;lt; 10; i++) {
+                try {
+                    data.decrement();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        },&amp;#34;D&amp;#34;).start();
+
+    }
+}
+
+
+//1判断等待，2业务，3通知
+class Data{
+    private int number=0;
+
+    //+1
+    public synchronized void increment() throws InterruptedException {
+        while(number!=0){
+        //等待
+        this.wait();
+        }
+        number++;
+        System.out.println(Thread.currentThread().getName()+&amp;#34;=&amp;gt;&amp;#34;+number);
+        //通知其他线程，我+1完了
+        this.notify();
+    }
+    //-1
+    public synchronized void decrement() throws InterruptedException {
+        while(number==0){
+        //等待
+        this.wait();
+        }
+        number--;
+        System.out.println(Thread.currentThread().getName()+&amp;#34;=&amp;gt;&amp;#34;+number);
+        //通知其他线程，我-1完了
+        this.notify();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如上执行后部分结果，可以看出不会出现不安全的问题：
+A=&amp;gt;1
+B=&amp;gt;0
+A=&amp;gt;1
+B=&amp;gt;0
+A=&amp;gt;1
+B=&amp;gt;0
+A=&amp;gt;1
+B=&amp;gt;0
+A=&amp;gt;1
+B=&amp;gt;0&lt;/p&gt;
+&lt;p&gt;如果将里面的while（）循环换成if就会出现安全问题（虚假唤醒），执行后如下,会出现有2的情况：
+A=&amp;gt;1
+B=&amp;gt;0
+A=&amp;gt;1
+B=&amp;gt;0
+A=&amp;gt;1
+C=&amp;gt;2
+D=&amp;gt;1
+D=&amp;gt;0&lt;/p&gt;
+&lt;p&gt;那为什么会出现这样的情况：就是用if判断的话，唤醒后线程会从wait之后的代码开始运行，但是不会重新判断if条件，直接继续运行if代码块之后的代码，而如果使用while的话，也会从wait之后的代码运行，但是唤醒后会重新判断循环条件，如果不成立再执行while代码块之后的代码块，成立的话继续wait。&lt;/p&gt;
+&lt;p&gt;这也就是为什么用while而不用if的原因了，因为线程被唤醒后，执行开始的地方是wait之后。&lt;/p&gt;
+&lt;h2 id=&#34;lock版生产者消费者问题新版&#34;&gt;Lock版生产者消费者问题（新版）&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;public class B {
+    public static void main(String[] args) {
+        Data2 data = new Data2();
+        new Thread(()-&amp;gt;{
+            for (int i = 0; i &amp;lt; 10; i++) {
+                try {
+                    data.increment();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        },&amp;#34;A&amp;#34;).start();
+
+        new Thread(()-&amp;gt;{
+            for (int i = 0; i &amp;lt; 10; i++) {
+                try {
+                    data.decrement();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        },&amp;#34;B&amp;#34;).start();
+
+        new Thread(()-&amp;gt;{
+            for (int i = 0; i &amp;lt; 10; i++) {
+                try {
+                    data.increment();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        },&amp;#34;C&amp;#34;).start();
+
+        new Thread(()-&amp;gt;{
+            for (int i = 0; i &amp;lt; 10; i++) {
+                try {
+                    data.decrement();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        },&amp;#34;D&amp;#34;).start();
+
+    }
+}
+//1判断等待，2业务，3通知
+class Data2 {
+    private int number = 0;
+    Lock lock = new ReentrantLock();
+    Condition condition = lock.newCondition();
+
+    //+1
+    public void increment() throws InterruptedException {
+        lock.lock();//有锁的话，先上锁
+        try {
+            //业务代码
+            while (number == 0) {
+                //等待
+                condition.await();
+            }
+            number--;
+            System.out.println(Thread.currentThread().getName() + &amp;#34;=&amp;gt;&amp;#34; + number);
+            //通知其他线程，我-1完了
+            condition.signalAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();//用完锁，要释放
+        }
+
+    }
+
+    //-1
+    public void decrement() throws InterruptedException {
+        lock.lock();
+        try {
+            while (number == 0) {
+                //等待
+                condition.await();
+            }
+            number--;
+            System.out.println(Thread.currentThread().getName() + &amp;#34;=&amp;gt;&amp;#34; + number);
+            //通知其他线程，我-1完了
+            condition.signalAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如上执行后部分结果，可以看出执行的结果是无序的：&lt;br&gt;
+A=&amp;gt;1
+B=&amp;gt;0
+c=&amp;gt;1
+B=&amp;gt;0
+A=&amp;gt;1
+B=&amp;gt;0
+A=&amp;gt;1
+B=&amp;gt;0
+A=&amp;gt;1
+B=&amp;gt;0
+A=&amp;gt;1
+D=&amp;gt;0
+c=&amp;gt;1&lt;/p&gt;
+&lt;h2 id=&#34;lock版生产者消费者问题新版改进&#34;&gt;Lock版生产者消费者问题（新版改进）&lt;/h2&gt;
+&lt;p&gt;那么接下来让他变成有序的（condition同步监视器），让线程被有序唤醒，而不是乱执行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;public class C {
+    public static void main(String[] args) {
+        Data3 data=new Data3();
+
+        new Thread(()-&amp;gt;{
+            for (int i = 0; i &amp;lt; 10; i++) {
+                data.printA();
+            }
+        },&amp;#34;A&amp;#34;).start();
+        new Thread(()-&amp;gt;{
+            for (int i = 0; i &amp;lt; 10; i++) {
+                data.printB();
+            }
+        },&amp;#34;B&amp;#34;).start();
+        new Thread(()-&amp;gt;{
+            for (int i = 0; i &amp;lt; 10; i++) {
+                data.printC();
+            }
+        },&amp;#34;C&amp;#34;).start();
+    }
+}
+class Data3{
+    private Lock lock=new ReentrantLock();
+    //监视器
+
+    private Condition condition1=lock.newCondition();
+    private Condition condition2=lock.newCondition();
+    private Condition condition3=lock.newCondition();
+    private int number=1;// 1A,2B,3C
+    public void printA(){
+        lock.lock();
+        try {
+            //业务，判断-&amp;gt;执行-&amp;gt;通知
+            while (number!=1){
+                condition1.await();
+            }
+            System.out.println(Thread.currentThread().getName()+&amp;#34;=&amp;gt;AAAAAA&amp;#34;);
+            //唤醒指定的人，B
+            number=2;
+            condition2.signal();//唤醒指定线程  B
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            lock.unlock();
+        }
+
+    }
+    public void printB(){
+        lock.lock();
+        try {
+            //业务，判断-&amp;gt;执行-&amp;gt;通知
+            while (number!=2){
+                condition2.await();
+            }
+            System.out.println(Thread.currentThread().getName()+&amp;#34;=&amp;gt;BBBBB&amp;#34;);
+            //唤醒指定的线程C
+            number=3;
+            condition3.signal();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            lock.unlock();
+        }
+    }
+    public void printC(){
+        lock.lock();
+        try {
+            //业务，判断-&amp;gt;执行-&amp;gt;通知
+            while (number!=3){
+                condition3.await();
+            }
+            System.out.println(Thread.currentThread().getName()+&amp;#34;=&amp;gt;AAAAAA&amp;#34;);
+            //唤醒指定线程C
+            number=1;
+            condition1.signal();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            lock.unlock();
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行部分结果如下，可以看出是有序执行，A-&amp;gt;B-&amp;gt;C：&lt;br&gt;
+A=&amp;gt;AAAAAA
+B=&amp;gt;BBBBB
+C=&amp;gt;AAAAAA
+A=&amp;gt;AAAAAA
+B=&amp;gt;BBBBB
+C=&amp;gt;AAAAAA
+A=&amp;gt;AAAAAA
+B=&amp;gt;BBBBB
+C=&amp;gt;AAAAAA&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Jprofiler的使用</title>
         <link>/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
         <pubDate>Sun, 24 Apr 2022 20:10:48 +0800</pubDate>
@@ -36,7 +350,7 @@
 
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;设置堆内存大小&#34;&gt;设置堆内存大小&lt;/h2&gt;
-&lt;p&gt;如果不设置堆内存，堆的默认内存应该是1GB，会占用很多资源，为了让
+&lt;p&gt;如果不设置堆内存，堆的默认内存应该是1GB，会占用很多资源
 &lt;figure style=&#34;flex-grow: 111; flex-basis: 268px&#34;&gt;
 		&lt;a href=&#34;/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/2.jpg&#34; data-size=&#34;1582x1414&#34;&gt;&lt;img src=&#34;/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/2.jpg&#34;
 				srcset=&#34;/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/2_hu97565987d4f9a59b8ba1a32c80f33ff5_409950_480x0_resize_q75_box.jpg 480w, /archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/2_hu97565987d4f9a59b8ba1a32c80f33ff5_409950_1024x0_resize_q75_box.jpg 1024w&#34;
@@ -227,6 +541,24 @@
 &lt;blockquote&gt;
 &lt;p&gt;总结：重写loadclass方法&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;h2 id=&#34;双亲委派被破坏的例子&#34;&gt;双亲委派被破坏的例子&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;第一种被破坏的情况是在双亲委派出现之前。&lt;br&gt;由于双亲委派模型是在JDK1.2之后才被引入的，而在这之前已经有用户自定义类加载器在用了。所以，这些是没有遵守双亲委派原则的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;第二种，是JNDI、JDBC等需要加载SPI接口实现类的情况。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;第三种是为了实现热插拔热部署工具。为了让代码动态生效而无需重启，实现方式时把模块连同类加载器一起换掉就实现了代码的热替换。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;第四种时tomcat等web容器的出现。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;第五种时OSGI、Jigsaw等模块化技术的应用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -314,7 +646,7 @@ java虚拟机在操作系统之上，那操作系统的东西java是调用不了
 &lt;blockquote&gt;
 &lt;p&gt;因为java刚刚诞生的时候c和C++很流行，想要立足那必须要有可以调用c和c++程序&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;big&gt;一般在哪使用到Native？&lt;/big&gt;
+&lt;p&gt;&lt;big&gt;一般在哪使用到Native？&lt;/big&gt;&lt;br&gt;
 一般在做硬件方面的东西或者java程序驱动打印机，管理系统，robot（）机器人类&lt;/p&gt;
 </description>
         </item>
