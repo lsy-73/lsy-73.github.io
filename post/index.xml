@@ -6,7 +6,25 @@
     <description>Recent content in Posts on Space Dog&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 29 Apr 2022 12:50:22 +0800</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 19 May 2022 10:26:23 +0800</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>单例模式（2）</title>
+      <link>/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/</link>
+      <pubDate>Thu, 19 May 2022 10:26:23 +0800</pubDate>
+      
+      <guid>/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/</guid>
+      <description>破坏双重校验锁的单例 public Lazyman{ private Lazyman(){} private volatile static Lazyman lazyman; public static Lazyman getInstance3(){ if(lazyman==null){ synchronized (Lazyman.class){ if(lazyman==null){ lazyman=new Lazyman(); } } } return lazyman; } //使用反射破坏单例模式 public static void main(String[] args) throws Exception { Lazyman instance = Lazyman.getI</description>
+    </item>
+    
+    <item>
+      <title>单例模式</title>
+      <link>/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Thu, 19 May 2022 08:26:57 +0800</pubDate>
+      
+      <guid>/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</guid>
+      <description>Java中单例(Singleton)模式是一种广泛使用的设计模式。通过单例模式可以保证系统中一个类只有一个实例而且该实例易于外界访问，从而方</description>
+    </item>
+    
     <item>
       <title>生产者消费者问题</title>
       <link>/archives/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98/</link>

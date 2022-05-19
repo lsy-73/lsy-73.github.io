@@ -6,7 +6,324 @@
         <description>Recent content on Space Dog&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-CN</language>
-        <lastBuildDate>Fri, 29 Apr 2022 12:50:22 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 19 May 2022 10:26:23 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>单例模式（2）</title>
+        <link>/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/</link>
+        <pubDate>Thu, 19 May 2022 10:26:23 +0800</pubDate>
+        
+        <guid>/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/</guid>
+        <description>&lt;img src="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/1.jpg" alt="Featured image of post 单例模式（2）" /&gt;&lt;h2 id=&#34;破坏双重校验锁的单例&#34;&gt;破坏双重校验锁的单例&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;public Lazyman{
+    private Lazyman(){}
+    private volatile static Lazyman lazyman;
+    public static Lazyman getInstance3(){
+        if(lazyman==null){
+            synchronized (Lazyman.class){
+                if(lazyman==null){
+                    lazyman=new Lazyman();
+                }
+            }
+        }
+        return lazyman;
+    }
+    //使用反射破坏单例模式
+    public static void main(String[] args) throws Exception {
+        Lazyman instance = Lazyman.getInstance3();//用单例模式创建
+        //用反射创建
+        Constructor&amp;lt;Lazyman&amp;gt; declaredConstructor=Lazyman.class.getDeclaredConstructor(null);//1。获取反射对象2。获得一个空参构造器
+        declaredConstructor.setAccessible(true);//无视私有的构造器(破除私有权限)
+        Lazyman instance2=declaredConstructor.newInstance();//反射创建出来的对象
+
+        //查看用反射创建出来的对象和用单例模式创建出来的对象哈希值一不一样
+        System.out.println(instance);
+        System.out.println(instance2);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;运行后的结果：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;com.java.Single.Lazyman@2503dbd3
+com.java.Single.Lazyman@4b67cf4d
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;由结果可见&lt;strong&gt;单例确实被破坏了&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;如何防止单例被破坏&#34;&gt;如何防止单例被破坏&lt;/h3&gt;
+&lt;p&gt;declaredConstructor走了一个构造器Lazyman（），所以在Lazyman（）里加一个判断。加锁，第二次new的时候就会报错，如果Lazyman不为空，即已经创建过了，此时就知道是来搞破坏，所以抛出一个异常
+&lt;figure style=&#34;flex-grow: 304; flex-basis: 731px&#34;&gt;
+		&lt;a href=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/9.png&#34; data-size=&#34;1378x452&#34;&gt;&lt;img src=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/9.png&#34;
+				srcset=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/9_hucd3c40bbf922ce722285927aaed72267_305418_480x0_resize_box_3.png 480w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/9_hucd3c40bbf922ce722285927aaed72267_305418_1024x0_resize_box_3.png 1024w&#34;
+				width=&#34;1378&#34;
+				height=&#34;452&#34;
+				loading=&#34;lazy&#34;
+				&gt;
+		&lt;/a&gt;
+		
+	&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&#34;破坏枚举单例&#34;&gt;破坏枚举单例&lt;/h2&gt;
+&lt;p&gt;上一节我们说到枚举是绝对安全的，但是如果我们就想用反射破坏一下，下面来测试一下&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;失败1:&lt;/strong&gt;&lt;br&gt;
+在EnumSingle.Class这个文件中我们看到里面有一个无参的构造方法，现在我们测试一下是否真的有无参构造
+&lt;figure style=&#34;flex-grow: 123; flex-basis: 296px&#34;&gt;
+		&lt;a href=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/2.png&#34; data-size=&#34;696x564&#34;&gt;&lt;img src=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/2.png&#34;
+				srcset=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/2_hu993ad466a647807054fdaefb7834b8af_98578_480x0_resize_box_3.png 480w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/2_hu993ad466a647807054fdaefb7834b8af_98578_1024x0_resize_box_3.png 1024w&#34;
+				width=&#34;696&#34;
+				height=&#34;564&#34;
+				loading=&#34;lazy&#34;
+				alt=&#34;EnumSingle.Class&#34;&gt;
+		&lt;/a&gt;
+		
+		&lt;figcaption&gt;EnumSingle.Class&lt;/figcaption&gt;
+		
+	&lt;/figure&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;public enum EnumSingle {
+    INSTANCE;
+    public EnumSingle getInstance(){
+        return INSTANCE;
+    }
+}
+class Test{
+    public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        EnumSingle instance1=EnumSingle.INSTANCE;
+        Constructor&amp;lt;EnumSingle&amp;gt; declaredconstructor= EnumSingle.class.getDeclaredConstructor(null);
+        declaredconstructor.setAccessible(true);
+        EnumSingle instance2=declaredconstructor.newInstance();
+
+        System.out.println(instance1);
+        System.out.println(instance2);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此时爆出了异常，所以我们的测试还没有结束
+&lt;figure style=&#34;flex-grow: 461; flex-basis: 1106px&#34;&gt;
+		&lt;a href=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/3.png&#34; data-size=&#34;1808x392&#34;&gt;&lt;img src=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/3.png&#34;
+				srcset=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/3_hu2647b5d20e7334f06350f0c9e0380b21_203193_480x0_resize_box_3.png 480w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/3_hu2647b5d20e7334f06350f0c9e0380b21_203193_1024x0_resize_box_3.png 1024w&#34;
+				width=&#34;1808&#34;
+				height=&#34;392&#34;
+				loading=&#34;lazy&#34;
+				alt=&#34;异常&#34;&gt;
+		&lt;/a&gt;
+		
+		&lt;figcaption&gt;异常&lt;/figcaption&gt;
+		
+	&lt;/figure&gt;
+他告诉我们&lt;font color=&#34;red&#34;&gt;NoSuchMethodException: com.java.Single.EnumSingle.&lt;init&gt;()&lt;/font&gt;,就是说枚举类里没有空参的构造器&lt;br&gt;
+此时我们进入Constructor这个构造器
+&lt;figure style=&#34;flex-grow: 156; flex-basis: 376px&#34;&gt;
+		&lt;a href=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/4.png&#34; data-size=&#34;1540x982&#34;&gt;&lt;img src=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/4.png&#34;
+				srcset=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/4_hudf7ae5550d57b0b0a829622806201ed3_318873_480x0_resize_box_3.png 480w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/4_hudf7ae5550d57b0b0a829622806201ed3_318873_1024x0_resize_box_3.png 1024w&#34;
+				width=&#34;1540&#34;
+				height=&#34;982&#34;
+				loading=&#34;lazy&#34;
+				&gt;
+		&lt;/a&gt;
+		
+	&lt;/figure&gt;
+在Constructor这个构造器，Instance里可以看出，正常应该报出&lt;font color=&#34;red&#34;&gt;&amp;ldquo;Cannot reflectively create enum objects&amp;rdquo;&lt;/font&gt;这个异常，即不能使用反射破坏枚举。所以我们的探究又失败了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;失败2:&lt;/strong&gt;&lt;br&gt;
+经过上一次失败我们这次通过反编译将EnumSingle.class反编译回来&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;javap -p EnumSingle.class&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 258; flex-basis: 619px&#34;&gt;
+		&lt;a href=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/5.png&#34; data-size=&#34;1534x594&#34;&gt;&lt;img src=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/5.png&#34;
+				srcset=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/5_hu7f9270ca8b80dacfb704dfdbaf5795f5_389824_480x0_resize_box_3.png 480w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/5_hu7f9270ca8b80dacfb704dfdbaf5795f5_389824_1024x0_resize_box_3.png 1024w&#34;
+				width=&#34;1534&#34;
+				height=&#34;594&#34;
+				loading=&#34;lazy&#34;
+				alt=&#34;反编译EnumSingle.class&#34;&gt;
+		&lt;/a&gt;
+		
+		&lt;figcaption&gt;反编译EnumSingle.class&lt;/figcaption&gt;
+		
+	&lt;/figure&gt;
+此时我们看到里面也有一个空参的构造,说明我们还是被骗了&lt;/p&gt;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 720; flex-basis: 1729px&#34;&gt;
+		&lt;a href=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/6.png&#34; data-size=&#34;764x106&#34;&gt;&lt;img src=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/6.png&#34;
+				srcset=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/6_hu74220e32f106fabeda2087b000d46e0d_39724_480x0_resize_box_3.png 480w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/6_hu74220e32f106fabeda2087b000d46e0d_39724_1024x0_resize_box_3.png 1024w&#34;
+				width=&#34;764&#34;
+				height=&#34;106&#34;
+				loading=&#34;lazy&#34;
+				&gt;
+		&lt;/a&gt;
+		
+	&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;成功:&lt;/strong&gt;&lt;br&gt;
+经过上面俩次被骗，此时使用一个更专业的工具Jad，用jad反编译EnumSingle.class&lt;/p&gt;
+&lt;p&gt;Jad(JAva Decompiler)是一个Java的反编译器，可以通过命令行把Java的class文件反编译成源代码。&lt;/p&gt;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 122; flex-basis: 294px&#34;&gt;
+		&lt;a href=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/7.png&#34; data-size=&#34;1494x1218&#34;&gt;&lt;img src=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/7.png&#34;
+				srcset=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/7_hu3d21e109d930869541b0587be9119a32_833844_480x0_resize_box_3.png 480w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/7_hu3d21e109d930869541b0587be9119a32_833844_1024x0_resize_box_3.png 1024w&#34;
+				width=&#34;1494&#34;
+				height=&#34;1218&#34;
+				loading=&#34;lazy&#34;
+				&gt;
+		&lt;/a&gt;
+		
+	&lt;/figure&gt;
+可以看出是一个有参构造，里面参数是一个string和int，那我们也把测试代码里的参数该成有参的在看看结果&lt;/p&gt;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 294; flex-basis: 706px&#34;&gt;
+		&lt;a href=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/8.png&#34; data-size=&#34;2020x686&#34;&gt;&lt;img src=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/8.png&#34;
+				srcset=&#34;/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/8_hu82cc37d49883451aa3c60663b590f840_334651_480x0_resize_box_3.png 480w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/8_hu82cc37d49883451aa3c60663b590f840_334651_1024x0_resize_box_3.png 1024w&#34;
+				width=&#34;2020&#34;
+				height=&#34;686&#34;
+				loading=&#34;lazy&#34;
+				&gt;
+		&lt;/a&gt;
+		
+	&lt;/figure&gt;
+此时我们得倒了想要的结果，我宣布成功了&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>单例模式</title>
+        <link>/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</link>
+        <pubDate>Thu, 19 May 2022 08:26:57 +0800</pubDate>
+        
+        <guid>/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</guid>
+        <description>&lt;img src="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/1.jpeg" alt="Featured image of post 单例模式" /&gt;&lt;p&gt;Java中单例(Singleton)模式是一种广泛使用的设计模式。通过单例模式可以保证系统中一个类只有一个实例而且该实例易于外界访问，从而方便对实例个数的控制并节约系统资源。如果希望在系统中某个类的对象只能存在一个，单例模式是最好的解决方案。&lt;/p&gt;
+&lt;p&gt;单例模式好处:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1.它能够避免实例对象的重复创建，不仅可以减少每次创建对象的时间开销，还可以节约内存空间；&lt;br&gt;
+2.能够避免由于操作多个实例导致的逻辑错误。&lt;br&gt;
+3.如果一个对象有可能贯穿整个应用程序，而且起到了全局统一管理控制的作用，那么单例模式也许是一个值得考虑的选择。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;饿汉式&#34;&gt;饿汉式&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;public class Hungry {
+    private Hungry(){} //构造函数
+    private final static Hungry HUNGRY=new Hungry();//自己创建实例
+    // 通过该函数向整个系统提供实例
+    public static Hungry getInstance(){
+        return HUNGRY;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;从代码中我们看到，类的构造函数定义为private的，保证其他类不能实例化此类，然后提供了一个静态实例并返回给调用者。饿汉模式是最简单的一种实现方式，&lt;font color=&#34;red&#34;&gt;饿汉模式在类加载的时候就对实例进行创建，实例在整个程序周期都存在&lt;/font&gt;。&lt;br&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;它的&lt;strong&gt;好处&lt;/strong&gt;是只在&lt;strong&gt;类加载的时候创建一次实例&lt;/strong&gt;，不会存在多个线程创建多个实例的情况，&lt;strong&gt;避免了多线程同步的问题&lt;/strong&gt;。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;它的&lt;strong&gt;缺点&lt;/strong&gt;也很明显，即使这个单例没有用到也会被创建，而且在类加载之后就被创建，&lt;strong&gt;内存就被浪费了&lt;/strong&gt;。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;这种实现方式&lt;strong&gt;适合&lt;/strong&gt;单例&lt;strong&gt;占用内存比较小&lt;/strong&gt;，在初始化时就会被用到的情况。但是，如果单例占用的内存比较大，或单例只是在某个特定场景下才会用到，使用饿汉模式就不合适了，这时候就需要用到懒汉模式进行延迟加载。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;懒汉式&#34;&gt;懒汉式&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;//懒汉式
+public class Lazyman {
+    private Lazyman(){}//构造函数
+
+    private static Lazyman lazyman;//不实例化
+    //通过该函数向整个系统提供实例
+    public static Lazyman getInstance(){
+        // 当 lazyman 为 null 时，则实例化对象，否则直接返回对象
+        if(lazyman==null){
+            lazyman =new Lazyman();//实例化
+        }
+        return lazyman;//返回已经存在的对象
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;font color=&#34;red&#34;&gt;好处：懒汉模式中单例是在需要的时候才去创建的&lt;/font&gt;，如果单例已经创建，再次调用获取接口将不会重新创建新的对象，而是直接返回之前创建的对象。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适用于&lt;/strong&gt;：如果某个单例使用的次数少，并且创建单例消耗的资源较多，那么就需要实现单例的按需创建，这个时候使用懒汉模式就是一个不错的选择。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点&lt;/strong&gt;：但是这里的&lt;strong&gt;懒汉模式并没有考虑线程安全问题&lt;/strong&gt;，在多个线程可能会并发调用它的getInstance()方法，导致创建多个实例，因此&lt;strong&gt;需要加锁解决线程同步问题&lt;/strong&gt;，实现如下:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当线程 A 进入到 if 判断条件后，开始实例化对象，此时 lazyman 依然为 null；又有线程 B 进入到 if 判断条件中，之后也会通过条件判断，进入到方法里面创建一个实例对象。&lt;/p&gt;
+&lt;p&gt;所以我们需要对该方法进行加锁，保证多线程情况下仅创建一个实例。这里我们使用 Synchronized 同步锁来修饰 getInstance2 方法：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;// 懒汉模式 + synchronized 同步锁
+    //加了synchronized锁适用多线程，但效率不高
+    private Lazyman(){}
+    private static Lazyman lazyman;
+    public static synchronized Lazyman getInstance2(){
+        if(lazyman==null){
+            lazyman=new Lazyman();
+        }
+        return lazyman;
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但同步锁会增加锁竞争，带来系统性能开销，从而导致系统性能下降，因此这种方式也会降低单例模式的性能。&lt;/p&gt;
+&lt;p&gt;还有，&lt;font color=&#34;red&#34;&gt;每次请求获取类对象时，都会通过 getInstance2() 方法获取，除了第一次为 null，其它每次请求基本都是不为 null 的。在没有加同步锁之前，是因为 if 判断条件为 null 时，才导致创建了多个实例。基于以上两点，我们可以考虑将同步锁放在 if 条件里面，这样就可以减少同步锁资源竞争。&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;你是不是觉得这样就可以了呢？答案是依然会创建多个实例。这是因为当多个线程进入到 if 判断条件里，虽然有同步锁，但是进入到判断条件里面的线程依然会依次获取到锁创建对象，然后再释放同步锁。所以我们还需要在同步锁里面再加一个判断条件.&lt;/p&gt;
+&lt;h2 id=&#34;双重校验锁推荐&#34;&gt;双重校验+锁（推荐）&lt;/h2&gt;
+&lt;p&gt;这里使用到了volatile关键字，volatile的一个语义是禁止指令重排序优化，也就保证了instance变量被赋值的时候对象已经是初始化过的，从而避免指令重排。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;// 懒汉模式 + synchronized 同步锁 + double-check
+    private Lazyman(){}
+    private volatile static Lazyman lazyman;
+    public static Lazyman getInstance3(){
+        if(lazyman==null){
+            synchronized (Lazyman.class){
+                if(lazyman==null){
+                    lazyman=new Lazyman();//不是一个原子性操作
+                    /*
+                     * new对象的步骤（可能会发生指令重排，即执行顺序不是123，可能是132）
+                     * 1。分配内存空间
+                     * 2。执行构造方法，初始化对象
+                     * 3。把这个对象指向这个空间
+                     * 如果是132，此时lazyman还没有完成构造，会认为lazyman!==null
+                     * 原子操作可以是一个步骤，也可以是多个操作步骤，但是其顺序不可以被打乱，也不可以被切割而只执行其中的一部分。
+                     * */
+                }
+            }
+        }
+        return lazyman;
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;静态内部类推荐&#34;&gt;静态内部类（推荐）&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;//懒汉式 静态内部类实现
+public class Holder {
+    private Holder(){
+
+    }
+    private static Holder getInstance(){
+        return InnerClass.HOLDER;// 返回内部类中的静态变量
+    }
+    //内部类实现
+    public static class InnerClass{
+        private static final Holder HOLDER=new Holder();//自己创建实例
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;这种方式同样利用了&lt;strong&gt;类加载机制&lt;/strong&gt;来保证只创建一个instance实例。它与饿汉模式一样，也是利用了类加载机制，因此不存在多线程并发的问题。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;不一样的是，它是在内部类里面去创建对象实例。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;这样的话，只要应用中不使用内部类，JVM就不会去加载这个单例类，也就不会创建单例对象，从而实现懒汉式的延迟加载。也就是说这种方式&lt;strong&gt;可以同时保证延迟加载和线程安全&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;枚举强烈推荐&#34;&gt;枚举（强烈推荐）&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;//enum本身就是一个class类
+//枚举方式实现单例模式
+//枚举类型是线程安全的，并且只会装载一次
+public enum EnumSingle {
+    INSTANCE;
+    public EnumSingle getInstance(){
+        return INSTANCE;
+    }
+}
+//测试用例
+class Test{
+    public static void main(String[] args) {
+        EnumSingle instance1=EnumSingle.INSTANCE;
+        EnumSingle instance2=EnumSingle.INSTANCE;
+
+        System.out.println(instance1);
+        System.out.println(instance2);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;输出：&lt;br&gt;INSTANCE&lt;br&gt;INSTANCE&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;可以看出俩个instance哈希值是一样的&lt;/p&gt;
+&lt;p&gt;&lt;font color=&#34;red&#34;&gt;下面我们来看看单例是如何被保证的： &lt;/font&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1.首先，在枚举中我们&lt;font color=&#34;red&#34;&gt;明确了构造方法限制为私有&lt;/font&gt;，在我们访问枚举实例时会执行构造方法。&lt;br&gt;
+2.同时&lt;font color=&#34;red&#34;&gt;每个枚举实例都是static final类型的&lt;/font&gt;，也就表明只能被实例化一次。在调用构造方法时，我们的单例被实例化。 &lt;br&gt;
+3.也就是说，因为enum中的实例被保证只会被实例化一次，所以我们的INSTANCE也被保证实例化一次。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;单例模式的线程安全性&#34;&gt;单例模式的线程安全性&lt;/h2&gt;
+&lt;p&gt;首先要说的是单例模式的线程安全意味着：某个类的实例在多线程环境下只会被创建一次出来。单例模式有很多种的写法，我总结一下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;（1）饿汉式：线程安全
+
+（2）懒汉式：非线程安全
+
+（3）双检锁：线程安全
+
+（4）静态内部类：线程安全
+
+（5）枚举：线程安全
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;如何选择&#34;&gt;如何选择&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;如果我们在程序启动后，一定会加载到类，那么用饿汉模式实现的单例简单又实用；
+
+如果我们是写一些工具类，则优先考虑使用懒汉模式，因为很多项目可能会引用到 jar 包，但未必会使用到这个工具类，懒汉模式实现的单例可以避免提前被加载到内存中，占用系统资源。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;参考：
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/fly910905/article/details/79286680&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/fly910905/article/details/79286680&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>生产者消费者问题</title>
         <link>/archives/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98/</link>
         <pubDate>Fri, 29 Apr 2022 12:50:22 +0800</pubDate>

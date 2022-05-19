@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='破坏单例模式'><title>单例模式（2）</title>
+
+<link rel='canonical' href='/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='单例模式（2）'>
+<meta property='og:description' content='破坏单例模式'>
+<meta property='og:url' content='/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/'>
+<meta property='og:site_name' content='Space Dog&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2022-05-19T10:26:23&#43;08:00'/><meta property='article:modified_time' content='2022-05-19T11:45:12&#43;08:00'/><meta property='og:image' content='/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/1.jpg' />
+<meta name="twitter:title" content="单例模式（2）">
+<meta name="twitter:description" content="破坏单例模式"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/1.jpg' />
+    <link rel="shortcut icon" href="/img/favicon.png" />
+<style>
+    h1 {letter-spacing: 4px}
+    </style>
+    
+    </head>
+    <body class="
+    article-page
+<!--has-toc-->
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+  <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu3cb343f5d53fab105f4ee9ab78b41854_789405_300x0_resize_box_3.png" width="300"
+                            height="295" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+            </figure>
+            
+        
+        <h1 class="site-name"><a href="/">Space Dog&#39;s Blog</a></h1>
+        <h2 class="site-description">天空比大海还要深，是个未知的世界</h2><ol class="social-menu">
+                
+                    <li>
+                        <a 
+                            href='https://mailto:liusenyuan6@gmail.com'
+                            target="_blank"
+                            title="Email"
+                        >
+                            
+                            
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="30" height="27" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg> 
+
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a 
+                            href='https://github.com/lsy-73'
+                            target="_blank"
+                            title="GitHub"
+                        >
+                            
+                            
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a 
+                            href='/index.xml'
+                            target="_blank"
+                            title="Rss"
+                        >
+                            
+                            
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a 
+                            href='https://t.me/lsysid'
+                            target="_blank"
+                            title="Telegram"
+                        >
+                            
+                            
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="30" height="27" viewBox="0 0 28 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />
+</svg> 
+
+                            
+                        </a>
+                    </li>
+                
+            </ol></header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-friends" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <circle cx="7" cy="5" r="2" />
+  <path d="M5 22v-5l-1 -1v-4a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4l-1 1v5" />
+  <circle cx="17" cy="5" r="2" />
+  <path d="M15 22v-4h-2l2 -6a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1l2 6h-2v4" />
+</svg> 
+
+                
+                <span>友链</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/gpg/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-key" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <circle cx="8" cy="15" r="4" />
+  <line x1="10.85" y1="12.15" x2="19" y2="4" />
+  <line x1="18" y1="5" x2="20" y2="7" />
+  <line x1="15" y1="8" x2="17" y2="10" />
+</svg> 
+
+                
+                <span>密钥</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
+<main class="main full-width">
+    
+
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/">
+                <img src="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/1_hu4d45f9d8f7b84b7d44ef9aaa0a966809_426366_800x0_resize_q75_box.jpg"
+                        srcset="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/1_hu4d45f9d8f7b84b7d44ef9aaa0a966809_426366_800x0_resize_q75_box.jpg 800w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/1_hu4d45f9d8f7b84b7d44ef9aaa0a966809_426366_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="568" 
+                        loading="lazy"
+                        alt="Featured image of post 单例模式（2）" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <h2 class="article-title">
+        <a href="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/">单例模式（2）</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        破坏单例模式
+    </h3>
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2022-05-19</time>
+            </div>
+        
+
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <h2 id="破坏双重校验锁的单例">破坏双重校验锁的单例</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public Lazyman{
+    private Lazyman(){}
+    private volatile static Lazyman lazyman;
+    public static Lazyman getInstance3(){
+        if(lazyman==null){
+            synchronized (Lazyman.class){
+                if(lazyman==null){
+                    lazyman=new Lazyman();
+                }
+            }
+        }
+        return lazyman;
+    }
+    //使用反射破坏单例模式
+    public static void main(String[] args) throws Exception {
+        Lazyman instance = Lazyman.getInstance3();//用单例模式创建
+        //用反射创建
+        Constructor&lt;Lazyman&gt; declaredConstructor=Lazyman.class.getDeclaredConstructor(null);//1。获取反射对象2。获得一个空参构造器
+        declaredConstructor.setAccessible(true);//无视私有的构造器(破除私有权限)
+        Lazyman instance2=declaredConstructor.newInstance();//反射创建出来的对象
+
+        //查看用反射创建出来的对象和用单例模式创建出来的对象哈希值一不一样
+        System.out.println(instance);
+        System.out.println(instance2);
+    }
+}
+</code></pre></div><p>运行后的结果：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">com.java.Single.Lazyman@2503dbd3
+com.java.Single.Lazyman@4b67cf4d
+</code></pre></div><p>由结果可见<strong>单例确实被破坏了</strong></p>
+<h3 id="如何防止单例被破坏">如何防止单例被破坏</h3>
+<p>declaredConstructor走了一个构造器Lazyman（），所以在Lazyman（）里加一个判断。加锁，第二次new的时候就会报错，如果Lazyman不为空，即已经创建过了，此时就知道是来搞破坏，所以抛出一个异常
+<figure style="flex-grow: 304; flex-basis: 731px">
+		<a href="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/9.png" data-size="1378x452"><img src="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/9.png"
+				srcset="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/9_hucd3c40bbf922ce722285927aaed72267_305418_480x0_resize_box_3.png 480w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/9_hucd3c40bbf922ce722285927aaed72267_305418_1024x0_resize_box_3.png 1024w"
+				width="1378"
+				height="452"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<h2 id="破坏枚举单例">破坏枚举单例</h2>
+<p>上一节我们说到枚举是绝对安全的，但是如果我们就想用反射破坏一下，下面来测试一下</p>
+<p><strong>失败1:</strong><br>
+在EnumSingle.Class这个文件中我们看到里面有一个无参的构造方法，现在我们测试一下是否真的有无参构造
+<figure style="flex-grow: 123; flex-basis: 296px">
+		<a href="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/2.png" data-size="696x564"><img src="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/2.png"
+				srcset="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/2_hu993ad466a647807054fdaefb7834b8af_98578_480x0_resize_box_3.png 480w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/2_hu993ad466a647807054fdaefb7834b8af_98578_1024x0_resize_box_3.png 1024w"
+				width="696"
+				height="564"
+				loading="lazy"
+				alt="EnumSingle.Class">
+		</a>
+		
+		<figcaption>EnumSingle.Class</figcaption>
+		
+	</figure></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public enum EnumSingle {
+    INSTANCE;
+    public EnumSingle getInstance(){
+        return INSTANCE;
+    }
+}
+class Test{
+    public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        EnumSingle instance1=EnumSingle.INSTANCE;
+        Constructor&lt;EnumSingle&gt; declaredconstructor= EnumSingle.class.getDeclaredConstructor(null);
+        declaredconstructor.setAccessible(true);
+        EnumSingle instance2=declaredconstructor.newInstance();
+
+        System.out.println(instance1);
+        System.out.println(instance2);
+    }
+}
+</code></pre></div><p>此时爆出了异常，所以我们的测试还没有结束
+<figure style="flex-grow: 461; flex-basis: 1106px">
+		<a href="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/3.png" data-size="1808x392"><img src="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/3.png"
+				srcset="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/3_hu2647b5d20e7334f06350f0c9e0380b21_203193_480x0_resize_box_3.png 480w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/3_hu2647b5d20e7334f06350f0c9e0380b21_203193_1024x0_resize_box_3.png 1024w"
+				width="1808"
+				height="392"
+				loading="lazy"
+				alt="异常">
+		</a>
+		
+		<figcaption>异常</figcaption>
+		
+	</figure>
+他告诉我们<font color="red">NoSuchMethodException: com.java.Single.EnumSingle.<init>()</font>,就是说枚举类里没有空参的构造器<br>
+此时我们进入Constructor这个构造器
+<figure style="flex-grow: 156; flex-basis: 376px">
+		<a href="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/4.png" data-size="1540x982"><img src="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/4.png"
+				srcset="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/4_hudf7ae5550d57b0b0a829622806201ed3_318873_480x0_resize_box_3.png 480w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/4_hudf7ae5550d57b0b0a829622806201ed3_318873_1024x0_resize_box_3.png 1024w"
+				width="1540"
+				height="982"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure>
+在Constructor这个构造器，Instance里可以看出，正常应该报出<font color="red">&ldquo;Cannot reflectively create enum objects&rdquo;</font>这个异常，即不能使用反射破坏枚举。所以我们的探究又失败了。</p>
+<p><strong>失败2:</strong><br>
+经过上一次失败我们这次通过反编译将EnumSingle.class反编译回来</p>
+<blockquote>
+<p>javap -p EnumSingle.class</p>
+</blockquote>
+<p><figure style="flex-grow: 258; flex-basis: 619px">
+		<a href="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/5.png" data-size="1534x594"><img src="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/5.png"
+				srcset="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/5_hu7f9270ca8b80dacfb704dfdbaf5795f5_389824_480x0_resize_box_3.png 480w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/5_hu7f9270ca8b80dacfb704dfdbaf5795f5_389824_1024x0_resize_box_3.png 1024w"
+				width="1534"
+				height="594"
+				loading="lazy"
+				alt="反编译EnumSingle.class">
+		</a>
+		
+		<figcaption>反编译EnumSingle.class</figcaption>
+		
+	</figure>
+此时我们看到里面也有一个空参的构造,说明我们还是被骗了</p>
+<p><figure style="flex-grow: 720; flex-basis: 1729px">
+		<a href="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/6.png" data-size="764x106"><img src="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/6.png"
+				srcset="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/6_hu74220e32f106fabeda2087b000d46e0d_39724_480x0_resize_box_3.png 480w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/6_hu74220e32f106fabeda2087b000d46e0d_39724_1024x0_resize_box_3.png 1024w"
+				width="764"
+				height="106"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<p><strong>成功:</strong><br>
+经过上面俩次被骗，此时使用一个更专业的工具Jad，用jad反编译EnumSingle.class</p>
+<p>Jad(JAva Decompiler)是一个Java的反编译器，可以通过命令行把Java的class文件反编译成源代码。</p>
+<p><figure style="flex-grow: 122; flex-basis: 294px">
+		<a href="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/7.png" data-size="1494x1218"><img src="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/7.png"
+				srcset="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/7_hu3d21e109d930869541b0587be9119a32_833844_480x0_resize_box_3.png 480w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/7_hu3d21e109d930869541b0587be9119a32_833844_1024x0_resize_box_3.png 1024w"
+				width="1494"
+				height="1218"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure>
+可以看出是一个有参构造，里面参数是一个string和int，那我们也把测试代码里的参数该成有参的在看看结果</p>
+<p><figure style="flex-grow: 294; flex-basis: 706px">
+		<a href="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/8.png" data-size="2020x686"><img src="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/8.png"
+				srcset="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/8_hu82cc37d49883451aa3c60663b590f840_334651_480x0_resize_box_3.png 480w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/8_hu82cc37d49883451aa3c60663b590f840_334651_1024x0_resize_box_3.png 1024w"
+				width="2020"
+				height="686"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure>
+此时我们得倒了想要的结果，我宣布成功了</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+	
+	
+    <section class="article-edit">
+        <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1629478225447" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2064" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><defs><style type="text/css"></style></defs><path d="M960 512c0 97.76-28.704 185.216-85.664 263.264-56.96 78.016-130.496 131.84-220.64 161.856-10.304 1.824-18.368 0.448-22.848-4.032a22.4 22.4 0 0 1-7.2-17.504v-122.88c0-37.632-10.304-65.44-30.464-82.912a409.856 409.856 0 0 0 59.616-10.368 222.752 222.752 0 0 0 54.72-22.816c18.848-10.784 34.528-23.36 47.104-38.592 12.544-15.232 22.848-35.904 30.912-61.44 8.096-25.568 12.128-54.688 12.128-87.904 0-47.072-15.232-86.976-46.208-120.16 14.368-35.456 13.024-74.912-4.48-118.848-10.752-3.616-26.432-1.344-47.072 6.272s-38.56 16.16-53.824 25.568l-21.984 13.888c-36.32-10.304-73.536-15.232-112.096-15.232s-75.776 4.928-112.096 15.232a444.48 444.48 0 0 0-24.672-15.68c-10.336-6.272-26.464-13.888-48.896-22.432-21.952-8.96-39.008-11.232-50.24-8.064-17.024 43.936-18.368 83.424-4.032 118.848-30.496 33.632-46.176 73.536-46.176 120.608 0 33.216 4.032 62.336 12.128 87.456 8.032 25.12 18.368 45.76 30.496 61.44 12.544 15.68 28.224 28.704 47.072 39.04 18.848 10.304 37.216 17.92 54.72 22.816a409.6 409.6 0 0 0 59.648 10.368c-15.712 13.856-25.12 34.048-28.704 60.064a99.744 99.744 0 0 1-26.464 8.512 178.208 178.208 0 0 1-33.184 2.688c-13.024 0-25.568-4.032-38.144-12.544-12.544-8.512-23.296-20.64-32.256-36.32a97.472 97.472 0 0 0-28.256-30.496c-11.232-8.064-21.088-12.576-28.704-13.92l-11.648-1.792c-8.096 0-13.92 0.928-17.056 2.688-3.136 1.792-4.032 4.032-2.688 6.72s3.136 5.408 5.376 8.096 4.928 4.928 7.616 7.168l4.032 2.688c8.544 4.032 17.056 11.232 25.568 21.984 8.544 10.752 14.368 20.64 18.4 29.6l5.824 13.44c4.928 14.816 13.44 26.912 25.568 35.872 12.096 8.992 25.088 14.816 39.008 17.504 13.888 2.688 27.36 4.032 40.352 4.032s23.776-0.448 32.288-2.24l13.472-2.24c0 14.784 0 32.288 0.416 52.032 0 19.744 0.48 30.496 0.48 31.392a22.624 22.624 0 0 1-7.648 17.472c-4.928 4.48-12.992 5.824-23.296 4.032-90.144-30.048-163.68-83.84-220.64-161.888C92.256 697.216 64 609.312 64 512c0-81.152 20.192-156.064 60.096-224.672s94.176-122.88 163.232-163.232C355.936 84.192 430.816 64 512 64s156.064 20.192 224.672 60.096 122.88 94.176 163.232 163.232C939.808 355.488 960 430.848 960 512" fill="#000000" p-id="2065"></path></svg>
+        <span><a style="color: inherit;" href="https://github.com/lsy-73/lsy-73.github.io/edit/develop/content/post/singletond_pattern2/index.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+    </section>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2022-05-19
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+
+    
+
+    <footer class="site-footer">
+  <section class="copyright">
+    
+    
+  </section>
+
+  
+  
+   
+      
+   
+      
+   
+      
+   
+      
+   
+      
+   
+      
+   
+      
+   
+      
+   
+      
+   
+      
+   
+      
+   
+      
+   
+      
+   
+      
+   
+      
+   
+      
+   
+      
+  
+  <section class="copyright">
+    &copy; 
+    
+    2022 Space Dog's Blog·<i class="fas fa-bell"></i> <a id="days">50</a>Days<br>共编辑了20.3k字
+    ·共 12篇文章</br><span><p>
+</section>
+
+
+  <section class="powerby">
+    Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+
+  </section>
+
+
+
+  
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+    <aside class="sidebar right-sidebar sticky">
+      
+      <form action="/search/" class="search-form widget" >
+        <p>
+            <label>搜索</label>
+            <input name="keyword" required placeholder="Type something..." />
+        
+            <button title="搜索">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+      
+      <section class="widget archives">
+        <h2 class="widget-title section-title">归档</h2>
+        
+
+        
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2022">
+                        
+                            <span class="year">2022</span>
+                            <span class="count">10</span>
+                        
+                    </a> 
+                </div>
+            <div class="archives-year">
+                    <a href="/archives/#2021">
+                        
+                            <span class="year">2021</span>
+                            <span class="count">2</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+      
+      <section class="widget categories">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+  
+        </div> 
+        <h2 class="widget-title section-title">分类</h2>
+    <div class="widget-categories--list">
+<div class="widget">
+    <h3 class="widget-title"> </h3>
+    <div class="widget-body">
+        <div class="category-list">
+            <div class="category-list-item"><a href="/categories/%E4%B8%8D%E5%AD%A6%E4%B9%A0/" class="category-list-link">不学习<span class="category-list-count">1</a>
+            </span></div>
+            <div class="category-list-item"><a href="/categories/%E5%AD%A6%E4%B9%A0/" class="category-list-link">学习<span class="category-list-count">10</a>
+            </span></div>
+        </div>
+    </div>
+</div>
+    </div>
+    </section>
+      
+      <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">标签</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/jvm/" class="font_size_3">
+                JVM
+            </a>
+        
+            <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="font_size_2">
+                设计模式
+            </a>
+        
+            <a href="/tags/git/" class="font_size_1">
+                git
+            </a>
+        
+            <a href="/tags/gpg/" class="font_size_1">
+                GPG
+            </a>
+        
+            <a href="/tags/juc/" class="font_size_1">
+                JUC
+            </a>
+        
+            <a href="/tags/%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="font_size_1">
+                复杂度
+            </a>
+        
+            <a href="/tags/%E6%8C%87%E9%92%88/" class="font_size_1">
+                指针
+            </a>
+        
+            <a href="/tags/%E6%B3%9B%E5%9E%8B/" class="font_size_1">
+                泛型
+            </a>
+        
+            <a href="/tags/%E6%B5%B7%E6%B7%98/" class="font_size_1">
+                海淘
+            </a>
+        
+            <a href="/tags/%E7%90%86%E8%B4%A2/" class="font_size_1">
+                理财
+            </a>
+        
+    </div>
+</section>
+
+      
+      
+      <section class="widget archives">
+        <div class="widget--toc">
+          <nav id="TableOfContents">
+  <ol>
+    <li><a href="#破坏双重校验锁的单例">破坏双重校验锁的单例</a>
+      <ol>
+        <li><a href="#如何防止单例被破坏">如何防止单例被破坏</a></li>
+      </ol>
+    </li>
+    <li><a href="#破坏枚举单例">破坏枚举单例</a></li>
+  </ol>
+</nav>
+        </div>
+      </section>
+      
+    </aside>
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<script src="/js/snow.js"></script>
+
+    </body>
+</html>
