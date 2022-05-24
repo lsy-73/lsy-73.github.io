@@ -9,7 +9,7 @@
 <meta property='og:description' content='关于内存分析工具Jprofiler的使用'>
 <meta property='og:url' content='/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/'>
 <meta property='og:site_name' content='Space Dog&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JVM' /><meta property='article:published_time' content='2022-04-24T20:10:48&#43;08:00'/><meta property='article:modified_time' content='2022-04-29T12:53:33&#43;08:00'/><meta property='og:image' content='/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/1.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JVM' /><meta property='article:published_time' content='2022-04-24T20:10:48&#43;08:00'/><meta property='article:modified_time' content='2022-05-24T19:21:55&#43;08:00'/><meta property='og:image' content='/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/1.jpg' />
 <meta name="twitter:title" content="Jprofiler的使用">
 <meta name="twitter:description" content="关于内存分析工具Jprofiler的使用"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='/archives/jprofiler%E7%9A%84%E4%BD%BF%E7%94%A8/1.jpg' />
@@ -295,7 +295,7 @@
 
 <main class="main full-width">
     
-        <p> 最后更新于 2022 年 4 月 29 日</p>
+        <p> 最后更新于 2022 年 5 月 24 日</p>
     
 
     <article class="has-image main-article">
@@ -359,28 +359,28 @@
 
     <section class="article-content">
     <p><strong>首先我们写一个报oom错误的代码</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class demo01 {
-    public static void main(String[] args) {
-        byte[] array=new byte[1*1024*1024];//1m  1兆
-        ArrayList&lt;demo01&gt; list=new ArrayList&lt;demo01&gt;();
-        int count=0;//计数
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">demo01</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">array</span><span class="o">=</span><span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">1</span><span class="o">*</span><span class="n">1024</span><span class="o">*</span><span class="n">1024</span><span class="o">];</span><span class="c1">//1m  1兆
+</span><span class="c1"></span>        <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">demo01</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">=</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">demo01</span><span class="o">&gt;();</span>
+        <span class="kt">int</span> <span class="n">count</span><span class="o">=</span><span class="n">0</span><span class="o">;</span><span class="c1">//计数
+</span><span class="c1"></span>
 
+        <span class="k">try</span><span class="o">{</span>
+            <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+                <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">demo01</span><span class="o">());</span><span class="c1">//无限的向list中添加数据，new新的对象。注意：次方法会导致oom
+</span><span class="c1"></span>                <span class="n">count</span><span class="o">=</span><span class="n">count</span><span class="o">++;</span>
+            <span class="o">}</span>
+        <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">Error</span> <span class="n">e</span><span class="o">){</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;count:&#34;</span><span class="o">+</span><span class="n">count</span><span class="o">);</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="c1">//Throwable
+</span><span class="c1"></span>            <span class="c1">//error
+</span><span class="c1"></span>            <span class="c1">//Exception
+</span><span class="c1"></span>    <span class="o">}</span>
 
-        try{
-            while(true){
-                list.add(new demo01());//无限的向list中添加数据，new新的对象。注意：次方法会导致oom
-                count=count++;
-            }
-        }catch(Error e){
-            System.out.println(&#34;count:&#34;+count);
-            e.printStackTrace();
-        }
-        //Throwable
-            //error
-            //Exception
-    }
-
-}
+<span class="o">}</span>
 </code></pre></div><h2 id="设置堆内存大小">设置堆内存大小</h2>
 <p>如果不设置堆内存，堆的默认内存应该是1GB，会占用很多资源
 <figure style="flex-grow: 111; flex-basis: 268px">
@@ -491,7 +491,7 @@
 
 
         <span>
-            最后更新于 2022-04-29
+            最后更新于 2022-05-24
         </span>
     </section></footer>
 

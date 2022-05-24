@@ -9,7 +9,7 @@
 <meta property='og:description' content='破坏单例模式'>
 <meta property='og:url' content='/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/'>
 <meta property='og:site_name' content='Space Dog&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2022-05-19T10:26:23&#43;08:00'/><meta property='article:modified_time' content='2022-05-19T11:45:12&#43;08:00'/><meta property='og:image' content='/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/1.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2022-05-19T10:26:23&#43;08:00'/><meta property='article:modified_time' content='2022-05-24T19:20:40&#43;08:00'/><meta property='og:image' content='/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/1.jpg' />
 <meta name="twitter:title" content="单例模式（2）">
 <meta name="twitter:description" content="破坏单例模式"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/1.jpg' />
@@ -295,6 +295,8 @@
 
 <main class="main full-width">
     
+        <p> 最后更新于 2022 年 5 月 24 日</p>
+    
 
     <article class="has-image main-article">
     <header class="article-header">
@@ -349,32 +351,32 @@
 
     <section class="article-content">
     <h2 id="破坏双重校验锁的单例">破坏双重校验锁的单例</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public Lazyman{
-    private Lazyman(){}
-    private volatile static Lazyman lazyman;
-    public static Lazyman getInstance3(){
-        if(lazyman==null){
-            synchronized (Lazyman.class){
-                if(lazyman==null){
-                    lazyman=new Lazyman();
-                }
-            }
-        }
-        return lazyman;
-    }
-    //使用反射破坏单例模式
-    public static void main(String[] args) throws Exception {
-        Lazyman instance = Lazyman.getInstance3();//用单例模式创建
-        //用反射创建
-        Constructor&lt;Lazyman&gt; declaredConstructor=Lazyman.class.getDeclaredConstructor(null);//1。获取反射对象2。获得一个空参构造器
-        declaredConstructor.setAccessible(true);//无视私有的构造器(破除私有权限)
-        Lazyman instance2=declaredConstructor.newInstance();//反射创建出来的对象
-
-        //查看用反射创建出来的对象和用单例模式创建出来的对象哈希值一不一样
-        System.out.println(instance);
-        System.out.println(instance2);
-    }
-}
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">Lazyman</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="nf">Lazyman</span><span class="o">(){}</span>
+    <span class="kd">private</span> <span class="kd">volatile</span> <span class="kd">static</span> <span class="n">Lazyman</span> <span class="n">lazyman</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Lazyman</span> <span class="nf">getInstance3</span><span class="o">(){</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">lazyman</span><span class="o">==</span><span class="kc">null</span><span class="o">){</span>
+            <span class="kd">synchronized</span> <span class="o">(</span><span class="n">Lazyman</span><span class="o">.</span><span class="na">class</span><span class="o">){</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">lazyman</span><span class="o">==</span><span class="kc">null</span><span class="o">){</span>
+                    <span class="n">lazyman</span><span class="o">=</span><span class="k">new</span> <span class="n">Lazyman</span><span class="o">();</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">lazyman</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">//使用反射破坏单例模式
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="n">Lazyman</span> <span class="n">instance</span> <span class="o">=</span> <span class="n">Lazyman</span><span class="o">.</span><span class="na">getInstance3</span><span class="o">();</span><span class="c1">//用单例模式创建
+</span><span class="c1"></span>        <span class="c1">//用反射创建
+</span><span class="c1"></span>        <span class="n">Constructor</span><span class="o">&lt;</span><span class="n">Lazyman</span><span class="o">&gt;</span> <span class="n">declaredConstructor</span><span class="o">=</span><span class="n">Lazyman</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredConstructor</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span><span class="c1">//1。获取反射对象2。获得一个空参构造器
+</span><span class="c1"></span>        <span class="n">declaredConstructor</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span><span class="c1">//无视私有的构造器(破除私有权限)
+</span><span class="c1"></span>        <span class="n">Lazyman</span> <span class="n">instance2</span><span class="o">=</span><span class="n">declaredConstructor</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span><span class="c1">//反射创建出来的对象
+</span><span class="c1"></span>
+        <span class="c1">//查看用反射创建出来的对象和用单例模式创建出来的对象哈希值一不一样
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instance</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instance2</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div><p>运行后的结果：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">com.java.Single.Lazyman@2503dbd3
 com.java.Single.Lazyman@4b67cf4d
@@ -407,23 +409,23 @@ com.java.Single.Lazyman@4b67cf4d
 		<figcaption>EnumSingle.Class</figcaption>
 		
 	</figure></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public enum EnumSingle {
-    INSTANCE;
-    public EnumSingle getInstance(){
-        return INSTANCE;
-    }
-}
-class Test{
-    public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        EnumSingle instance1=EnumSingle.INSTANCE;
-        Constructor&lt;EnumSingle&gt; declaredconstructor= EnumSingle.class.getDeclaredConstructor(null);
-        declaredconstructor.setAccessible(true);
-        EnumSingle instance2=declaredconstructor.newInstance();
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">EnumSingle</span> <span class="o">{</span>
+    <span class="n">INSTANCE</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="n">EnumSingle</span> <span class="nf">getInstance</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NoSuchMethodException</span><span class="o">,</span> <span class="n">InvocationTargetException</span><span class="o">,</span> <span class="n">InstantiationException</span><span class="o">,</span> <span class="n">IllegalAccessException</span> <span class="o">{</span>
+        <span class="n">EnumSingle</span> <span class="n">instance1</span><span class="o">=</span><span class="n">EnumSingle</span><span class="o">.</span><span class="na">INSTANCE</span><span class="o">;</span>
+        <span class="n">Constructor</span><span class="o">&lt;</span><span class="n">EnumSingle</span><span class="o">&gt;</span> <span class="n">declaredconstructor</span><span class="o">=</span> <span class="n">EnumSingle</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredConstructor</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+        <span class="n">declaredconstructor</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">EnumSingle</span> <span class="n">instance2</span><span class="o">=</span><span class="n">declaredconstructor</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
 
-        System.out.println(instance1);
-        System.out.println(instance2);
-    }
-}
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instance1</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instance2</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div><p>此时爆出了异常，所以我们的测试还没有结束
 <figure style="flex-grow: 461; flex-basis: 1106px">
 		<a href="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/3.png" data-size="1808x392"><img src="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/3.png"
@@ -527,7 +529,7 @@ class Test{
 
 
         <span>
-            最后更新于 2022-05-19
+            最后更新于 2022-05-24
         </span>
     </section></footer>
 

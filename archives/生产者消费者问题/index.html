@@ -9,7 +9,7 @@
 <meta property='og:description' content='Synchronized版生产者消费者问题（旧版） /* * 线程之间的通信问题：生产者消费者问题 等待唤醒 通知唤醒 * 线程交替执行 A B C D操作同一个变'>
 <meta property='og:url' content='/archives/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98/'>
 <meta property='og:site_name' content='Space Dog&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JUC' /><meta property='article:tag' content='设计模式' /><meta property='article:published_time' content='2022-04-29T12:50:22&#43;08:00'/><meta property='article:modified_time' content='2022-05-19T08:47:01&#43;08:00'/><meta property='og:image' content='/archives/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98/1.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JUC' /><meta property='article:tag' content='设计模式' /><meta property='article:published_time' content='2022-04-29T12:50:22&#43;08:00'/><meta property='article:modified_time' content='2022-05-24T19:19:32&#43;08:00'/><meta property='og:image' content='/archives/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98/1.jpg' />
 <meta name="twitter:title" content="生产者消费者问题">
 <meta name="twitter:description" content="Synchronized版生产者消费者问题（旧版） /* * 线程之间的通信问题：生产者消费者问题 等待唤醒 通知唤醒 * 线程交替执行 A B C D操作同一个变"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='/archives/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98/1.jpg' />
@@ -295,7 +295,7 @@
 
 <main class="main full-width">
     
-        <p> 最后更新于 2022 年 5 月 19 日</p>
+        <p> 最后更新于 2022 年 5 月 24 日</p>
     
 
     <article class="has-image main-article">
@@ -355,89 +355,89 @@
 
     <section class="article-content">
     <h2 id="synchronized版生产者消费者问题旧版">Synchronized版生产者消费者问题（旧版）</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">/*
-* 线程之间的通信问题：生产者消费者问题  等待唤醒  通知唤醒
-* 线程交替执行 A B C D操作同一个变量  num=0
-* A num+1
-* B num-1
-* C num+1
-* D num-1
- */
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="cm">/*
+</span><span class="cm">* 线程之间的通信问题：生产者消费者问题  等待唤醒  通知唤醒
+</span><span class="cm">* 线程交替执行 A B C D操作同一个变量  num=0
+</span><span class="cm">* A num+1
+</span><span class="cm">* B num-1
+</span><span class="cm">* C num+1
+</span><span class="cm">* D num-1
+</span><span class="cm"> */</span>
 
-public class A {
-    public static void main(String[] args) {
-        Data data=new Data();
-        new Thread(()-&gt;{
-            for (int i = 0; i &lt; 10; i++) {
-                try {
-                    data.increment();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        },&#34;A&#34;).start();
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">A</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Data</span> <span class="n">data</span><span class="o">=</span><span class="k">new</span> <span class="n">Data</span><span class="o">();</span>
+        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()-&gt;{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">data</span><span class="o">.</span><span class="na">increment</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">},</span><span class="s">&#34;A&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
 
-        new Thread(()-&gt;{
-            for (int i = 0; i &lt; 10; i++) {
-                try {
-                    data.decrement();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        },&#34;B&#34;).start();
+        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()-&gt;{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">data</span><span class="o">.</span><span class="na">decrement</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">},</span><span class="s">&#34;B&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
 
-        new Thread(()-&gt;{
-            for (int i = 0; i &lt; 10; i++) {
-                try {
-                    data.increment();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        },&#34;C&#34;).start();
+        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()-&gt;{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">data</span><span class="o">.</span><span class="na">increment</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">},</span><span class="s">&#34;C&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
 
-        new Thread(()-&gt;{
-            for (int i = 0; i &lt; 10; i++) {
-                try {
-                    data.decrement();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        },&#34;D&#34;).start();
+        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()-&gt;{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">data</span><span class="o">.</span><span class="na">decrement</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">},</span><span class="s">&#34;D&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
 
-    }
-}
+    <span class="o">}</span>
+<span class="o">}</span>
 
 
-//1判断等待，2业务，3通知
-class Data{
-    private int number=0;
+<span class="c1">//1判断等待，2业务，3通知
+</span><span class="c1"></span><span class="kd">class</span> <span class="nc">Data</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">number</span><span class="o">=</span><span class="n">0</span><span class="o">;</span>
 
-    //+1
-    public synchronized void increment() throws InterruptedException {
-        while(number!=0){
-        //等待
-        this.wait();
-        }
-        number++;
-        System.out.println(Thread.currentThread().getName()+&#34;=&gt;&#34;+number);
-        //通知其他线程，我+1完了
-        this.notify();
-    }
-    //-1
-    public synchronized void decrement() throws InterruptedException {
-        while(number==0){
-        //等待
-        this.wait();
-        }
-        number--;
-        System.out.println(Thread.currentThread().getName()+&#34;=&gt;&#34;+number);
-        //通知其他线程，我-1完了
-        this.notify();
-    }
-}
+    <span class="c1">//+1
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">increment</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+        <span class="k">while</span><span class="o">(</span><span class="n">number</span><span class="o">!=</span><span class="n">0</span><span class="o">){</span>
+        <span class="c1">//等待
+</span><span class="c1"></span>        <span class="k">this</span><span class="o">.</span><span class="na">wait</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="n">number</span><span class="o">++;</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;=&gt;&#34;</span><span class="o">+</span><span class="n">number</span><span class="o">);</span>
+        <span class="c1">//通知其他线程，我+1完了
+</span><span class="c1"></span>        <span class="k">this</span><span class="o">.</span><span class="na">notify</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="c1">//-1
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">decrement</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+        <span class="k">while</span><span class="o">(</span><span class="n">number</span><span class="o">==</span><span class="n">0</span><span class="o">){</span>
+        <span class="c1">//等待
+</span><span class="c1"></span>        <span class="k">this</span><span class="o">.</span><span class="na">wait</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="n">number</span><span class="o">--;</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;=&gt;&#34;</span><span class="o">+</span><span class="n">number</span><span class="o">);</span>
+        <span class="c1">//通知其他线程，我-1完了
+</span><span class="c1"></span>        <span class="k">this</span><span class="o">.</span><span class="na">notify</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div><p>如上执行后部分结果，可以看出不会出现不安全的问题：
 A=&gt;1
 B=&gt;0
@@ -461,97 +461,97 @@ D=&gt;0</p>
 <p>那为什么会出现这样的情况：就是用if判断的话，唤醒后线程会从wait之后的代码开始运行，但是不会重新判断if条件，直接继续运行if代码块之后的代码，而如果使用while的话，也会从wait之后的代码运行，但是唤醒后会重新判断循环条件，如果不成立再执行while代码块之后的代码块，成立的话继续wait。</p>
 <p>这也就是为什么用while而不用if的原因了，因为线程被唤醒后，执行开始的地方是wait之后。</p>
 <h2 id="lock版生产者消费者问题新版">Lock版生产者消费者问题（新版）</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class B {
-    public static void main(String[] args) {
-        Data2 data = new Data2();
-        new Thread(()-&gt;{
-            for (int i = 0; i &lt; 10; i++) {
-                try {
-                    data.increment();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        },&#34;A&#34;).start();
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">B</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Data2</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Data2</span><span class="o">();</span>
+        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()-&gt;{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">data</span><span class="o">.</span><span class="na">increment</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">},</span><span class="s">&#34;A&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
 
-        new Thread(()-&gt;{
-            for (int i = 0; i &lt; 10; i++) {
-                try {
-                    data.decrement();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        },&#34;B&#34;).start();
+        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()-&gt;{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">data</span><span class="o">.</span><span class="na">decrement</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">},</span><span class="s">&#34;B&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
 
-        new Thread(()-&gt;{
-            for (int i = 0; i &lt; 10; i++) {
-                try {
-                    data.increment();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        },&#34;C&#34;).start();
+        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()-&gt;{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">data</span><span class="o">.</span><span class="na">increment</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">},</span><span class="s">&#34;C&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
 
-        new Thread(()-&gt;{
-            for (int i = 0; i &lt; 10; i++) {
-                try {
-                    data.decrement();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        },&#34;D&#34;).start();
+        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()-&gt;{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">data</span><span class="o">.</span><span class="na">decrement</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">},</span><span class="s">&#34;D&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
 
-    }
-}
-//1判断等待，2业务，3通知
-class Data2 {
-    private int number = 0;
-    Lock lock = new ReentrantLock();
-    Condition condition = lock.newCondition();
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">//1判断等待，2业务，3通知
+</span><span class="c1"></span><span class="kd">class</span> <span class="nc">Data2</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">number</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+    <span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
+    <span class="n">Condition</span> <span class="n">condition</span> <span class="o">=</span> <span class="n">lock</span><span class="o">.</span><span class="na">newCondition</span><span class="o">();</span>
 
-    //+1
-    public void increment() throws InterruptedException {
-        lock.lock();//有锁的话，先上锁
-        try {
-            //业务代码
-            while (number == 0) {
-                //等待
-                condition.await();
-            }
-            number--;
-            System.out.println(Thread.currentThread().getName() + &#34;=&gt;&#34; + number);
-            //通知其他线程，我-1完了
-            condition.signalAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            lock.unlock();//用完锁，要释放
-        }
+    <span class="c1">//+1
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">increment</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+        <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span><span class="c1">//有锁的话，先上锁
+</span><span class="c1"></span>        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">//业务代码
+</span><span class="c1"></span>            <span class="k">while</span> <span class="o">(</span><span class="n">number</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">//等待
+</span><span class="c1"></span>                <span class="n">condition</span><span class="o">.</span><span class="na">await</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="n">number</span><span class="o">--;</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;=&gt;&#34;</span> <span class="o">+</span> <span class="n">number</span><span class="o">);</span>
+            <span class="c1">//通知其他线程，我-1完了
+</span><span class="c1"></span>            <span class="n">condition</span><span class="o">.</span><span class="na">signalAll</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span><span class="c1">//用完锁，要释放
+</span><span class="c1"></span>        <span class="o">}</span>
 
-    }
+    <span class="o">}</span>
 
-    //-1
-    public void decrement() throws InterruptedException {
-        lock.lock();
-        try {
-            while (number == 0) {
-                //等待
-                condition.await();
-            }
-            number--;
-            System.out.println(Thread.currentThread().getName() + &#34;=&gt;&#34; + number);
-            //通知其他线程，我-1完了
-            condition.signalAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            lock.unlock();
-        }
-    }
-}
+    <span class="c1">//-1
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">decrement</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+        <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">number</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">//等待
+</span><span class="c1"></span>                <span class="n">condition</span><span class="o">.</span><span class="na">await</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="n">number</span><span class="o">--;</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;=&gt;&#34;</span> <span class="o">+</span> <span class="n">number</span><span class="o">);</span>
+            <span class="c1">//通知其他线程，我-1完了
+</span><span class="c1"></span>            <span class="n">condition</span><span class="o">.</span><span class="na">signalAll</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div><p>如上执行后部分结果，可以看出执行的结果是无序的：<br>
 A=&gt;1
 B=&gt;0
@@ -568,88 +568,88 @@ D=&gt;0
 c=&gt;1</p>
 <h2 id="lock版生产者消费者问题新版改进">Lock版生产者消费者问题（新版改进）</h2>
 <p>那么接下来让他变成有序的（condition同步监视器），让线程被有序唤醒，而不是乱执行：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class C {
-    public static void main(String[] args) {
-        Data3 data=new Data3();
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">C</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Data3</span> <span class="n">data</span><span class="o">=</span><span class="k">new</span> <span class="n">Data3</span><span class="o">();</span>
 
-        new Thread(()-&gt;{
-            for (int i = 0; i &lt; 10; i++) {
-                data.printA();
-            }
-        },&#34;A&#34;).start();
-        new Thread(()-&gt;{
-            for (int i = 0; i &lt; 10; i++) {
-                data.printB();
-            }
-        },&#34;B&#34;).start();
-        new Thread(()-&gt;{
-            for (int i = 0; i &lt; 10; i++) {
-                data.printC();
-            }
-        },&#34;C&#34;).start();
-    }
-}
-class Data3{
-    private Lock lock=new ReentrantLock();
-    //监视器
+        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()-&gt;{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">data</span><span class="o">.</span><span class="na">printA</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">},</span><span class="s">&#34;A&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()-&gt;{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">data</span><span class="o">.</span><span class="na">printB</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">},</span><span class="s">&#34;B&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()-&gt;{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">data</span><span class="o">.</span><span class="na">printC</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">},</span><span class="s">&#34;C&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">Data3</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="n">Lock</span> <span class="n">lock</span><span class="o">=</span><span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
+    <span class="c1">//监视器
+</span><span class="c1"></span>
+    <span class="kd">private</span> <span class="n">Condition</span> <span class="n">condition1</span><span class="o">=</span><span class="n">lock</span><span class="o">.</span><span class="na">newCondition</span><span class="o">();</span>
+    <span class="kd">private</span> <span class="n">Condition</span> <span class="n">condition2</span><span class="o">=</span><span class="n">lock</span><span class="o">.</span><span class="na">newCondition</span><span class="o">();</span>
+    <span class="kd">private</span> <span class="n">Condition</span> <span class="n">condition3</span><span class="o">=</span><span class="n">lock</span><span class="o">.</span><span class="na">newCondition</span><span class="o">();</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">number</span><span class="o">=</span><span class="n">1</span><span class="o">;</span><span class="c1">// 1A,2B,3C
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">printA</span><span class="o">(){</span>
+        <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">//业务，判断-&gt;执行-&gt;通知
+</span><span class="c1"></span>            <span class="k">while</span> <span class="o">(</span><span class="n">number</span><span class="o">!=</span><span class="n">1</span><span class="o">){</span>
+                <span class="n">condition1</span><span class="o">.</span><span class="na">await</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;=&gt;AAAAAA&#34;</span><span class="o">);</span>
+            <span class="c1">//唤醒指定的人，B
+</span><span class="c1"></span>            <span class="n">number</span><span class="o">=</span><span class="n">2</span><span class="o">;</span>
+            <span class="n">condition2</span><span class="o">.</span><span class="na">signal</span><span class="o">();</span><span class="c1">//唤醒指定线程  B
+</span><span class="c1"></span>        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+        <span class="o">}</span>
 
-    private Condition condition1=lock.newCondition();
-    private Condition condition2=lock.newCondition();
-    private Condition condition3=lock.newCondition();
-    private int number=1;// 1A,2B,3C
-    public void printA(){
-        lock.lock();
-        try {
-            //业务，判断-&gt;执行-&gt;通知
-            while (number!=1){
-                condition1.await();
-            }
-            System.out.println(Thread.currentThread().getName()+&#34;=&gt;AAAAAA&#34;);
-            //唤醒指定的人，B
-            number=2;
-            condition2.signal();//唤醒指定线程  B
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            lock.unlock();
-        }
-
-    }
-    public void printB(){
-        lock.lock();
-        try {
-            //业务，判断-&gt;执行-&gt;通知
-            while (number!=2){
-                condition2.await();
-            }
-            System.out.println(Thread.currentThread().getName()+&#34;=&gt;BBBBB&#34;);
-            //唤醒指定的线程C
-            number=3;
-            condition3.signal();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            lock.unlock();
-        }
-    }
-    public void printC(){
-        lock.lock();
-        try {
-            //业务，判断-&gt;执行-&gt;通知
-            while (number!=3){
-                condition3.await();
-            }
-            System.out.println(Thread.currentThread().getName()+&#34;=&gt;AAAAAA&#34;);
-            //唤醒指定线程C
-            number=1;
-            condition1.signal();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            lock.unlock();
-        }
-    }
-}
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">printB</span><span class="o">(){</span>
+        <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">//业务，判断-&gt;执行-&gt;通知
+</span><span class="c1"></span>            <span class="k">while</span> <span class="o">(</span><span class="n">number</span><span class="o">!=</span><span class="n">2</span><span class="o">){</span>
+                <span class="n">condition2</span><span class="o">.</span><span class="na">await</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;=&gt;BBBBB&#34;</span><span class="o">);</span>
+            <span class="c1">//唤醒指定的线程C
+</span><span class="c1"></span>            <span class="n">number</span><span class="o">=</span><span class="n">3</span><span class="o">;</span>
+            <span class="n">condition3</span><span class="o">.</span><span class="na">signal</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">printC</span><span class="o">(){</span>
+        <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">//业务，判断-&gt;执行-&gt;通知
+</span><span class="c1"></span>            <span class="k">while</span> <span class="o">(</span><span class="n">number</span><span class="o">!=</span><span class="n">3</span><span class="o">){</span>
+                <span class="n">condition3</span><span class="o">.</span><span class="na">await</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;=&gt;AAAAAA&#34;</span><span class="o">);</span>
+            <span class="c1">//唤醒指定线程C
+</span><span class="c1"></span>            <span class="n">number</span><span class="o">=</span><span class="n">1</span><span class="o">;</span>
+            <span class="n">condition1</span><span class="o">.</span><span class="na">signal</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div><p>执行部分结果如下，可以看出是有序执行，A-&gt;B-&gt;C：<br>
 A=&gt;AAAAAA
 B=&gt;BBBBB
@@ -692,7 +692,7 @@ C=&gt;AAAAAA</p>
 
 
         <span>
-            最后更新于 2022-05-19
+            最后更新于 2022-05-24
         </span>
     </section></footer>
 
