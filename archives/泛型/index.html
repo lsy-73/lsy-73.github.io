@@ -366,91 +366,90 @@
 <br>
 <h2 id="2-java的泛型是如何工作的--什么是类型擦除-">2. Java的泛型是如何工作的 ? 什么是类型擦除 ?</h2>
 <p>　　泛型是通过类型擦除来实现的，编译器在编译时擦除了所有类型相关的信息，所以在运行时不存在任何类型相关的信息。例如List<String>在运行时仅用一个List来表示。这样做的目的，是确保能和Java 5之前的版本开发二进制类库进行兼容。你无法在运行时访问到类型参数，因为编译器已经把泛型类型转换成了原始类型。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"> <span class="c1">//类型被擦除了，保留的是类型的上限，String的上限就是Object
-</span><span class="c1"></span>        <span class="n">List</span> <span class="n">list</span> <span class="o">=</span> <span class="n">strlist</span><span class="o">;</span>
-<span class="err">​</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">stringList2</span> <span class="o">=</span> <span class="n">list</span><span class="o">;</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">intList2</span> <span class="o">=</span> <span class="n">list</span><span class="o">;</span>
-        <span class="c1">//你也可以把它赋给Integer类型的集合，但是当你把这个集合当
-</span><span class="c1"></span>        <span class="c1">//成Integer的集合操作的时候，依旧会抛出ClassCastException异常
-</span><span class="c1"></span><span class="err">​</span>
-        <span class="k">for</span> <span class="o">(</span><span class="n">Integer</span> <span class="n">i</span><span class="o">:</span><span class="n">intList2</span><span class="o">){</span><span class="c1">//java.lang.ClassCastException
-</span><span class="c1"></span>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-        <span class="o">}</span>
-</code></pre></div><br>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"> <span class="c1">//类型被擦除了，保留的是类型的上限，String的上限就是Object
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">List</span> <span class="n">list</span> <span class="o">=</span> <span class="n">strlist</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="err">​</span>
+</span></span><span class="line"><span class="cl">        <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">stringList2</span> <span class="o">=</span> <span class="n">list</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">intList2</span> <span class="o">=</span> <span class="n">list</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//你也可以把它赋给Integer类型的集合，但是当你把这个集合当
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">//成Integer的集合操作的时候，依旧会抛出ClassCastException异常
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">​</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="n">Integer</span> <span class="n">i</span><span class="o">:</span><span class="n">intList2</span><span class="o">){</span><span class="c1">//java.lang.ClassCastException
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span></code></pre></div><br>
 <h2 id="3-什么是泛型中的限定通配符和非限定通配符-">3. 什么是泛型中的限定通配符和非限定通配符 ?</h2>
 <p>限定通配符对类型进行了限制。有两种限定通配符，一种是<code>&lt;? extends T&gt;</code>它通过确保类型必须是T的子类来设定类型的上界，另一种是<code>&lt;? super T&gt;</code>它通过确保类型必须是T的父类来设定类型的下界。泛型类型必须用限定内的类型来进行初始化，否则会导致编译错误。另一方面<?>表示了非限定通配符，因为<?>可以用任意类型来替代。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Animal</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">&gt;</span> <span class="n">animals</span><span class="o">=</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-        <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Cat</span><span class="o">&gt;</span> <span class="n">cats</span><span class="o">=</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-        <span class="n">ArrayList</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Cat</span><span class="o">&gt;</span> <span class="n">miniCats</span><span class="o">=</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-
-        <span class="n">showAnimal</span><span class="o">(</span><span class="n">cats</span><span class="o">);</span>
-        <span class="n">showAnimal</span><span class="o">(</span><span class="n">miniCats</span><span class="o">);</span>
-        <span class="c1">//showAnimal(animals);
-</span><span class="c1"></span>    <span class="o">}</span>
-
-    <span class="c1">//类型通配符的上限，要求该泛型的类型，只能是实参类型，或实参类型的子类类型。
-</span><span class="c1"></span>    <span class="c1">//此处上限是Cat，包括MiniCat但是不包括Anmial的
-</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">showAnimal</span><span class="o">(</span><span class="n">ArrayList</span> <span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Cat</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">){</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="n">Cat</span> <span class="n">cat</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">cat</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="c1">//要求该泛型的类型，只能是实参类型，或实参类型的父类类型。
-</span><span class="c1"></span>    <span class="c1">//类型通配符的下限，要求只能是Cat或者是Cat的父类
-</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">showAnimal2</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">Cat</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">){</span>
-        <span class="c1">//增强for循环，用object类型的o接受，遍历list
-</span><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="n">Object</span> <span class="n">o</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-<span class="o">}</span>
-<span class="kd">class</span> <span class="nc">Cat</span> <span class="kd">extends</span> <span class="n">Animal</span><span class="o">{</span>
-
-<span class="o">}</span>
-
-<span class="kd">class</span> <span class="nc">MiniCat</span> <span class="kd">extends</span> <span class="n">Animal</span><span class="o">{</span>
-<span class="o">}</span>
-
-</code></pre></div><br>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Animal</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">&gt;</span> <span class="n">animals</span><span class="o">=</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Cat</span><span class="o">&gt;</span> <span class="n">cats</span><span class="o">=</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ArrayList</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Cat</span><span class="o">&gt;</span> <span class="n">miniCats</span><span class="o">=</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">showAnimal</span><span class="o">(</span><span class="n">cats</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">showAnimal</span><span class="o">(</span><span class="n">miniCats</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//showAnimal(animals);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//类型通配符的上限，要求该泛型的类型，只能是实参类型，或实参类型的子类类型。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//此处上限是Cat，包括MiniCat但是不包括Anmial的
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">showAnimal</span><span class="o">(</span><span class="n">ArrayList</span> <span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">Cat</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Cat</span> <span class="n">cat</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">cat</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//要求该泛型的类型，只能是实参类型，或实参类型的父类类型。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//类型通配符的下限，要求只能是Cat或者是Cat的父类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">showAnimal2</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">Cat</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//增强for循环，用object类型的o接受，遍历list
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="n">Object</span> <span class="n">o</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Cat</span> <span class="kd">extends</span> <span class="n">Animal</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">MiniCat</span> <span class="kd">extends</span> <span class="n">Animal</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><br>
 <h2 id="4可以把list-string传递给一个接受list--object参数的方法吗">4.可以把List&lt; String&gt;传递给一个接受List &lt; Object&gt;参数的方法吗？</h2>
 <p>　　对任何一个不太熟悉泛型的人来说，这个Java泛型题目看起来令人疑惑，因为乍看起来String是一种Object，所以List&lt; String&gt;应当可以用在需要List&lt; Object&gt;的地方，但是事实并非如此。真这样做的话会导致编译错误。如果你再深一步考虑，你会发现Java这样做是有意义的，因为List&lt; Object&gt;可以存储任何类型的对象包括String, Integer等等，而List&lt; String&gt;却只能用来存储Strings。</p>
 <p><big>例一:</big></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">       //这里与
-       List&lt;Object&gt; objectList;
-       List&lt;String&gt; stringList;
-       objectList = stringList;  
-       //compilation error incompatible types
-</code></pre></div><p><big>例二:</big></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"> <span class="n">List</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">();</span><span class="c1">//默认类型是Object
-</span><span class="c1"></span>        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;A123&#34;</span><span class="o">);</span>
-        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;B234&#34;</span><span class="o">);</span>
-        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;C345&#34;</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
-
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">();</span><span class="n">i</span><span class="o">++){</span>
-            <span class="c1">//若要将list中的元素赋给String变量，需要进行类型
-</span><span class="c1"></span>            <span class="c1">//转换compatible types错误，显示list.get(i)返回的是Object
-</span><span class="c1"></span>            <span class="n">String</span> <span class="n">str</span> <span class="o">=</span>  <span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
-        <span class="o">}</span>
-<span class="err">​</span>   
-        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">123</span><span class="o">);</span>
-        <span class="c1">//因为类型是Object，我们可以把Integer类型或者其他数据类型的元素也加入list之中
-</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">3</span><span class="o">));</span>
-<span class="err">​</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">();</span><span class="n">i</span><span class="o">++){</span>
-            <span class="c1">//String str =  (String) list.get(i);
-</span><span class="c1"></span>            <span class="c1">//但是在这里会报错java.lang.ClassCastException，
-</span><span class="c1"></span>            <span class="c1">//我们不能直接将Integer类型的数据转换成String
-</span><span class="c1"></span>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">getClass</span><span class="o">());</span>
-        <span class="o">}</span>
-</code></pre></div><p>如代码中所示，当我们定义了一个List，list默认的类型是所有对象的基类Object，那么我们取出数据的时候需要经过一次类型转换才能进行对象的实际类型的相关操作。因为List中的类型是Object，那么我们先添加了String类型的数据，然后再添加Integer或者其他类型的数据也是允许的，因为编译时List中是Object类型的数据，然而运行的时候却是它本身的类型，所以当我们将List中的数据当作String处理时会抛出<code>java.lang.ClassCastException</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">       //这里与
+</span></span><span class="line"><span class="cl">       List&lt;Object&gt; objectList;
+</span></span><span class="line"><span class="cl">       List&lt;String&gt; stringList;
+</span></span><span class="line"><span class="cl">       objectList = stringList;  
+</span></span><span class="line"><span class="cl">       //compilation error incompatible types
+</span></span></code></pre></div><p><big>例二:</big></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"> <span class="n">List</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">();</span><span class="c1">//默认类型是Object
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;A123&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;B234&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;C345&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">();</span><span class="n">i</span><span class="o">++){</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//若要将list中的元素赋给String变量，需要进行类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">//转换compatible types错误，显示list.get(i)返回的是Object
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">String</span> <span class="n">str</span> <span class="o">=</span>  <span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">​</span>   
+</span></span><span class="line"><span class="cl">        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">123</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//因为类型是Object，我们可以把Integer类型或者其他数据类型的元素也加入list之中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">3</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl"><span class="err">​</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">();</span><span class="n">i</span><span class="o">++){</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//String str =  (String) list.get(i);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">//但是在这里会报错java.lang.ClassCastException，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">//我们不能直接将Integer类型的数据转换成String
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">getClass</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span></code></pre></div><p>如代码中所示，当我们定义了一个List，list默认的类型是所有对象的基类Object，那么我们取出数据的时候需要经过一次类型转换才能进行对象的实际类型的相关操作。因为List中的类型是Object，那么我们先添加了String类型的数据，然后再添加Integer或者其他类型的数据也是允许的，因为编译时List中是Object类型的数据，然而运行的时候却是它本身的类型，所以当我们将List中的数据当作String处理时会抛出<code>java.lang.ClassCastException</code></p>
 <br>
 <h2 id="5-array中可以用泛型吗">5. Array中可以用泛型吗?</h2>
 <p>　　这可能是Java泛型面试题中最简单的一个了，当然前提是你要知道Array事实上并不支持泛型，这也是为什么Joshua Bloch在Effective Java一书中建议使用List来代替Array，因为<strong>List可以提供编译期的类型安全保证，而Array却不能。</strong></p>

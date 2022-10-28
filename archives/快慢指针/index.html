@@ -9,7 +9,7 @@
 <meta property='og:description' content='关于快慢指针的问题'>
 <meta property='og:url' content='/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/'>
 <meta property='og:site_name' content='Space Dog&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='指针' /><meta property='article:published_time' content='2022-04-07T14:20:13&#43;08:00'/><meta property='article:modified_time' content='2022-04-22T16:55:35&#43;08:00'/><meta property='og:image' content='/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/1.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='指针' /><meta property='article:published_time' content='2022-04-07T14:20:13&#43;08:00'/><meta property='article:modified_time' content='2022-04-22T16:55:34&#43;08:00'/><meta property='og:image' content='/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/1.jpg' />
 <meta name="twitter:title" content="快慢指针">
 <meta name="twitter:description" content="关于快慢指针的问题"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='/archives/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/1.jpg' />
@@ -387,15 +387,15 @@
 <p>正规一点儿的分析，如下：</p>
 <p>因为 j 是 cl 的整数倍，并且是 cl 整数倍中满足 j &gt; s 最小的那个数。如果 s &lt;= cl，那么 j = cl；如果 s &gt; cl，那么 j &lt; 2*s ，所以 j 的时间复杂度为 O(s + cl)。假设单向链表中结点的个数为 n，因为 s 和 cl 都是小于 n 的，所以 j = O(n) 。这是慢指针的时间复杂度，那么快指针的就是 O(nk) 。所以取 k = 2 ，可以最小化算法的运行时间。</p>
 <h3 id="方法二简单版">方法二(简单版)：</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">证明能相遇
-	假定环前节点有 x 个，环上节点有 y 个，快慢指针在环上分别走了 m，n 圈后相遇，
-	在环上相遇的位置为 z，用 i 表示慢指针在相遇的时候走了多少步。能有如下两表达式：
-	x + my + z = 2*i + 1
-	x + ny + z = 1*i
-	两式相减
-	(m - n)y = (2-1)i + 1
-	说明 i+1 的值为环节点长度的倍数，即可相遇
-</code></pre></div><h3 id="为什么快指针步长要为-2-345可以吗">为什么快指针步长要为 2 ？3，4，5可以吗</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">证明能相遇
+</span></span><span class="line"><span class="cl">	假定环前节点有 x 个，环上节点有 y 个，快慢指针在环上分别走了 m，n 圈后相遇，
+</span></span><span class="line"><span class="cl">	在环上相遇的位置为 z，用 i 表示慢指针在相遇的时候走了多少步。能有如下两表达式：
+</span></span><span class="line"><span class="cl">	x + my + z = 2*i + 1
+</span></span><span class="line"><span class="cl">	x + ny + z = 1*i
+</span></span><span class="line"><span class="cl">	两式相减
+</span></span><span class="line"><span class="cl">	(m - n)y = (2-1)i + 1
+</span></span><span class="line"><span class="cl">	说明 i+1 的值为环节点长度的倍数，即可相遇
+</span></span></code></pre></div><h3 id="为什么快指针步长要为-2-345可以吗">为什么快指针步长要为 2 ？3，4，5可以吗</h3>
 <p>有了上面证明的基础，就不难发现 k 越小，所需的遍历次数就越少，因为给定一个带环的单向链表，j 的取值是确定的。所以，取 k ＝ 2。当然，除了 1 ，别的其他数都可以。</p>
 <p>正规一点儿的分析，如下：</p>
 <p>因为 j 是 cl 的整数倍，并且是 cl 整数倍中满足 j &gt; s 最小的那个数。如果 s &lt;= cl，那么 j = cl；如果 s &gt; cl，那么 j &lt; 2*s ，所以 j 的时间复杂度为 O(s + cl)。假设单向链表中结点的个数为 n，因为 s 和 cl 都是小于 n 的，所以 j = O(n) 。这是慢指针的时间复杂度，那么快指针的就是 O(nk) 。所以取 k = 2 ，可以最小化算法的运行时间。</p>

@@ -351,36 +351,36 @@
 
     <section class="article-content">
     <h2 id="破坏双重校验锁的单例">破坏双重校验锁的单例</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">Lazyman</span><span class="o">{</span>
-    <span class="kd">private</span> <span class="nf">Lazyman</span><span class="o">(){}</span>
-    <span class="kd">private</span> <span class="kd">volatile</span> <span class="kd">static</span> <span class="n">Lazyman</span> <span class="n">lazyman</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Lazyman</span> <span class="nf">getInstance3</span><span class="o">(){</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">lazyman</span><span class="o">==</span><span class="kc">null</span><span class="o">){</span>
-            <span class="kd">synchronized</span> <span class="o">(</span><span class="n">Lazyman</span><span class="o">.</span><span class="na">class</span><span class="o">){</span>
-                <span class="k">if</span><span class="o">(</span><span class="n">lazyman</span><span class="o">==</span><span class="kc">null</span><span class="o">){</span>
-                    <span class="n">lazyman</span><span class="o">=</span><span class="k">new</span> <span class="n">Lazyman</span><span class="o">();</span>
-                <span class="o">}</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="n">lazyman</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="c1">//使用反射破坏单例模式
-</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-        <span class="n">Lazyman</span> <span class="n">instance</span> <span class="o">=</span> <span class="n">Lazyman</span><span class="o">.</span><span class="na">getInstance3</span><span class="o">();</span><span class="c1">//用单例模式创建
-</span><span class="c1"></span>        <span class="c1">//用反射创建
-</span><span class="c1"></span>        <span class="n">Constructor</span><span class="o">&lt;</span><span class="n">Lazyman</span><span class="o">&gt;</span> <span class="n">declaredConstructor</span><span class="o">=</span><span class="n">Lazyman</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredConstructor</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span><span class="c1">//1。获取反射对象2。获得一个空参构造器
-</span><span class="c1"></span>        <span class="n">declaredConstructor</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span><span class="c1">//无视私有的构造器(破除私有权限)
-</span><span class="c1"></span>        <span class="n">Lazyman</span> <span class="n">instance2</span><span class="o">=</span><span class="n">declaredConstructor</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span><span class="c1">//反射创建出来的对象
-</span><span class="c1"></span>
-        <span class="c1">//查看用反射创建出来的对象和用单例模式创建出来的对象哈希值一不一样
-</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instance</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instance2</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div><p>运行后的结果：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">com.java.Single.Lazyman@2503dbd3
-com.java.Single.Lazyman@4b67cf4d
-</code></pre></div><p>由结果可见<strong>单例确实被破坏了</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">Lazyman</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="nf">Lazyman</span><span class="o">(){}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">volatile</span> <span class="kd">static</span> <span class="n">Lazyman</span> <span class="n">lazyman</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Lazyman</span> <span class="nf">getInstance3</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="o">(</span><span class="n">lazyman</span><span class="o">==</span><span class="kc">null</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">synchronized</span> <span class="o">(</span><span class="n">Lazyman</span><span class="o">.</span><span class="na">class</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="o">(</span><span class="n">lazyman</span><span class="o">==</span><span class="kc">null</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">lazyman</span><span class="o">=</span><span class="k">new</span> <span class="n">Lazyman</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">lazyman</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//使用反射破坏单例模式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Lazyman</span> <span class="n">instance</span> <span class="o">=</span> <span class="n">Lazyman</span><span class="o">.</span><span class="na">getInstance3</span><span class="o">();</span><span class="c1">//用单例模式创建
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">//用反射创建
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">Constructor</span><span class="o">&lt;</span><span class="n">Lazyman</span><span class="o">&gt;</span> <span class="n">declaredConstructor</span><span class="o">=</span><span class="n">Lazyman</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredConstructor</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span><span class="c1">//1。获取反射对象2。获得一个空参构造器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">declaredConstructor</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span><span class="c1">//无视私有的构造器(破除私有权限)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">Lazyman</span> <span class="n">instance2</span><span class="o">=</span><span class="n">declaredConstructor</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span><span class="c1">//反射创建出来的对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//查看用反射创建出来的对象和用单例模式创建出来的对象哈希值一不一样
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instance</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instance2</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>运行后的结果：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">com.java.Single.Lazyman@2503dbd3
+</span></span><span class="line"><span class="cl">com.java.Single.Lazyman@4b67cf4d
+</span></span></code></pre></div><p>由结果可见<strong>单例确实被破坏了</strong></p>
 <h3 id="如何防止单例被破坏">如何防止单例被破坏</h3>
 <p>declaredConstructor走了一个构造器Lazyman（），所以在Lazyman（）里加一个判断。加锁，第二次new的时候就会报错，如果Lazyman不为空，即已经创建过了，此时就知道是来搞破坏，所以抛出一个异常
 <figure style="flex-grow: 304; flex-basis: 731px">
@@ -409,24 +409,24 @@ com.java.Single.Lazyman@4b67cf4d
 		<figcaption>EnumSingle.Class</figcaption>
 		
 	</figure></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">EnumSingle</span> <span class="o">{</span>
-    <span class="n">INSTANCE</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="n">EnumSingle</span> <span class="nf">getInstance</span><span class="o">(){</span>
-        <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-<span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NoSuchMethodException</span><span class="o">,</span> <span class="n">InvocationTargetException</span><span class="o">,</span> <span class="n">InstantiationException</span><span class="o">,</span> <span class="n">IllegalAccessException</span> <span class="o">{</span>
-        <span class="n">EnumSingle</span> <span class="n">instance1</span><span class="o">=</span><span class="n">EnumSingle</span><span class="o">.</span><span class="na">INSTANCE</span><span class="o">;</span>
-        <span class="n">Constructor</span><span class="o">&lt;</span><span class="n">EnumSingle</span><span class="o">&gt;</span> <span class="n">declaredconstructor</span><span class="o">=</span> <span class="n">EnumSingle</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredConstructor</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
-        <span class="n">declaredconstructor</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-        <span class="n">EnumSingle</span> <span class="n">instance2</span><span class="o">=</span><span class="n">declaredconstructor</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
-
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instance1</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instance2</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div><p>此时爆出了异常，所以我们的测试还没有结束
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">EnumSingle</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">INSTANCE</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">EnumSingle</span> <span class="nf">getInstance</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Test</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NoSuchMethodException</span><span class="o">,</span> <span class="n">InvocationTargetException</span><span class="o">,</span> <span class="n">InstantiationException</span><span class="o">,</span> <span class="n">IllegalAccessException</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">EnumSingle</span> <span class="n">instance1</span><span class="o">=</span><span class="n">EnumSingle</span><span class="o">.</span><span class="na">INSTANCE</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Constructor</span><span class="o">&lt;</span><span class="n">EnumSingle</span><span class="o">&gt;</span> <span class="n">declaredconstructor</span><span class="o">=</span> <span class="n">EnumSingle</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredConstructor</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">declaredconstructor</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">EnumSingle</span> <span class="n">instance2</span><span class="o">=</span><span class="n">declaredconstructor</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instance1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">instance2</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>此时爆出了异常，所以我们的测试还没有结束
 <figure style="flex-grow: 461; flex-basis: 1106px">
 		<a href="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/3.png" data-size="1808x392"><img src="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/3.png"
 				srcset="/archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/3_hu2647b5d20e7334f06350f0c9e0380b21_203193_480x0_resize_box_3.png 480w, /archives/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F2/3_hu2647b5d20e7334f06350f0c9e0380b21_203193_1024x0_resize_box_3.png 1024w"

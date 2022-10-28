@@ -364,8 +364,8 @@
 <h2 id="安装">安装</h2>
 <p>安装就非常简单，没什么好说的，执行命令就完成了。我的是通过二进制文件下载的中文版，如果是brew下载应该是英文的，本文以英文版的为教程（中文的我就不多bb了）</p>
 <h2 id="mac">Mac</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">brew install gpg
-</code></pre></div><h2 id="生成密钥">生成密钥</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">brew install gpg
+</span></span></code></pre></div><h2 id="生成密钥">生成密钥</h2>
 <p>现在我们通过 <code>gpg --full-gen-key</code> 来生成密钥。
 <figure style="flex-grow: 75; flex-basis: 180px">
 		<a href="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f1.png" data-size="1170x1554"><img src="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f1.png"
@@ -406,17 +406,17 @@
 <p>生成完密钥之后，为了保险起见，我们需要生成一个撤销证书，以便在日后我们不使用这个密钥的时候可以撤销。</p>
 <p>这个撤销只有你把公钥上传到公钥服务器才有效，如果你不上传到公钥服务器其实没多大作用。即便申请撤销了，它还是会存在，只是不建议使用了。</p>
 <p>撤销的命令如下</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">gpg --gen-revoke test1
-</code></pre></div><h2 id="加密">加密</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">gpg --gen-revoke test1
+</span></span></code></pre></div><h2 id="加密">加密</h2>
 <p>有了密钥之后，我们来看看怎么用它来加密一个文件</p>
 <p>通过 gpg -r [uid] -o file -e file 来加密一个文件，其中 -r 指定用哪个用户加密， -o 表示加密后输出的文件， -e 表示要加密的文件。如果不用 -o 默认会在原来的文件后面添加 .gpg 的后缀，用来表示加密文件。</p>
 <p>举个例子：假设我们有一个 test.txt 的文件，内容如下</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">我是帅哥
-</code></pre></div><p>我们对其进行加密</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">gpg -r test1 -e test.txt
-
--- 可以使用 gpg -r test1 -o test.txt.gpg -e test.txt 效果是一样的
-</code></pre></div><p>执行完成后会得到一个名为 test.txt.gpg 的文件，这个文件是一个二进制文件。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">我是帅哥
+</span></span></code></pre></div><p>我们对其进行加密</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">gpg -r test1 -e test.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-- 可以使用 gpg -r test1 -o test.txt.gpg -e test.txt 效果是一样的
+</span></span></code></pre></div><p>执行完成后会得到一个名为 test.txt.gpg 的文件，这个文件是一个二进制文件。</p>
 <p>如果我们想要显示 ASCII ，可以通过添加 -a 来显示</p>
 <p><figure style="flex-grow: 193; flex-basis: 464px">
 		<a href="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f3.png" data-size="964x498"><img src="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f3.png"
@@ -434,14 +434,14 @@
 <p>加密完之后，我们来看如何解密</p>
 <p>通过 <code>gpg -o file -d file</code> 来对文件进行解密，其中 <code>-o</code> 表示解密后输出的文件，要放在前面， <code>-d</code> 表示要解密的文件。</p>
 <p>我们就拿之前加密的文件来进行解密</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">gpg -o decrypt.txt -d test.txt.gpg
-cat decrypt.txt
-我是帅哥
-
-gpg -o decrypt.txt -d test.txt.asc
-cat decrypt.txt
-我是帅哥
-</code></pre></div><h3 id="解密的时候会让你输入密码">解密的时候会让你输入密码</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">gpg -o decrypt.txt -d test.txt.gpg
+</span></span><span class="line"><span class="cl">cat decrypt.txt
+</span></span><span class="line"><span class="cl">我是帅哥
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">gpg -o decrypt.txt -d test.txt.asc
+</span></span><span class="line"><span class="cl">cat decrypt.txt
+</span></span><span class="line"><span class="cl">我是帅哥
+</span></span></code></pre></div><h3 id="解密的时候会让你输入密码">解密的时候会让你输入密码</h3>
 <p><figure style="flex-grow: 101; flex-basis: 244px">
 		<a href="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f2.png" data-size="1050x1030"><img src="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f2.png"
 				srcset="/archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f2_hueb48d6a88b0d5107c5a0b9c5d97213cd_397752_480x0_resize_box_3.png 480w, /archives/gpg%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%9B%E5%BB%BA/f2_hueb48d6a88b0d5107c5a0b9c5d97213cd_397752_1024x0_resize_box_3.png 1024w"
@@ -460,29 +460,29 @@ cat decrypt.txt
 <p>使用 <code>gpg --sign test.txt</code> 对 <code>test.txt</code> 进行签名，生成 <code>test.txt.gpg</code> ，里面的内容是二进制。</p>
 <h2 id="ascii-签名">ASCII 签名</h2>
 <p>除了二进制的方式还可以输出 ASCII 的签名，用 <code>gpg --clearsign test.txt</code> 对 <code>test.txt</code> 进行 ASCII 签名</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">gpg --clearsign test.txt
-cat test.txt.asc
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA256
-
-This is gpg test
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEiPHq0DgY+8QbgkHmOxWoUusKglEFAl41jDIACgkQOxWoUusK
-glFEKhAAqwzhd4lexf1KyMTuCd5jAftPGB6AC1igmUx0gjpnMoZHv7gJkfFr8jTa
-iD958jXVY4fawsBQ+LEEkpJarBdZfY2No5Dw1PSlRlaUzCQgMkOPgLTdqGHuTNB0
-/ENsIiweXv5kUXiSU1Paxedwi7yux5L34WWdi9Mg9KoLhJN84HEdzIKYZjJNyFtB
-WYP/Nqqqs01SBa3writrdVaj/ZaDqMtpzM9DSxfMT4P6NVDR3RGSTkQpnatEEa67
-11i+oQXQcQT6a+O1vZ8GwbfoQ/EmPGT4nURs1HSEbAXj2aInquU5UjIvkvDp3q2x
-j9UbDBcQaQWQdAsuJItIfLeyY1BhejqVIjhPPFMhplp5XrHMMR+JJXOUJleQkkZV
-q35RitRlnRCjm+Z26aACS1vSS4Y23jaNV+MWv23OF570+iQ1lVotYLeLeMbuW4s9
-oWQIqJydaePbL87wR3tTWm7OjlgZNrrSXh9aH366Oz5tjZVrZoJwNDupOj5uAgsf
-T58N0St0OlrPO2csUQw5Kkd7Ls1lKCkh+drPQEPHJJODzNo4WxjtPGwgwhIhLJcw
-o1TQxd3h5YhVInCs0XFzSx3Ty/Ds0Lm0zFa4AyINl0QiHkQy2OoD4rsFO7n6LdOk
-zJKrFEkSwuvTOeIBUOGulwZiZEFrxb9KpaCjhMLZgQfjSYAnyQ8=
-=lmwE
------END PGP SIGNATURE-----
-</code></pre></div><p>这种方式会在源文件里加上签名。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">gpg --clearsign test.txt
+</span></span><span class="line"><span class="cl">cat test.txt.asc
+</span></span><span class="line"><span class="cl">-----BEGIN PGP SIGNED MESSAGE-----
+</span></span><span class="line"><span class="cl">Hash: SHA256
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">This is gpg test
+</span></span><span class="line"><span class="cl">-----BEGIN PGP SIGNATURE-----
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">iQIzBAEBCAAdFiEEiPHq0DgY+8QbgkHmOxWoUusKglEFAl41jDIACgkQOxWoUusK
+</span></span><span class="line"><span class="cl">glFEKhAAqwzhd4lexf1KyMTuCd5jAftPGB6AC1igmUx0gjpnMoZHv7gJkfFr8jTa
+</span></span><span class="line"><span class="cl">iD958jXVY4fawsBQ+LEEkpJarBdZfY2No5Dw1PSlRlaUzCQgMkOPgLTdqGHuTNB0
+</span></span><span class="line"><span class="cl">/ENsIiweXv5kUXiSU1Paxedwi7yux5L34WWdi9Mg9KoLhJN84HEdzIKYZjJNyFtB
+</span></span><span class="line"><span class="cl">WYP/Nqqqs01SBa3writrdVaj/ZaDqMtpzM9DSxfMT4P6NVDR3RGSTkQpnatEEa67
+</span></span><span class="line"><span class="cl">11i+oQXQcQT6a+O1vZ8GwbfoQ/EmPGT4nURs1HSEbAXj2aInquU5UjIvkvDp3q2x
+</span></span><span class="line"><span class="cl">j9UbDBcQaQWQdAsuJItIfLeyY1BhejqVIjhPPFMhplp5XrHMMR+JJXOUJleQkkZV
+</span></span><span class="line"><span class="cl">q35RitRlnRCjm+Z26aACS1vSS4Y23jaNV+MWv23OF570+iQ1lVotYLeLeMbuW4s9
+</span></span><span class="line"><span class="cl">oWQIqJydaePbL87wR3tTWm7OjlgZNrrSXh9aH366Oz5tjZVrZoJwNDupOj5uAgsf
+</span></span><span class="line"><span class="cl">T58N0St0OlrPO2csUQw5Kkd7Ls1lKCkh+drPQEPHJJODzNo4WxjtPGwgwhIhLJcw
+</span></span><span class="line"><span class="cl">o1TQxd3h5YhVInCs0XFzSx3Ty/Ds0Lm0zFa4AyINl0QiHkQy2OoD4rsFO7n6LdOk
+</span></span><span class="line"><span class="cl">zJKrFEkSwuvTOeIBUOGulwZiZEFrxb9KpaCjhMLZgQfjSYAnyQ8=
+</span></span><span class="line"><span class="cl">=lmwE
+</span></span><span class="line"><span class="cl">-----END PGP SIGNATURE-----
+</span></span></code></pre></div><p>这种方式会在源文件里加上签名。</p>
 
 </section>
 

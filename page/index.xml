@@ -17,6 +17,15 @@
     </item>
     
     <item>
+      <title>归档</title>
+      <link>/archives/</link>
+      <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/archives/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>密钥</title>
       <link>/gpg/</link>
       <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
@@ -26,11 +35,11 @@
     </item>
     
     <item>
-      <title>归档</title>
-      <link>/archives/</link>
-      <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
+      <title>搜索</title>
+      <link>/search/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/archives/</guid>
+      <guid>/search/</guid>
       <description></description>
     </item>
     
@@ -41,15 +50,6 @@
       
       <guid>/links/</guid>
       <description>欢迎交换友情链接，本站信息： 网站名称：Space Dog&amp;rsquo;s Blog 网站链接：lsy-73.github.io 网站图像：https://github.com</description>
-    </item>
-    
-    <item>
-      <title>搜索</title>
-      <link>/search/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/search/</guid>
-      <description></description>
     </item>
     
   </channel>
