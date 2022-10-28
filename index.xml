@@ -6,7 +6,113 @@
         <description>Recent content on Space Dog&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-CN</language>
-        <lastBuildDate>Wed, 25 May 2022 10:14:38 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 28 Oct 2022 00:15:17 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Filter</title>
+        <link>/archives/filter/</link>
+        <pubDate>Fri, 28 Oct 2022 00:15:17 +0800</pubDate>
+        
+        <guid>/archives/filter/</guid>
+        <description>&lt;img src="/show.jpeg" alt="Featured image of post Filter" /&gt;&lt;h3 id=&#34;spring过滤器filter拦截器interceptor和aop的区别与联系&#34;&gt;Spring：过滤器filter、拦截器interceptor、和AOP的区别与联系&lt;/h3&gt;
+&lt;h1 id=&#34;filter过滤器&#34;&gt;Filter过滤器&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;过滤器拦截web访问url地址&lt;/strong&gt;。 严格意义上讲，filter只是适用于web中，依赖于Servlet容器，利用&lt;strong&gt;Java的回调机制&lt;/strong&gt;进行实现。&lt;/li&gt;
+&lt;li&gt;Filter&lt;strong&gt;过滤器&lt;/strong&gt;：和框架无关，可以控制最初的http请求，但是更细一点的类和方法控制不了。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;过滤器可以拦截到方法的请求和响应(ServletRequest request, ServletResponse response)&lt;/strong&gt;，并对请求响应做出像响应的过滤操作，&lt;/li&gt;
+&lt;li&gt;比如&lt;strong&gt;设置字符编码，鉴权操作&lt;/strong&gt;等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;interceptor拦截器&#34;&gt;Interceptor拦截器&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;*拦截器拦截以 .action结尾的url，拦截Action的访问*&lt;/strong&gt;&lt;/em&gt;。 Interfactor是基于&lt;strong&gt;Java的反射机制&lt;/strong&gt;（APO思想）进行实现，不依赖Servlet容器。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;拦截器可以在方法执行之前(preHandle)和方法执行之后(afterCompletion)进行操作，回调操作(postHandle)&lt;/strong&gt;，&lt;em&gt;&lt;strong&gt;*可以获取执行的方法的名称*&lt;/strong&gt;&lt;/em&gt;，请求(HttpServletRequest)&lt;/li&gt;
+&lt;li&gt;Interceptor：&lt;strong&gt;可以控制请求的控制器和方法&lt;/strong&gt;，但&lt;strong&gt;控制不了请求方法里的参数(*&lt;em&gt;只能获取参数的名称，不能获取到参数的值*&lt;/em&gt;)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;**（**用于处理页面提交的请求响应并进行处理，例如做国际化，做主题更换，过滤等）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;spring-aop拦截器&#34;&gt;Spring AOP拦截器&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;*只能拦截Spring管理Bean的访问（业务层Service）*&lt;/strong&gt;&lt;/em&gt;。 具体AOP详情参照 &lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/fly910905/article/details/84025425&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Spring AOP：原理、 通知、连接点、切点、切面、表达式&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;实际开发中，AOP常和事务结合：&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/fly910905/article/details/83547744&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Spring的事务管理:声明式事务管理(切面)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;AOP操作可以对操作进行横向的拦截&lt;/strong&gt;，最大的优势在于他可&lt;strong&gt;以获取执行方法的参数( ProceedingJoinPoint.getArgs() )&lt;/strong&gt;，对方法进行统一的处理。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Aspect : 可以自定义切入的点，有方法的参数，&lt;/p&gt;
+&lt;p&gt;但是拿不到http请求，可以通过其他方式如RequestContextHolder&lt;/p&gt;
+&lt;p&gt;获得(&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ServletRequestAttributes servletRequestAttributes= (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;常见&lt;strong&gt;使用日志，事务，请求参数安全验证&lt;/strong&gt;等&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;spring对aop的支持&#34;&gt;Spring对AOP的支持&lt;/h2&gt;
+&lt;p&gt;Spring中AOP代理由Spring的IOC容器负责生成、管理，其依赖关系也由IOC容器负责管理。因此，AOP代理可以直接使用容器中的其它bean实例作为目标，这种关系可由IOC容器的依赖注入提供。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Spring创建代理的规则为：
+1、默认使用Java动态代理来创建AOP代理，这样就可以为任何接口实例创建代理了
+2、当需要代理的类不是代理接口的时候，Spring会切换为使用CGLIB代理，也可强制使用CGLIB&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;AOP编程其实是很简单的事情，纵观AOP编程，程序员只需要参与三个部分：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1、定义普通业务组件
+2、定义切入点，一个切入点可能横切多个业务组件
+3、定义增强处理，增强处理就是在AOP框架为普通业务组件织入的处理动作&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;所以进行AOP编程的关键就是定义切入点和定义增强处理，一旦定义了合适的切入点和增强处理，AOP框架将自动生成AOP代理，&lt;/li&gt;
+&lt;li&gt;即：代理对象的方法=增强处理+被代理对象的方法。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;filter与interceptor联系与区别&#34;&gt;Filter与Interceptor联系与区别&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;拦截器是基于java的反射机制，使用代理模式，而过滤器是基于函数回调。&lt;/li&gt;
+&lt;li&gt;拦截器不依赖servlet容器，过滤器依赖于servlet容器。&lt;/li&gt;
+&lt;li&gt;拦截器只能对action起作用，而过滤器可以对几乎所有的请求起作用（可以保护资源）。&lt;/li&gt;
+&lt;li&gt;拦截器可以访问action上下文，堆栈里面的对象，而过滤器不可以。&lt;/li&gt;
+&lt;li&gt;执行顺序：过滤前-拦截前-Action处理-拦截后-过滤后。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;从上面对拦截器与过滤器的描述来看，它俩是非常相似的，都能对客户端发来的请求进行处理，它们的区别如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;作用域不同
+&lt;ul&gt;
+&lt;li&gt;过滤器依赖于servlet容器，只能在 servlet容器，web环境下使用&lt;/li&gt;
+&lt;li&gt;拦截器依赖于spring容器，可以在spring容器中调用，不管此时Spring处于什么环境&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;细粒度的不同
+&lt;ul&gt;
+&lt;li&gt;过滤器的控制比较粗，只能在请求进来时进行处理，对请求和响应进行包装&lt;/li&gt;
+&lt;li&gt;拦截器提供更精细的控制，可以在controller对请求处理之前或之后被调用，也可以在渲染视图呈现给用户之后调用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;中断链执行的难易程度不同
+&lt;ul&gt;
+&lt;li&gt;拦截器可以 &lt;code&gt;preHandle&lt;/code&gt;方法内返回 false 进行中断&lt;/li&gt;
+&lt;li&gt;过滤器就比较复杂，需要处理请求和响应对象来引发中断，需要额外的动作，比如将用户重定向到错误页面&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;小结&#34;&gt;小结&lt;/h2&gt;
+&lt;p&gt;简单总结一下，拦截器相比过滤器有更细粒度的控制，依赖于Spring容器，可以在请求之前或之后启动，过滤器主要依赖于servlet，过滤器能做的，拦截器基本上都能做。&lt;/p&gt;
+&lt;h1 id=&#34;filterinterceptoraop拦截方向和抛出异常方向图&#34;&gt;Filter、Interceptor、aop拦截方向和抛出异常方向图&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;/2.png&#34; alt=&#34;img&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;参考（CV）：https://blog.csdn.net/fly910905/article/details/86537648&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>记录一些喜欢的胶片</title>
         <link>/archives/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%BA%9B%E5%96%9C%E6%AC%A2%E7%9A%84%E8%83%B6%E7%89%87/</link>
         <pubDate>Wed, 25 May 2022 10:14:38 +0800</pubDate>
@@ -155,31 +261,6 @@
 		&lt;/a&gt;
 		
 	&lt;/figure&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>记录一些喜欢的胶片</title>
-        <link>/archives/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%BA%9B%E5%96%9C%E6%AC%A2%E7%9A%84%E8%83%B6%E7%89%87/</link>
-        <pubDate>Wed, 25 May 2022 10:14:38 +0800</pubDate>
-        
-        <guid>/archives/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%BA%9B%E5%96%9C%E6%AC%A2%E7%9A%84%E8%83%B6%E7%89%87/</guid>
-        <description>&lt;img src="/show.jpeg" alt="Featured image of post 记录一些喜欢的胶片" /&gt;&lt;h2 id=&#34;富士c200&#34;&gt;富士c200&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;/1.jpeg&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/9.jpeg&#34; alt=&#34;&#34;  /&gt;
-&lt;img src=&#34;/10.jpeg&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;柯达金200&#34;&gt;柯达金200&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;/4.jpeg&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/13.jpeg&#34; alt=&#34;&#34;  /&gt;
-&lt;img src=&#34;/16.jpeg&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/15.jpeg&#34; alt=&#34;&#34;  /&gt;
-&lt;img src=&#34;/14.jpeg&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;柯达400&#34;&gt;柯达400&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;/5.jpeg&#34; alt=&#34;&#34;  /&gt;
-&lt;img src=&#34;/6.jpeg&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/7.jpeg&#34; alt=&#34;&#34;  /&gt;
-&lt;img src=&#34;/8.jpeg&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/11.jpeg&#34; alt=&#34;&#34;  /&gt;
-&lt;img src=&#34;/12.jpeg&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
